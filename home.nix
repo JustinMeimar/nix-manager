@@ -5,20 +5,28 @@
   home.homeDirectory = "/home/justin";
   home.stateVersion = "24.05";
   
+  # imports
+  imports = [
+    ./dotfiles/zsh/zsh.nix
+    ./dotfiles/tmux/tmux.nix
+  ];
+
   # Pacakges
   home.packages = [
-    pkgs.zsh
     pkgs.dust
+    pkgs.htop
+    pkgs.oh-my-zsh
     pkgs.tree
+    pkgs.wget
+    pkgs.zellij
+    pkgs.zsh
   ];
   
-  # Dotfiles
+  # Other dotfiles
   home.file = {
-    "foo.txt".text = "bar";
-    ".zshrc".source = dotfiles/.zshrc; 
-    ".tmux.conf".source = dotfiles/.tmux.conf; 
-  };
-  
+    ".config/zellij/config.kdl".source = ./dotfiles/zellij/config.kdl;
+  };  
+
   # Environment
   home.sessionVariables = {
     EDITOR = "vim";
