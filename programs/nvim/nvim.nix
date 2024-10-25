@@ -3,6 +3,7 @@
 {
   imports = [
     ./plugins/treesitter.nix
+    ./plugins/lsp.nix
   ];
 
   programs.nixvim = { 
@@ -21,7 +22,6 @@
 	shiftwidth = 2;
 	clipboard = "unnamedplus";
     };
-
   };
 }
-	
+
