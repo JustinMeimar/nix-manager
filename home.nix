@@ -9,7 +9,7 @@
   imports = [
     ./programs/zsh.nix
     ./programs/vim.nix
-    ./programs/nvim.nix
+    ./programs/nvim/nvim.nix
   ];
 
   # Pacakges
