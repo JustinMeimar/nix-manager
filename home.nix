@@ -18,6 +18,7 @@
     pkgs.htop
     pkgs.just
     pkgs.oh-my-zsh
+    pkgs.ripgrep
     pkgs.tree
     pkgs.wget
     pkgs.zellij
