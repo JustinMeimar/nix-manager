@@ -7,25 +7,28 @@
   
   # imports
   imports = [
-    ./dotfiles/zsh/zsh.nix
-    ./dotfiles/tmux/tmux.nix
+    ./programs/zsh.nix
+    ./programs/vim.nix
+    ./programs/nvim.nix
   ];
 
   # Pacakges
   home.packages = [
     pkgs.dust
     pkgs.htop
+    pkgs.just
     pkgs.oh-my-zsh
     pkgs.tree
     pkgs.wget
     pkgs.zellij
-    pkgs.zsh
   ];
   
   # Other dotfiles
   home.file = {
-    ".config/zellij/config.kdl".source = ./dotfiles/zellij/config.kdl;
-  };  
+    ".config/zellij/config.kdl".source = ./dotfiles/config.kdl;
+    ".tmux.conf".source = ./dotfiles/tmux.conf;
+    ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty.toml;
+  };
 
   # Environment
   home.sessionVariables = {
