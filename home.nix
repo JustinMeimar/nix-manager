@@ -22,6 +22,7 @@
     pkgs.tree
     pkgs.wget
     pkgs.zellij
+    pkgs.zoxide
   ];
   
   # Other dotfiles

@@ -4,13 +4,32 @@
   programs.zsh = {
     
     enable = true;
-
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true; 
     
+    # peak lazy
     shellAliases = {
- 	ll = "ls -la"; 
+ 	ll = "ls -la";
+	gita = "git add";
+	gitc = "git commit";
+	gits = "git status";
     };
+    
+    initExtra = ''
+      copy() {
+        if [ -z "$1" ]; then
+          echo "Usage: copy <filename>"
+          return 1
+        fi
+        if [ -f "$1" ]; then
+          cat "$1" | xclip -selection clipboard
+          echo "Copied $1 to clipboard"
+        else
+          echo "Error: File $1 does not exist"
+          return 1
+        fi
+      }
+    '';
     
     oh-my-zsh = {
 	enable = true;
@@ -51,6 +70,16 @@
       ### Zig
       export ZIG_PATH=/home/justin/install/zig
       export PATH=$PATH:$ZIG_PATH
+      
+      ### GO
+      export PATH=$PATH:/usr/local/go/bin  
+      
+      ### DENO
+      export PATH=$PATH:/home/justin/.deno/bin
+
+      ### BUN
+      export BUN_INSTALL="$HOME/.bun"
+      export PATH="$BUN_INSTALL/bin:$PATH"
     '';
   };
 }
