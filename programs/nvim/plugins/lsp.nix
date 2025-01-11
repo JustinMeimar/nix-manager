@@ -3,12 +3,55 @@
   programs.nixvim = {
     plugins = {
       lsp = {
-        enable = true;
-        servers = {
+        enable = true; 
+	servers = {
 	  
-	  # TODO: Figure out include files
+	  # html
+	  html = {
+	    enable = true;
+	  };
+	  
+	  # css
+	  cssls =  {
+	    enable = true;
+	  };
+	  
+	  # type/java script
+	  ts_ls = {
+            enable = false;
+          };
+	
+	  # deno 2
+	  denols = {
+	    enable = true;
+	  };
+	  
+	  # rust!
+	  rust_analyzer = {
+	    enable = true;
+	    installCargo = false;
+	    installRustc = false;
+	    settings = {
+	      procMacro = {
+		enable = true;
+	      };
+	      check = {
+		command = "clippy";
+		extraArgs = ["--all-targets"];
+	      };
+	      cargo = {
+		extraEnv = {
+		  CARGO_PATH = "~/.cargo/bin/cargo";
+		  RUSTC_PATH = "~/.cargo/bin/rustc";
+		};
+	      };
+	    };
+	  };
+
+	  # c/c++
           clangd = {
             enable = true;
+	    # TODO: Figure out include files
             extraOptions = {
               initializationOptions = {
                 compilationDatabaseDirectory = "build";
@@ -19,7 +62,8 @@
               };
             };
           };
-
+	  
+	  # python :D
           pyright = {
             enable = true;
             settings = {
@@ -31,6 +75,7 @@
                 };
 		pythonPath = "";
                 venvPath = ".";
+		venv = "venv";
               };
             };
           };
@@ -47,7 +92,7 @@
             "K" = "hover";
             "<leader>rn" = "rename";
             "<leader>ca" = "code_action";
-          };
+          }; 
         };
       };
 

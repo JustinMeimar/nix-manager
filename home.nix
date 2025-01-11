@@ -7,8 +7,8 @@
   
   # imports
   imports = [
-    ./programs/zsh.nix
     ./programs/vim.nix
+    ./programs/zsh.nix
     ./programs/nvim/nvim.nix
   ];
 
@@ -17,11 +17,13 @@
     pkgs.dust
     pkgs.htop
     pkgs.just
+    pkgs.lazygit
     pkgs.oh-my-zsh
     pkgs.ripgrep
     pkgs.tree
     pkgs.wget
     pkgs.zellij
+    pkgs.zoxide
   ];
   
   # Other dotfiles
