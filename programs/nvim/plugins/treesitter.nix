@@ -17,6 +17,7 @@
           "luadoc"
           "markdown"
           "markdown_inline"
+	  "nix"
           "query"
 	  "typescript"
           "vim"

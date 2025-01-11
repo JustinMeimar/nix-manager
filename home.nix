@@ -8,7 +8,7 @@
   # imports
   imports = [
     ./programs/vim.nix
-    ./programs/zsh.nix
+    ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
   ];
 

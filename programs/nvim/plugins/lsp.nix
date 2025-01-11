@@ -1,4 +1,5 @@
 # plugins/lsp.nix
+
 {
   programs.nixvim = {
     plugins = {
@@ -6,6 +7,11 @@
         enable = true; 
 	servers = {
 	  
+	  # nix
+	  nil_ls = {
+	    enable = true;
+	  };
+
 	  # html
 	  html = {
 	    enable = true;

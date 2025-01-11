@@ -1,5 +1,6 @@
 # TODO
 
-[ ] Migrate dotfiles that have good enough home manager support to `/programs`
-[ ] Improve neovim LSP plugin
-
+[ ] Import regular file in .nix
+[ ] TMUX puggins
+[ ] Harpoon nixvim plugin
+[ ] Zoxide auto configuration
