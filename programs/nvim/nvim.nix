@@ -2,11 +2,12 @@
 
 {
   imports = [
-    ./plugins/treesitter.nix
-    ./plugins/lsp.nix
+    ./plugins/bar.nix
     ./plugins/cmp.nix
-    ./plugins/telescope.nix
     ./plugins/comment.nix
+    ./plugins/lsp.nix
+    ./plugins/telescope.nix
+    ./plugins/treesitter.nix
   ];
 
   programs.nixvim = { 
@@ -27,8 +28,7 @@
       signcolumn = "yes:1"; # prevent diagnostic flicker
       relativenumber = true;
     };
-  
-    
+   
     keymaps = [
       {
         mode = "n";
