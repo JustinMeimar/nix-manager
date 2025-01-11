@@ -8,6 +8,7 @@
   # imports
   imports = [
     ./programs/vim.nix
+    ./programs/tmux/tmux.nix
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
   ];
@@ -29,7 +30,6 @@
   # Other dotfiles
   home.file = {
     ".config/zellij/config.kdl".source = ./dotfiles/config.kdl;
-    ".tmux.conf".source = ./dotfiles/tmux.conf;
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty.toml;
   };
 
