@@ -21,8 +21,11 @@
     pkgs.lazygit
     pkgs.oh-my-zsh
     pkgs.ripgrep
+    pkgs.texlivePackages.latexmk
+    pkgs.texliveSmall
     pkgs.tree
     pkgs.wget
+    pkgs.zathura
     pkgs.zellij
     pkgs.zoxide
   ];

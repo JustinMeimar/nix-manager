@@ -9,6 +9,7 @@
     ./plugins/md.nix
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
+    ./plugins/vimtext.nix
   ];
 
   programs.nixvim = { 

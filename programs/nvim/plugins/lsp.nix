@@ -5,8 +5,7 @@
     plugins = {
       lsp = {
         enable = true; 
-	servers = {
-	  
+	servers = { 
 	  # nix
 	  nil_ls = {
 	    enable = true;
@@ -85,6 +84,28 @@
               };
             };
           };
+	  
+	  # latex
+	  texlab = {
+	    enable = true;
+	    settings = {
+		texlab = {
+		  build = {
+		    executable = "latexmk";
+		    args = [
+		      "-pdf"
+		      "-interaction=nonstopmode"
+		      "-synctex=1"
+		    ];
+		    onSave = true;
+		  };
+		};
+		chktex = {
+		  onEdit = true;
+		  onOpenAndSave = true;
+		};
+	    };
+	  };
         };
 
         keymaps = {

@@ -7,12 +7,14 @@
       settings = {
         ensureInstalled = [
           "bash"
+	  "bibtext" # latex support
           "c"
 	  "cpp"
 	  "css"
           "diff"
           "html"
 	  "javascript"
+	  "latex" # latex support
           "lua"
           "luadoc"
           "markdown"
