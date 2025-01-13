@@ -7,8 +7,8 @@
         enable = true;
 	keymaps = {
 	  close.key = "<C-m>";
-	  moveNext.key = "<Tab>";
-	  movePrevious.key = "<S-Tab>";
+	  # moveNext.key = "<Tab>";
+	  # movePrevious.key = "<S-Tab>";
 	  goTo1.key = "<leader>1";
 	  goTo2.key = "<leader>2";
 	  goTo3.key = "<leader>3";
@@ -17,10 +17,9 @@
 	  goTo6.key = "<leader>6";
 	  goTo7.key = "<leader>7";
 	  goTo8.key = "<leader>8";
-	}; 
+	}; 	
       };
     };
-
-  };
+  }; 
 }
 

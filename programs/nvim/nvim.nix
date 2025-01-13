@@ -6,6 +6,7 @@
     ./plugins/cmp.nix
     ./plugins/comment.nix
     ./plugins/lsp.nix
+    ./plugins/md.nix
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
   ];
