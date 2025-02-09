@@ -7,6 +7,7 @@
   
   # imports
   imports = [
+    ./programs/git.nix
     ./programs/vim.nix
     ./programs/tmux/tmux.nix
     ./programs/zsh/zsh.nix
@@ -18,7 +19,7 @@
     pkgs.dust
     pkgs.htop
     pkgs.just
-    pkgs.lazygit
+    pkgs.lazygxit
     pkgs.oh-my-zsh
     pkgs.ripgrep
     pkgs.tree
