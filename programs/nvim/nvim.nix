@@ -24,7 +24,8 @@
 
     opts = {
       number = true;
-      shiftwidth = 2;
+      expandtab = true;
+      shiftwidth = 4;
       clipboard = "unnamedplus";
       signcolumn = "yes:1"; # prevent diagnostic flicker
       relativenumber = true;

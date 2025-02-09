@@ -1,12 +1,24 @@
 # plugins/lsp.nix
 
+{ configs, pkgs, ...}:
 {
   programs.nixvim = {
     plugins = {
       lsp = {
         enable = true; 
+        package = pkgs.vimPlugins.nvim-lspconfig;
 	servers = {
 	  
+	  # go
+	  gopls = {
+	    enable = true;	
+	  };
+
+	  # bash
+	  bashls = {
+	    enable = true;
+	  };
+
 	  # nix
 	  nil_ls = {
 	    enable = true;
@@ -64,6 +76,11 @@
 		fallbackFlags = [
 		  "-std=c++17"
 		  "-I/home/justin/install/llvm/llvm-18/include/"
+		  "-I/usr/include/"
+                  "-I/usr/include"
+                  "-I/usr/include/GL"
+                  "-I/usr/include/GLFW"
+                  "-I/usr/include/GLES"
 		];
               };
             };
