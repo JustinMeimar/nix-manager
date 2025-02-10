@@ -16,10 +16,11 @@
 
   # Pacakges
   home.packages = [
+    pkgs.bat
     pkgs.dust
     pkgs.htop
     pkgs.just
-    pkgs.lazygxit
+    pkgs.lazygit
     pkgs.oh-my-zsh
     pkgs.ripgrep
     pkgs.tree
