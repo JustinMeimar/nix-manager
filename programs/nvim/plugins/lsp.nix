@@ -69,18 +69,14 @@
 	  # c/c++
           clangd = {
             enable = true;
-	    # TODO: Figure out include files
             extraOptions = {
               initializationOptions = {
+                crossFileReferences = true;
+                callHierarchy = true;
                 compilationDatabaseDirectory = "build";
 		fallbackFlags = [
 		  "-std=c++17"
 		  "-I/home/justin/install/llvm/llvm-18/include/"
-		  "-I/usr/include/"
-                  "-I/usr/include"
-                  "-I/usr/include/GL"
-                  "-I/usr/include/GLFW"
-                  "-I/usr/include/GLES"
 		];
               };
             };
@@ -111,10 +107,12 @@
           };
           lspBuf = {
             "gd" = "definition";
+            "gi" = "implementation";
             "gr" = "references";
             "K" = "hover";
             "<leader>rn" = "rename";
             "<leader>ca" = "code_action";
+            "<leader>ic" = "incoming_calls";
           }; 
         };
       };
