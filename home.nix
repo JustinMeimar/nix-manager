@@ -15,12 +15,21 @@
   ];
 
   # Pacakges
-  home.packages = [
+  home.packages = let
+    llvm_pkg = {
+        "19" = pkgs.llvmPackages_19.libllvm;
+        "18" = pkgs.llvmPackages_18.libllvm;
+    };
+  in
+  [
     pkgs.bat
     pkgs.dust
+    pkgs.github-cli
     pkgs.htop
     pkgs.just
     pkgs.lazygit
+    llvm_pkg."18"
+    # pkgs.llvmPackages_19.libllvm # Here
     pkgs.oh-my-zsh
     pkgs.ripgrep
     pkgs.tree

@@ -9,10 +9,10 @@ alias antlr4="java -Xmx500M org.antlr.v4.Tool"
 alias grun='java org.antlr.v5.gui.TestRig'
 
 ### LLVM
-# export LLVM_DIR=/home/justin/install/llvm/llvm-18/lib/cmake/llvm
-# export MLIR_INS=/home/justin/install/llvm/llvm-18
-# export MLIR_DIR=$MLIR_INS/lib/cmake/mlir
-# export PATH=$MLIR_INS/bin:$PATH
+export LLVM_DIR=/home/justin/install/llvm/llvm-18/lib/cmake/llvm
+export MLIR_INS=/home/justin/install/llvm/llvm-18
+export MLIR_DIR=$MLIR_INS/lib/cmake/mlir
+export PATH=$PATH:$MLIR_INS/bin
 
 export CC="/home/justin/install/llvm/llvm-18/bin/clang"
 export CXX="/home/justin/install/llvm/llvm-18/bin/clang++"

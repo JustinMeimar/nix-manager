@@ -1,4 +1,15 @@
 { config, pkgs, ... }:
+let
+  concatFilesInDir = dirPath: 
+    let
+      files = builtins.attrNames (builtins.readDir dirPath);
+      regularFiles = builtins.filter (name: 
+        (builtins.readDir dirPath).${name} == "regular"
+      ) files;
+      contents = map (file: builtins.readFile "${dirPath}/${file}") regularFiles;
+    in
+      builtins.concatStringsSep "" contents;
+in
 {
   programs.zsh = {
     
@@ -20,10 +31,10 @@
 	plugins = [ ];
 	theme = "robbyrussell";
     };
-
-    # custom scripts to expose to shell
-    initExtra = builtins.readFile ./scripts/copy.sh;
     
+    # load scripts
+    initExtra = concatFilesInDir ./scripts;
+
     # env vars!
     envExtra = builtins.readFile ./zsh_env.sh; 
   };

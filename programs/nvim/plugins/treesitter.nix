@@ -19,6 +19,7 @@
           "markdown_inline"
 	  "nix"
           "query"
+          "tablegen"
 	  "typescript"
           "vim"
           "vimdoc"
