@@ -6,30 +6,23 @@
   home.stateVersion = "24.05";
   
   # imports
-  imports = [
+  imports = [ 
     ./programs/git.nix
     ./programs/vim.nix
     ./programs/tmux/tmux.nix
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
+    ./packages/llvm.nix 
   ];
 
   # Pacakges
-  home.packages = let
-    llvm_pkg = {
-        "19" = pkgs.llvmPackages_19.libllvm;
-        "18" = pkgs.llvmPackages_18.libllvm;
-    };
-  in
-  [
+  home.packages = [
     pkgs.bat
     pkgs.dust
     pkgs.github-cli
     pkgs.htop
     pkgs.just
     pkgs.lazygit
-    llvm_pkg."18"
-    # pkgs.llvmPackages_19.libllvm # Here
     pkgs.oh-my-zsh
     pkgs.ripgrep
     pkgs.tree
@@ -37,7 +30,13 @@
     pkgs.zellij
     pkgs.zoxide
   ];
-  
+    
+  # Configure LLVM user library version 
+  llvm = {
+    enable = true;
+    version = "19";
+  };
+
   # Other dotfiles
   home.file = {
     ".config/zellij/config.kdl".source = ./dotfiles/config.kdl;
