@@ -7,7 +7,7 @@
       description = "Enable llvm packages";
     };
     version = lib.mkOption {
-      type = lib.types.enum [ "14" "16" "18" "19" ];
+      type = lib.types.enum [ "16" "17" "18" "19" ];
       default = "19";
       description = "Which major version of LLVM to install";
     };
@@ -29,12 +29,12 @@
         ];
         "16" = [
           pkgs.llvmPackages_16.libllvm
-          pkgs.llvmPackages_16.mlir
+          pkgs.llvmPackages_17.mlir
         ];
       };    
     in
       # will concatenate to existig definition of home.packages
-      [ llvmPkgs.${config.llvm.version} ];
+      llvmPkgs.${config.llvm.version};
   };
 }
 
