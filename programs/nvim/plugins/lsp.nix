@@ -8,7 +8,12 @@
         enable = true; 
         package = pkgs.vimPlugins.nvim-lspconfig;
 	servers = {
-	  
+	 
+          # cmake
+          cmake = {
+            enable = true;
+          };
+
 	  # go
 	  gopls = {
 	    enable = true;	
