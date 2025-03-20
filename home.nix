@@ -18,6 +18,7 @@
   # Pacakges
   home.packages = [
     pkgs.bat
+    pkgs.boost # cxx
     pkgs.dust
     pkgs.github-cli
     pkgs.htop
@@ -36,7 +37,7 @@
     enable = true;
     version = "19";
   };
-
+   
   # Other dotfiles
   home.file = {
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty.toml;
@@ -50,3 +51,4 @@
   # Let home manager self-manage
   programs.home-manager.enable = true;
 }
+

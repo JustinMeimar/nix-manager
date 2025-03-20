@@ -19,17 +19,20 @@
         "19" = [
           pkgs.llvmPackages_19.libllvm
           pkgs.llvmPackages_19.mlir
+          pkgs.llvmPackages_19.libcxxClang
+          pkgs.llvmPackages_19.clang-tools
         ];
         "18" = [
           pkgs.llvmPackages_18.libllvm
+          pkgs.llvmPackages_17.mlir # no lib mlir 18
         ];
         "17" = [
           pkgs.llvmPackages_17.libllvm
           pkgs.llvmPackages_17.mlir
+          pkgs.llvmPackages_17.clang-tools
         ];
         "16" = [
           pkgs.llvmPackages_16.libllvm
-          pkgs.llvmPackages_17.mlir
         ];
       };    
     in
