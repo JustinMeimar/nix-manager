@@ -8,46 +8,17 @@
         enable = true; 
         package = pkgs.vimPlugins.nvim-lspconfig;
 	servers = {
-	 
-          # cmake
-          cmake = {
-            enable = true;
-          };
-
-	  # go
-	  gopls = {
-	    enable = true;	
-	  };
-
-	  # bash
-	  bashls = {
-	    enable = true;
-	  };
-
-	  # nix
-	  nil_ls = {
-	    enable = true;
-	  };
-
-	  # html
-	  html = {
-	    enable = true;
-	  };
-	  
-	  # css
-	  cssls =  {
-	    enable = true;
-	  };
-	  
-	  # type/java script
-	  ts_ls = {
-            enable = true;
-          };
-	
-	  # deno 2
-	  denols = {
-	    enable = false;
-	  };
+	    
+          # one-liners
+          cmake = { enable = true; };   # cmake
+          denols = { enable = false; }; # deno 2
+	  gopls = { enable = true; };   # go
+	  bashls = { enable = true; };  # bash
+	  nil_ls = { enable = true; };  # nix
+	  html = { enable = true; };    # html
+	  cssls =  { enable = true; };  # css
+	  ts_ls = { enable = true; };   # typescript 
+          tblgen_lsp_server = { enable = true; }; # tablegen NOTE(../lua/lsp_tblgn_compilation_db.lua) 
 	  
 	  # rust!
 	  rust_analyzer = {
@@ -81,7 +52,6 @@
                 compilationDatabaseDirectory = "build";
 		fallbackFlags = [
 		  "-std=c++17"
-		  "-I/home/justin/install/llvm/llvm-18/include/"
 		];
               };
             };

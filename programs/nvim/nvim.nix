@@ -42,7 +42,10 @@
         key = "<leader>TT";
         action = ":lua vim.diagnostic.enable(0)<CR>";
       }
-    ]; 
+    ];
+    
+    extraConfigLua = builtins.readFile(./lua/lsp_tblgn_compilation_db.lua);
+
   };
 }
 
