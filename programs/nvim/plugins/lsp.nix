@@ -41,12 +41,12 @@
 	  
 	  # type/java script
 	  ts_ls = {
-            enable = false;
+            enable = true;
           };
 	
 	  # deno 2
 	  denols = {
-	    enable = true;
+	    enable = false;
 	  };
 	  
 	  # rust!

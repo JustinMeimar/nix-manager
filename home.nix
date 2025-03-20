@@ -39,7 +39,6 @@
 
   # Other dotfiles
   home.file = {
-    ".config/zellij/config.kdl".source = ./dotfiles/config.kdl;
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty.toml;
   };
 
