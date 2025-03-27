@@ -21,6 +21,7 @@
           pkgs.llvmPackages_19.mlir
           pkgs.llvmPackages_19.libcxxClang
           pkgs.llvmPackages_19.clang-tools
+          pkgs.lit
         ];
         "18" = [
           pkgs.llvmPackages_18.libllvm

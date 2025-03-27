@@ -26,6 +26,7 @@
     pkgs.lazygit
     pkgs.oh-my-zsh
     pkgs.ripgrep
+    pkgs.sshfs
     pkgs.tree
     pkgs.wget
     pkgs.zellij
