@@ -23,6 +23,7 @@
     pkgs.github-cli
     pkgs.htop
     pkgs.just
+    pkgs.jq
     pkgs.lazygit
     pkgs.oh-my-zsh
     pkgs.ripgrep
@@ -36,7 +37,7 @@
   # Configure LLVM user library version 
   llvm = {
     enable = true;
-    version = "19";
+    version = "18";
   };
    
   # Other dotfiles
