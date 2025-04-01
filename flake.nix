@@ -16,9 +16,15 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # add sops-nix
+    sops = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, ... }:
+  outputs = { nixpkgs, home-manager, nixvim, sops, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -28,6 +34,7 @@
         modules = [
           ./home.nix
           nixvim.homeManagerModules.nixvim
+          sops.homeManagerModules.sops
         ];
       };
     };

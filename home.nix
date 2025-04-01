@@ -6,19 +6,21 @@
   home.stateVersion = "24.05";
   
   # imports
-  imports = [ 
+  imports = [
     ./programs/git.nix
     ./programs/vim.nix
     ./programs/tmux/tmux.nix
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
+    ./programs/sops/sops.nix
     ./packages/llvm.nix 
   ];
 
   # Pacakges
   home.packages = [
+    pkgs.age
     pkgs.bat
-    pkgs.boost # cxx
+    pkgs.boost
     pkgs.dust
     pkgs.github-cli
     pkgs.htop
@@ -27,13 +29,14 @@
     pkgs.lazygit
     pkgs.oh-my-zsh
     pkgs.ripgrep
+    pkgs.sops
     pkgs.sshfs
     pkgs.tree
     pkgs.wget
     pkgs.zellij
     pkgs.zoxide
   ];
-    
+ 
   # Configure LLVM user library version 
   llvm = {
     enable = true;
