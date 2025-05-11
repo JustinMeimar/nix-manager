@@ -4,7 +4,7 @@
   home.username = "justin";
   home.homeDirectory = "/home/justin";
   home.stateVersion = "24.05";
-  
+
   # imports
   imports = [
     ./programs/git.nix
@@ -34,6 +34,7 @@
     pkgs.tree
     pkgs.wget
     pkgs.zellij
+    pkgs.fzf
     pkgs.zoxide
   ];
  

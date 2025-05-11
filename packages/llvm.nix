@@ -26,11 +26,13 @@
         "18" = [
           pkgs.llvmPackages_18.libllvm
           pkgs.llvmPackages_17.mlir # no lib mlir 18
+          pkgs.llvmPackages_17.libcxxClang # can't find clang 18 for now
         ];
         "17" = [
           pkgs.llvmPackages_17.libllvm
           pkgs.llvmPackages_17.mlir
           pkgs.llvmPackages_17.clang-tools
+          pkgs.llvmPackages_17.libcxxClang
         ];
         "16" = [
           pkgs.llvmPackages_16.libllvm

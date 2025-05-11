@@ -7,8 +7,8 @@
         enable = true;
 	keymaps = {
 	  close.key = "<C-m>";
-	  # moveNext.key = "<Tab>";
-	  # movePrevious.key = "<S-Tab>";
+	  next.key = "<C-n>";
+	  previous.key = "<C-p>";
 	  goTo1.key = "<leader>1";
 	  goTo2.key = "<leader>2";
 	  goTo3.key = "<leader>3";
