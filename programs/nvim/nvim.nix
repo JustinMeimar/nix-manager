@@ -30,22 +30,9 @@
       signcolumn = "yes:1"; # prevent diagnostic flicker
       relativenumber = true;
     };
-   
-    keymaps = [
-      {
-        mode = "n";
-        key = "<leader>tt";
-        action = ":lua vim.diagnostic.disable(0)<CR>";
-      }
-      {
-        mode = "n";
-        key = "<leader>TT";
-        action = ":lua vim.diagnostic.enable(0)<CR>";
-      }
-    ];
-    
-    extraConfigLua = builtins.readFile(./lua/lsp_tblgn_compilation_db.lua);
-
+         
+    extraConfigLua = builtins.readFile(./lua/lsp_tblgn_compilation_db.lua) + "\n" + 
+                     builtins.readFile(./lua/keymaps.lua);
   };
 }
 

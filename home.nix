@@ -27,6 +27,7 @@
     pkgs.just
     pkgs.jq
     pkgs.lazygit
+    pkgs.nodejs_23
     pkgs.oh-my-zsh
     pkgs.ripgrep
     pkgs.sops
