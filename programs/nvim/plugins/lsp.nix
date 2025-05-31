@@ -83,7 +83,6 @@
           lspBuf = {
             "gd" = "definition";
             "gi" = "implementation";
-            "gr" = "references";
             "K" = "hover";
             "<leader>rn" = "rename";
             "<leader>ca" = "code_action";

@@ -1,15 +1,5 @@
 export PATH=$PATH:$HOME/.local/bin
 
-### ZSH
-export FZF_CTRL_R_OPTS="
-  --preview 'echo {}'
-  --preview-window down:3:wrap
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | xclip -selection clipboard)+abort'
-  --color header:italic
-  --header 'Copy: <CTRL-Y> | Next: <CTRL-N> | Prev: <CTRL-P>"
-
-export FZF_DEFAULT_OPTS='--height 40% --layout reverse --border --tmux bottom,40%'
-
 ### Clang
 export CC="/home/justin/install/llvm/llvm-18/bin/clang"
 export CXX="/home/justin/install/llvm/llvm-18/bin/clang++"

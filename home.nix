@@ -9,6 +9,7 @@
   imports = [
     ./programs/git.nix
     ./programs/vim.nix
+    ./programs/fzf.nix
     ./programs/tmux/tmux.nix
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
@@ -28,14 +29,12 @@
     pkgs.jq
     pkgs.lazygit
     pkgs.nodejs_23
-    pkgs.oh-my-zsh
     pkgs.ripgrep
     pkgs.sops
     pkgs.sshfs
     pkgs.tree
     pkgs.wget
     pkgs.zellij
-    pkgs.fzf
     pkgs.zoxide
   ];
  
