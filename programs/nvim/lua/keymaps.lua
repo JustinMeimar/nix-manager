@@ -1,5 +1,15 @@
 local map = vim.keymap.set
 
+map("n", "<leader>tt", function()
+ if vim.diagnostic.is_enabled() then
+   vim.diagnostic.disable(0)
+   print("Diagnostics disabled")
+ else
+   vim.diagnostic.enable(0)
+   print("Diagnostics enabled")
+ end
+end, { desc = "Toggle diagnostics" })
+
 map("n", "<leader>te", function()
   vim.diagnostic.config(
     { virtual_text = { severity = vim.diagnostic.severity.ERROR } }

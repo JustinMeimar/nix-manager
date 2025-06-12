@@ -10,6 +10,7 @@
     ./programs/git.nix
     ./programs/vim.nix
     ./programs/fzf.nix
+    ./programs/zoxide.nix
     ./programs/tmux/tmux.nix
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
@@ -35,7 +36,6 @@
     pkgs.tree
     pkgs.wget
     pkgs.zellij
-    pkgs.zoxide
   ];
  
   # Configure LLVM user library version 

@@ -19,7 +19,8 @@
 	  cssls =  { enable = true; };  # css
 	  ts_ls = { enable = true; };   # typescript 
           tblgen_lsp_server = { enable = true; }; # tablegen NOTE(../lua/lsp_tblgn_compilation_db.lua) 
-	  
+	  zls = { enable = true; };
+
 	  # rust!
 	  rust_analyzer = {
 	    enable = true;
