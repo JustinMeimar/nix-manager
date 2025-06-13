@@ -15,6 +15,7 @@
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
     ./programs/sops/sops.nix
+
     ./packages/llvm.nix 
   ];
 
@@ -29,6 +30,7 @@
     pkgs.just
     pkgs.jq
     pkgs.lazygit
+    pkgs.ninja
     pkgs.nodejs_23
     pkgs.ripgrep
     pkgs.sops
@@ -41,7 +43,7 @@
   # Configure LLVM user library version 
   llvm = {
     enable = true;
-    version = "18";
+    version = "19";
   };
    
   # Other dotfiles
