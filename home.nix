@@ -15,7 +15,6 @@
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
     ./programs/sops/sops.nix
-
     ./packages/llvm.nix 
   ];
 
@@ -32,6 +31,7 @@
     pkgs.lazygit
     pkgs.ninja
     pkgs.nodejs_23
+    pkgs.mutagen
     pkgs.ripgrep
     pkgs.sops
     pkgs.sshfs
