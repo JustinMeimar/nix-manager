@@ -9,6 +9,7 @@
     ./plugins/md.nix
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
+    ./plugins/gitsigns.nix
   ];
 
   programs.nixvim = { 
@@ -31,6 +32,14 @@
       relativenumber = true;
     };
          
+    autoCmd = [
+      {
+        event = ["FileType"];
+        pattern = ["nix" "yaml" "json" "html" "css"];
+        command = "setlocal shiftwidth=2 tabstop=2";
+      }
+    ];
+
     extraConfigLua = builtins.readFile(./lua/lsp_tblgn_compilation_db.lua) + "\n" + 
                      builtins.readFile(./lua/keymaps.lua);
   };

@@ -43,7 +43,7 @@
   # Configure LLVM user library version 
   llvm = {
     enable = true;
-    version = "19";
+    version = "17";
   };
    
   # Other dotfiles

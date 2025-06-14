@@ -1,9 +1,5 @@
 export PATH=$PATH:$HOME/.local/bin
 
-### Clang
-export CC=$(which clang)
-export CXX=$(which clang++)
-
 ### CMake
 export PATH="$PATH:/home/justin/install/cmake/bin"
 

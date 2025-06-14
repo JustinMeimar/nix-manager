@@ -23,6 +23,7 @@ in
 	gita = "git add";
 	gitc = "git commit";
 	gits = "git status";
+        nv = "nvim .";
     };
     
     # oh my zsh plugin

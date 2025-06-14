@@ -1,5 +1,15 @@
 local map = vim.keymap.set
 
+-- Basic Maps
+
+map("n", "<leader>d", '"_d', { desc = "Delete without copying" })
+map("n", "<leader>dd", '"_dd', { desc = "Delete line without copying" })
+map("v", "<leader>d", '"_d', { desc = "Delete selection without copying" })
+map("n", "<leader>el", '$', { desc = "Jump to end of line" })
+map("n", "<leader>nh", ":set hlsearch!<CR>", { desc = "Toggle search highlights" })
+
+-- Diagnositcs
+
 map("n", "<leader>tt", function()
  if vim.diagnostic.is_enabled() then
    vim.diagnostic.disable(0)
@@ -21,8 +31,4 @@ map("n", "<leader>tw", function()
     { virtual_text = { severity = { min = vim.diagnostic.severity.WARN } } }
   )
 end, { desc = "Show warnings and errors" })
-
-map("n", "<leader>d", '"_d', { desc = "Delete without copying" })
-map("n", "<leader>dd", '"_dd', { desc = "Delete line without copying" })
-map("v", "<leader>d", '"_d', { desc = "Delete selection without copying" })
 
