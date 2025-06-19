@@ -1,5 +1,15 @@
 { config, pkgs, ... }:
-
+let
+  concatFilesInDir = dirPath: 
+    let
+      files = builtins.attrNames (builtins.readDir dirPath);
+      regularFiles = builtins.filter (name: 
+        (builtins.readDir dirPath).${name} == "regular"
+      ) files;
+      contents = map (file: builtins.readFile "${dirPath}/${file}") regularFiles;
+    in
+      builtins.concatStringsSep "" contents;
+in
 {
   imports = [
     ./plugins/bar.nix
@@ -12,9 +22,9 @@
     ./plugins/gitsigns.nix
   ];
 
-  programs.nixvim = { 
-    enable = true;
-        
+  programs.nixvim = {
+
+    enable = true; 
     colorschemes.catppuccin.enable = true; 
     plugins.lualine.enable = true;
   
@@ -40,8 +50,7 @@
       }
     ];
 
-    extraConfigLua = builtins.readFile(./lua/lsp_tblgn_compilation_db.lua) + "\n" + 
-                     builtins.readFile(./lua/keymaps.lua);
+    extraConfigLua = concatFilesInDir ./lua;
   };
 }
 

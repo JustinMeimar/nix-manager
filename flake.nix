@@ -29,12 +29,23 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
     in {
-      homeConfigurations."justin-home" = home-manager.lib.homeManagerConfiguration {
+
+      # personal laptop config
+      homeConfigurations."justin@zen" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          ./home.nix
+          ./hosts/zen.nix
           nixvim.homeManagerModules.nixvim
           sops.homeManagerModules.sops
+        ];
+      };
+      
+      # build server config
+      homeConfigurations."justin@bee" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./hosts/bee.nix
+          nixvim.homeManagerModules.nixvim
         ];
       };
     };

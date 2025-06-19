@@ -7,43 +7,43 @@
       lsp = {
         enable = true; 
         package = pkgs.vimPlugins.nvim-lspconfig;
-	servers = {
-	    
+        servers = {
+            
           # one-liners
           cmake = { enable = true; };   # cmake
           denols = { enable = false; }; # deno 2
-	  gopls = { enable = true; };   # go
-	  bashls = { enable = true; };  # bash
-	  nil_ls = { enable = true; };  # nix
-	  html = { enable = true; };    # html
-	  cssls =  { enable = true; };  # css
-	  ts_ls = { enable = true; };   # typescript 
-          tblgen_lsp_server = { enable = true; }; # tablegen NOTE(../lua/lsp_tblgn_compilation_db.lua) 
-	  zls = { enable = true; };
+          gopls = { enable = true; };   # go
+          bashls = { enable = true; };  # bash
+          nil_ls = { enable = true; };  # nix
+          html = { enable = true; };    # html
+          cssls =  { enable = true; };  # css
+          ts_ls = { enable = true; };   # typescript 
+          tblgen_lsp_server = { enable = true; }; # NOTE: see lsp_tblgn_compilation_db.lua
+          zls = { enable = true; };
 
-	  # rust!
-	  rust_analyzer = {
-	    enable = true;
-	    installCargo = false;
-	    installRustc = false;
-	    settings = {
-	      procMacro = {
-		enable = true;
-	      };
-	      check = {
-		command = "clippy";
-		extraArgs = ["--all-targets"];
-	      };
-	      cargo = {
-		extraEnv = {
-		  CARGO_PATH = "~/.cargo/bin/cargo";
-		  RUSTC_PATH = "~/.cargo/bin/rustc";
-		};
-	      };
-	    };
-	  };
+          # rust!
+          rust_analyzer = {
+            enable = true;
+            installCargo = false;
+            installRustc = false;
+            settings = {
+              procMacro = {
+                enable = true;
+              };
+              check = {
+                command = "clippy";
+                extraArgs = ["--all-targets"];
+              };
+              cargo = {
+                extraEnv = {
+                  CARGO_PATH = "~/.cargo/bin/cargo";
+                  RUSTC_PATH = "~/.cargo/bin/rustc";
+                };
+              };
+            };
+          };
 
-	  # c/c++
+          # c/c++
           clangd = {
             enable = true;
             extraOptions = {
@@ -51,14 +51,14 @@
                 crossFileReferences = true;
                 callHierarchy = true;
                 compilationDatabaseDirectory = "build";
-		fallbackFlags = [
-		  "-std=c++17"
-		];
+                fallbackFlags = [
+                  "-std=c++17"
+                ];
               };
             };
           };
-	  
-	  # python :D
+          
+          # python :D
           pyright = {
             enable = true;
             settings = {
@@ -68,9 +68,9 @@
                   diagnosticMode = "workspace";
                   useLibraryCodeForTypes = true;
                 };
-		pythonPath = "";
+                pythonPath = "";
                 venvPath = ".";
-		venv = "venv";
+                venv = "venv";
               };
             };
           };
@@ -80,6 +80,7 @@
           diagnostic = {
             "<leader>j" = "goto_next";
             "<leader>k" = "goto_prev";
+            "<leader>e" = "open_float"; 
           };
           lspBuf = {
             "gd" = "definition";
@@ -91,10 +92,23 @@
           }; 
         };
       };
-
-      lsp-lines.enable = true;
       fidget.enable = true;
     };
+    
+    # Configure diagnostics to only show in sign column
+    # extraConfigLua = ''
+    #   vim.diagnostic.config({
+    #     virtual_text = false,
+    #     signs = true
+    #     underline = true
+    #     update_in_insert = false,
+    #     severity_sort = true,
+    #     float = {
+    #       border = 'rounded',
+    #       source = 'always',
+    #     },
+    #   })
+    # '';
   };
 }
 

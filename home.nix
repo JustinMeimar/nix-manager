@@ -14,7 +14,6 @@
     ./programs/tmux/tmux.nix
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
-    ./programs/sops/sops.nix
     ./packages/llvm.nix 
   ];
 
