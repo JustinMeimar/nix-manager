@@ -19,18 +19,18 @@ in
     
     # peak lazy
     shellAliases = {
- 	ll = "ls -la";
-	gita = "git add";
-	gitc = "git commit";
-	gits = "git status";
-        nv = "nvim .";
+      ll = "ls -la";
+      gita = "git add";
+      gitc = "git commit";
+      gits = "git status";
+      nv = "nvim .";
     };
     
     # oh my zsh plugin
     oh-my-zsh = {
-	enable = true;
-	plugins = [ ];
-	theme = "robbyrussell";
+      enable = true;
+      plugins = [ ];
+      theme = "robbyrussell";
     };
     
     # load scripts
