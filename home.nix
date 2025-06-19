@@ -14,7 +14,6 @@
     ./programs/tmux/tmux.nix
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
-    ./packages/llvm.nix 
   ];
 
   # Pacakges
@@ -38,12 +37,7 @@
     pkgs.wget
     pkgs.zellij
   ];
- 
-  # Configure LLVM user library version 
-  llvm = {
-    enable = true;
-    version = "17";
-  };
+  
    
   # Other dotfiles
   home.file = {

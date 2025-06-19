@@ -1,7 +1,9 @@
 {
   programs.git = {
     enable = true;
-    userEmail = "meimar@ualberta.ca";
-    userName = "JustinMeimar";
+    extraConfig = {
+      pull.rebase = true;
+      init.defaultBranch = "main";
+    };
   };
 }	
