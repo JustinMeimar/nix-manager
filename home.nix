@@ -11,6 +11,7 @@
     ./programs/vim.nix
     ./programs/fzf.nix
     ./programs/zoxide.nix
+    ./programs/ssh.nix
     ./programs/tmux/tmux.nix
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
