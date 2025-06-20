@@ -24,6 +24,7 @@ in
       gitc = "git commit";
       gits = "git status";
       nv = "nvim .";
+      cd = "z";
     };
     
     # oh my zsh plugin
