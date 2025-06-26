@@ -19,6 +19,7 @@ in
     ./plugins/md.nix
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
+    ./plugins/indent.nix
     ./plugins/gitsigns.nix
   ];
 

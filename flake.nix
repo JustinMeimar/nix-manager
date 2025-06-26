@@ -48,6 +48,15 @@
           nixvim.homeManagerModules.nixvim
         ];
       };
+  
+      # work configuration
+      homeConfigurations."justin@work" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./hosts/work.nix
+          nixvim.homeManagerModules.nixvim
+        ];
+      };
     };
 }
 
