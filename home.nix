@@ -23,6 +23,7 @@
     pkgs.bat
     pkgs.boost
     pkgs.dust
+    pkgs.docker-compose
     pkgs.github-cli
     pkgs.htop
     pkgs.just
