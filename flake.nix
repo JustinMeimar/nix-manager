@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of justin";
+  description = "Justin's Nix Flake";
 
   inputs = {
     
@@ -22,37 +22,37 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+  
+    # add vs-code extensions
+    nix-vscode-extensions = {
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, home-manager, nixvim, sops, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-
-      # personal laptop config
-      homeConfigurations."justin@zen" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
+    let 
+      mkHome = system: modules: home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = system;
+          config.allowUnfree = true;
+        };
+        inherit modules;
+      }; 
+    in {      
+      homeConfigurations = {
+        "justin@zen" = mkHome "x86_64-linux" [
           ./hosts/zen.nix
           nixvim.homeManagerModules.nixvim
           sops.homeManagerModules.sops
         ];
-      };
-      
-      # build server config
-      homeConfigurations."justin@bee" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
+        
+        "justin@bee" = mkHome "x86_64-linux" [
           ./hosts/bee.nix
           nixvim.homeManagerModules.nixvim
         ];
-      };
-  
-      # work configuration
-      homeConfigurations."justin@work" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
+        
+        "justin@work" = mkHome "x86_64-linux" [
           ./hosts/work.nix
           nixvim.homeManagerModules.nixvim
         ];

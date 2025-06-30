@@ -15,6 +15,7 @@
     ./programs/tmux/tmux.nix
     ./programs/zsh/zsh.nix
     ./programs/nvim/nvim.nix
+    ./programs/code/code.nix
   ];
 
   # Pacakges
