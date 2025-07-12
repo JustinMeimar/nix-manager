@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... } :
 let
   concatFilesInDir = dirPath: 
     let

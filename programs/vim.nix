@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, lib, pkgs, ... } : {
   programs.vim = {
     enable = true;
     settings = {

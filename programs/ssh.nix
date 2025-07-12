@@ -1,4 +1,4 @@
-{
+{ config, lib, pkgs, ... } : {
   programs.ssh = {
    enable = true;
    
@@ -34,7 +34,13 @@
          PubkeyAuthentication = "no";
        };
      };
-     
+      
+     "ug" = {
+       user = "cmput415";
+       hostname = "uf17.cs.ualberta.ca";
+       identityFile = "~/.ssh/cmput415";
+     };
+
      "ci415" = {
        user = "meimar";
        hostname = "ci.cmput415.cs.ualberta.ca";
@@ -50,6 +56,12 @@
      
      "github.com" = {
        hostname = "github.com";
+       identityFile = "~/.ssh/github-zen";
+     };
+
+     "gazbolt" = {
+       user = "justin";
+       hostname = "159.223.200.125";
        identityFile = "~/.ssh/github-zen";
      };
    };

@@ -5,24 +5,12 @@
   home.homeDirectory = "/home/justin";
   home.stateVersion = "24.05";
 
-  # imports
-  imports = [
-    ./programs/git.nix
-    ./programs/vim.nix
-    ./programs/fzf.nix
-    ./programs/zoxide.nix
-    ./programs/ssh.nix
-    ./programs/tmux/tmux.nix
-    ./programs/zsh/zsh.nix
-    ./programs/nvim/nvim.nix
-    ./programs/code/code.nix
-  ];
-
   # Pacakges
   home.packages = [
+    
+    # Low config command line tools
     pkgs.age
     pkgs.bat
-    pkgs.boost
     pkgs.dust
     pkgs.docker-compose
     pkgs.github-cli
@@ -30,15 +18,20 @@
     pkgs.just
     pkgs.jq
     pkgs.lazygit
-    pkgs.ninja
-    pkgs.nodejs_23
     pkgs.mutagen
     pkgs.ripgrep
-    pkgs.sops
     pkgs.sshfs
     pkgs.tree
     pkgs.wget
-    pkgs.zellij
+    
+    # Todo: find place
+    pkgs.ninja
+    pkgs.bear 
+    pkgs.sops
+    
+    # Todo: categorically different...
+    pkgs.nodejs_23
+    pkgs.boost
   ];
   
    

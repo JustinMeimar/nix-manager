@@ -7,7 +7,7 @@
       description = "Enable LLVM toolchain";
     };
     version = lib.mkOption {
-      type = lib.types.enum [ "17" "19" ];
+      type = lib.types.enum [ "17" "19" "latest" ];
       default = "19";
       description = "LLVM version or 'latest' for HEAD";
     };

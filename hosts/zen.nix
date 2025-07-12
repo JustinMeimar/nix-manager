@@ -3,19 +3,16 @@
 
 {
   imports = [
-    ../home.nix
-    ../modules/laptop.nix
-    ../programs/sops/sops.nix
-    ../packages/llvm.nix 
+    ../modules/home-manager/base.nix
   ];
-  
-  programs.git.userEmail = "meimar@ualberta.ca";
-  programs.git.userName = "JustinMeimar";
 
-  # Configure LLVM user library version 
-  llvm = {
-    enable = true;
-    version = "17";
+  specifics = {
+    git = {
+      enable = true;
+      userName = "JustinMeimar";
+      userEmail = "meimar@ualberta.ca";
+    };
   };
+  
 }
 

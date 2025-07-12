@@ -16,6 +16,7 @@ export PATH=$PATH:$ZIG_PATH
 
 ### GO
 export PATH=$PATH:/usr/local/go/bin  
+export PATH=$PATH:/home/justin/go/bin  
 
 ### DENO
 export PATH=$PATH:/home/justin/.deno/bin
@@ -34,6 +35,9 @@ export CLASSPATH="$ANTLR_JAR:$CLASSPATH"
 
 alias antlr4="java -Xmx500M org.antlr.v4.Tool"
 alias grun='java org.antlr.v5.gui.TestRig'
+
+### HOMEBREW
+export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 
 ### OTHER
 export MODULAR_HOME=/home/justin/.modualr

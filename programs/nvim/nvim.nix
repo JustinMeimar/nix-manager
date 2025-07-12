@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   concatFilesInDir = dirPath: 
     let
@@ -15,11 +15,11 @@ in
     ./plugins/bar.nix
     ./plugins/cmp.nix
     ./plugins/comment.nix
+    ./plugins/fmt.nix
     ./plugins/lsp.nix
     ./plugins/md.nix
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
-    ./plugins/indent.nix
     ./plugins/gitsigns.nix
   ];
 
@@ -41,8 +41,9 @@ in
       clipboard = "unnamedplus";
       signcolumn = "yes:1"; # prevent diagnostic flicker
       relativenumber = true;
+      scrolloff = 10;
     };
-         
+      
     autoCmd = [
       {
         event = ["FileType"];

@@ -2,7 +2,7 @@
   description = "Justin's Nix Flake";
 
   inputs = {
-    
+     
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     
     # add home manager
@@ -21,13 +21,7 @@
     sops = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-  
-    # add vs-code extensions
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    }; 
   };
 
   outputs = { nixpkgs, home-manager, nixvim, sops, ... }:
