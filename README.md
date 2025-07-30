@@ -12,12 +12,18 @@ Applying a configuration referenced in `./hosts`
 ### Secrets
 Some hosts configure `sops` which is used to manage secrets, for which some additional work post switch needs to be done.
 
-```
-sops --encrypt --age <AGE_PUBLIC_KEY> <SECRETS_YAML> > <SECRETS_YAML_ENC>
+```bash
+sops --encrypt --age <AGE_PUBLIC_KEY> <SECRETS_YAML> <SECRETS_YAML_ENC>
 ```
 Where: 
 * `AGE_PUBLIC_KEY`: path to AGE public key (hidden locally)
 * `SECRETS_YAML`: path to `.yaml` containing secrets (hidden locally)
 * `SECRETS_YAML_ENC`: encrypted version of secrets (can be stored publicly)
 
+While `sops-nix` should automatically handle decryption based on the parameters in `sops.nix`,
+secrets may be decrypted manually using:
+
+```bash
+sops --decrypt --input-type yaml --output-type yaml  <SECRETS_YAML_ENC>
+```
 

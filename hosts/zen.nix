@@ -4,6 +4,7 @@
 {
   imports = [
     ../modules/home-manager/base.nix
+    ../programs/sops/sops.nix
   ];
 
   specifics = {
@@ -12,7 +13,6 @@
       userName = "JustinMeimar";
       userEmail = "meimar@ualberta.ca";
     };
-  };
-  
+  };  
 }
 
