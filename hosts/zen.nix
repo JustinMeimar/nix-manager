@@ -4,6 +4,7 @@
 {
   imports = [
     ../modules/home-manager/base.nix
+    ../programs/sops/sops.nix
   ];
 
   specifics = {
