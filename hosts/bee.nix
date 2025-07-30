@@ -2,11 +2,8 @@
 
 {
   imports = [
-    ../home.nix
-    ../modules/server.nix
+    ../modules/nixos/base.nix
   ];
-
-  programs.git.userEmail = "meimar@ualberta.ca";
-  programs.git.userName = "JustinMeimar";
+ 
 }
 

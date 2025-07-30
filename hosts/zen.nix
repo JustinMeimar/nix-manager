@@ -13,7 +13,6 @@
       userName = "JustinMeimar";
       userEmail = "meimar@ualberta.ca";
     };
-  };
-  
+  };  
 }
 
