@@ -22,7 +22,10 @@
     pkgs.ripgrep
     pkgs.sshfs
     pkgs.tree
+    pkgs.typst
+    pkgs.tinymist
     pkgs.wget
+    pkgs.zathura
     
     # Todo: find place
     pkgs.ninja

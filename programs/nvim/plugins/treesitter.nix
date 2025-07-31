@@ -22,6 +22,7 @@
           "query"
           "tablegen"
 	        "typescript"
+          "typst"
           "vim"
           "vimdoc"
           "yaml"

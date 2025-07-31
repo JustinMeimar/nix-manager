@@ -19,6 +19,7 @@
           cssls =  { enable = true; };  # css
           ts_ls = { enable = true; };   # typescript 
           tblgen_lsp_server = { enable = true; }; # NOTE: see lsp_tblgn_compilation_db.lua
+          tinymist = { enable = true; }; # typst (why not named typst_lsp pls...)
           zls = { enable = true; };
 
           # rust!
