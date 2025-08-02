@@ -21,6 +21,8 @@
     shell = pkgs.zsh;
   };
 
+  programs.zsh.enable = true;
+
   # SSH service
   services.openssh = {
     enable = true;

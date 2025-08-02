@@ -1,11 +1,16 @@
-
 { config, pkgs, ... }:
 
 {
   imports = [
-    ../home.nix
-  ]; 
-  programs.git.userEmail = "justin.meimar@h-partners.com";
-  programs.git.userName = "j84409084";
+    ../modules/home-manager/base.nix
+  ];
+
+  specifics = {
+    git = {
+      enable = true;
+      userName = "j84409084";
+      userEmail = "justin.meimar@hpartners.com";
+    };
+  };  
 }
 

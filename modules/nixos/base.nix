@@ -3,7 +3,14 @@
   imports = [
     ./configuration.nix
     ./hardware-configuration.nix
-    ../../programs/sops/sops.nix
+    ./services/beefarm.nix
+    ./services/minima.nix
+    ./services/habits.nix
   ];
+ 
+  services.beefarm = {
+    enable = true;
+    domain = "localhost"; 
+  };
 }
 

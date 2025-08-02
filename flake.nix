@@ -32,7 +32,13 @@
           config.allowUnfree = true;
         };
         inherit modules;
-      }; 
+      };
+
+      mkSystem = system: modules: nixpkgs.lib.nixosSystem {
+        system = system;
+        modules = modules;
+      };
+
     in {      
       homeConfigurations = {
         "justin@zen" = mkHome "x86_64-linux" [
@@ -40,15 +46,17 @@
           nixvim.homeManagerModules.nixvim
           sops.homeManagerModules.sops
         ];
-        
-        "justin@bee" = mkHome "x86_64-linux" [
-          ./hosts/bee.nix
-          nixvim.homeManagerModules.nixvim
-        ];
-        
+                
         "justin@work" = mkHome "x86_64-linux" [
           ./hosts/work.nix
           nixvim.homeManagerModules.nixvim
+        ];
+      };
+
+      nixosConfigurations = {
+        "bee" = mkSystem "x86_64-linux" [
+          ./hosts/bee.nix
+          sops.nixosModules.sops
         ];
       };
     };
