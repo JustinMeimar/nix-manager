@@ -72,23 +72,22 @@ in {
       recommendedGzipSettings = true;
       recommendedProxySettings = true;
       
-      virtualHosts = mkMerge [
-        {
-          "${cfg.domain}" = {
-            locations."/" = {
+      virtualHosts."${cfg.domain}" = {
+        locations = mkMerge [
+          {
+            "/" = {
               return = "200 'Beefarm is running!'";
               extraConfig = "add_header Content-Type text/plain;";
             };
-          };
-        }
-        (mapAttrs' (name: site: 
-          nameValuePair "${site.network.subdomain}.${cfg.domain}" {
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:${toString site.network.port}";
-            };
-          }
-        ) publicSites)
-      ];
+          } 
+          ( mapAttrs' (name: site: 
+            nameValuePair "/${name}/" {
+              proxyPass = "http://127.0.0.1:${toString site.network.port}/";
+              extraConfig = "proxy_set_header Host $host;";
+            }
+          ) publicSites) 
+        ];
+      }; 
     };
     networking.firewall.allowedTCPPorts = mkIf (publicSites != {}) [ 80 443 ];    
     environment.systemPackages = [ pkgs.hello pkgs.nginx ];

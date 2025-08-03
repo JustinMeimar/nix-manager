@@ -1,5 +1,4 @@
 { config, lib, pkgs, ... }:
-with lib;
 let
   minima = builtins.fetchGit {
     url = "https://github.com/JustinMeimar/minima";
