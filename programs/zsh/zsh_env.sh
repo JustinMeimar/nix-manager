@@ -43,3 +43,6 @@ export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 export MODULAR_HOME=/home/justin/.modualr
 export EMSDK=/home/justin/installs/emsdk
 export EMSDK_NODE=/home/justin/installs/emsdk/node/18.20.3_64bit/bin/node
+
+### MOZ
+export MOZCONFIG=$HOME/dev/mozconfigs/debug

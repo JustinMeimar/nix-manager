@@ -34,7 +34,15 @@ in
     };
     
     # load scripts
-    initExtra = concatFilesInDir ./scripts;
+    initExtra = ''
+      ${concatFilesInDir ./scripts}
+      if command -v tmux &> /dev/null && [ -n "$PS1" ] \
+                                      && [[ ! "$TERM" =~ screen ]] \
+                                      && [[ ! "$TERM" =~ tmux ]] \
+                                      && [ -z "$TMUX" ]; then
+        exec tmux new-session -A -s main
+      fi
+    '';
 
     # env vars!
     envExtra = builtins.readFile ./zsh_env.sh; 
