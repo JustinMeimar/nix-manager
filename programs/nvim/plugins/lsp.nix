@@ -47,6 +47,14 @@
           # c/c++
           clangd = {
             enable = true;
+            cmd = [
+              "clangd"
+              "--background-index"
+              "--background-index=false"
+              "--limit-results=100"
+              "--j=1"
+              "--malloc-trim" # memory opt?
+            ];
             extraOptions = {
               initializationOptions = {
                 crossFileReferences = true;
@@ -95,21 +103,6 @@
       };
       fidget.enable = true;
     };
-    
-    # Configure diagnostics to only show in sign column
-    # extraConfigLua = ''
-    #   vim.diagnostic.config({
-    #     virtual_text = false,
-    #     signs = true
-    #     underline = true
-    #     update_in_insert = false,
-    #     severity_sort = true,
-    #     float = {
-    #       border = 'rounded',
-    #       source = 'always',
-    #     },
-    #   })
-    # '';
   };
 }
 

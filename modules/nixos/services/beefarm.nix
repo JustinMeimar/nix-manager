@@ -9,14 +9,19 @@ let
   
   siteType = types.submodule {
     options = {
-      enable = mkEnableOption "this service";
-      
-      serviceConfig = mkOption {
-        type = types.attrs;
-        description = "systemd service configuration";
-        default = {};
-      };
-      
+      enable = mkEnableOption "this service"; 
+      service = mkOption {
+        type = types.submodule {
+          options = {
+            description = mkOption {
+              type = types.str;
+            };
+            exec = mkOption {
+              type = types.str;
+            };
+          };
+        };
+      }; 
       network = mkOption {
         type = types.nullOr (types.submodule {
           options = {
@@ -31,7 +36,7 @@ let
             public = mkOption {
               type = types.bool;
               default = false;
-              description = "Expose via nginx";
+              description = "Internal v.s external service";
             };
           };
         });
@@ -42,14 +47,12 @@ let
   };
 in {
   options.services.beefarm = {
-    enable = mkEnableOption "beefarm";
-    
+    enable = mkEnableOption "beefarm"; 
     domain = mkOption {
       type = types.str;
       default = "localhost";
       description = "Base domain for services";
-    };
-    
+    }; 
     sites = mkOption {
       type = types.attrsOf siteType;
       default = {};
@@ -58,13 +61,21 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Create systemd services
+
     systemd.services = mapAttrs' (name: site: 
-      nameValuePair "beefarm-${name}" (site.serviceConfig // {
+      nameValuePair "beefarm-${name}" ({
         enable = site.enable;
+        description = site.service.description;
+        after = [ "network.target" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          ExecStart = site.service.exec;
+          Restart = "always";
+          User = "justin";
+        };
       })
-    ) cfg.sites;
-    
+    )cfg.sites;
+
     services.nginx = mkIf (publicSites != {}) {
       enable = true;
       recommendedTlsSettings = true;
@@ -90,7 +101,7 @@ in {
       }; 
     };
     networking.firewall.allowedTCPPorts = mkIf (publicSites != {}) [ 80 443 ];    
-    environment.systemPackages = [ pkgs.hello pkgs.nginx ];
+    environment.systemPackages = [ pkgs.nginx ];
   };
 }
 

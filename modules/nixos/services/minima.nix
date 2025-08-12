@@ -2,7 +2,7 @@
 let
   minima = builtins.fetchGit {
     url = "https://github.com/JustinMeimar/minima";
-    rev = "8217d126a5134ffa875d4516c253baa8edc64103";
+    ref = "HEAD";
   };
   port = 8000;
 in {
@@ -10,15 +10,10 @@ in {
     enable = true;
 
     # systemd service config
-    serviceConfig = {
-      description = "Minimal Personal Website";
-      after = [ "network.target" ];
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        ExecStart = "${pkgs.python3}/bin/python3 -m http.server ${builtins.toString(port)} --directory ${minima}";
-        Restart = "always";
-        User = "justin";
-      };
+    service = {
+      description = "Minimal Personal Site";
+      exec = "${pkgs.python3}/bin/python3 -m http.server " + 
+             "${builtins.toString(port)} --directory ${minima}";
     };
 
     # network config for nginx

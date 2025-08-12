@@ -20,6 +20,7 @@
     pkgs.lazygit
     pkgs.mutagen
     pkgs.ripgrep
+    pkgs.rr
     pkgs.sshfs
     pkgs.tree
     pkgs.typst

@@ -57,7 +57,6 @@
               "<C-c>" = "close";
               "<C-j>" = "cycle_history_next";
               "<C-k>" = "cycle_history_prev";
-              "<C-q>" = "smart_send_to_qflist";
             };
           };
         };
