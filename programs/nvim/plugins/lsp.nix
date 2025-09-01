@@ -8,21 +8,22 @@
         enable = true; 
         package = pkgs.vimPlugins.nvim-lspconfig;
         servers = {
-            
-          # one-liners
-          cmake = { enable = true; };   # cmake
-          denols = { enable = false; }; # deno 2
-          gopls = { enable = true; };   # go
-          bashls = { enable = true; };  # bash
-          nil_ls = { enable = true; };  # nix
-          html = { enable = true; };    # html
-          cssls =  { enable = true; };  # css
-          ts_ls = { enable = true; };   # typescript 
+          cmake = { enable = true; };
+          denols = { enable = false; };
+          gopls = { enable = true; };
+          bashls = { enable = true; };
+          nil_ls = { enable = true; };
+          html = { enable = true; };
+          cssls =  { enable = true; };
+          ts_ls = { enable = true; };
           tblgen_lsp_server = { enable = true; }; # NOTE: see lsp_tblgn_compilation_db.lua
-          tinymist = { enable = true; }; # typst (why not named typst_lsp pls...)
+          tinymist = { enable = true; };  # typst 
           zls = { enable = true; };
-
-          # rust!
+          ocamllsp =  {
+            enable = true;
+            package = null;
+            # package = pkgs.ocamlPackages.lsp;
+          };
           rust_analyzer = {
             enable = true;
             installCargo = false;
@@ -43,8 +44,6 @@
               };
             };
           };
-
-          # c/c++
           clangd = {
             enable = true;
             cmd = [
@@ -65,8 +64,7 @@
                 ];
               };
             };
-          };
-          
+          }; 
           # python :D
           pyright = {
             enable = true;

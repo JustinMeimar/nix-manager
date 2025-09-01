@@ -6,7 +6,7 @@
       barbar = {
         enable = true;
         keymaps = {
-          close.key = "<C-m>";
+          close.key = "<C-q>";
           next.key = "<C-n>";
           previous.key = "<C-p>";
           goTo1.key = "<leader>1";

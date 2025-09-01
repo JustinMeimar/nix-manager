@@ -19,6 +19,7 @@
     pkgs.jq
     pkgs.lazygit
     pkgs.mutagen
+    pkgs.opam
     pkgs.ripgrep
     pkgs.rr
     pkgs.sshfs
@@ -30,7 +31,6 @@
     
     # Todo: find place
     pkgs.ninja
-    pkgs.bear 
     pkgs.sops
     
     # Todo: categorically different...

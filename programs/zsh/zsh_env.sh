@@ -46,3 +46,9 @@ export EMSDK_NODE=/home/justin/installs/emsdk/node/18.20.3_64bit/bin/node
 
 ### MOZ
 export MOZCONFIG=$HOME/dev/mozconfigs/debug
+
+### OCAML
+eval "$(opam env)"
+
+source $HOME/.zshrc.local
+
