@@ -6,6 +6,7 @@
 
       settings = {
         ensureInstalled = [
+          "antlr"
           "bash"
           "c"
           "cpp"
