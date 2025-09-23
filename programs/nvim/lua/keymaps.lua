@@ -4,9 +4,11 @@ local map = vim.keymap.set
 
 map("n", "<leader>d", '"_d', { desc = "Delete without copying" })
 map("n", "<leader>dd", '"_dd', { desc = "Delete line without copying" })
-map("v", "<leader>d", '"_d', { desc = "Delete selection without copying" })
 map("n", "<leader>el", '$', { desc = "Jump to end of line" })
 map("n", "<leader>nh", ":set hlsearch!<CR>", { desc = "Toggle search highlights" })
+map("n", "<leader>ep", ":Explore<CR>", { desc = "Open Netrw" })
+map("n", "<leader>sa", ":wall<CR>", { desc = "Open Netrw" })
+map("v", "<leader>d", '"_d', { desc = "Delete selection without copying" })
 
 -- Diagnositcs
 
