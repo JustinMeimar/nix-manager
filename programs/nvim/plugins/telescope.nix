@@ -3,9 +3,9 @@
 {
   programs.nixvim = {
     plugins = {
-      
+
       web-devicons.enable = true;
-      
+
       telescope = {
         enable = true;
         extensions.fzf-native = {
@@ -15,7 +15,7 @@
             fuzzy = true;
           };
         };
-        
+
         settings.defaults = {
           file_ignore_patterns = [
             "^.git/"
@@ -32,11 +32,9 @@
               preview_width = 0.55;
               prompt_position = "top";
             };
-            vertical = {
-              mirror = false;
-            };
+            vertical = { mirror = false; };
             width = 0.87;
-            height = 0.80;
+            height = 0.8;
             preview_cutoff = 120;
           };
 
@@ -60,8 +58,8 @@
             };
           };
         };
-        
-	      keymaps = {
+
+        keymaps = {
           "<leader>ff" = "find_files";
           "<leader>fg" = "live_grep";
           "<leader>fb" = "buffers";

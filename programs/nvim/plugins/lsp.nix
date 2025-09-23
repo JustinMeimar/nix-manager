@@ -1,11 +1,10 @@
 # plugins/lsp.nix
 
-{ configs, pkgs, ...}:
-{
+{ configs, pkgs, ... }: {
   programs.nixvim = {
     plugins = {
       lsp = {
-        enable = true; 
+        enable = true;
         package = pkgs.vimPlugins.nvim-lspconfig;
         servers = {
           cmake = { enable = true; };
@@ -14,12 +13,14 @@
           bashls = { enable = true; };
           nil_ls = { enable = true; };
           html = { enable = true; };
-          cssls =  { enable = true; };
+          cssls = { enable = true; };
           ts_ls = { enable = true; };
-          tblgen_lsp_server = { enable = true; }; # NOTE: see lsp_tblgn_compilation_db.lua
-          tinymist = { enable = true; };  # typst 
+          tblgen_lsp_server = {
+            enable = true;
+          }; # NOTE: see lsp_tblgn_compilation_db.lua
+          tinymist = { enable = true; }; # typst
           zls = { enable = true; };
-          ocamllsp =  {
+          ocamllsp = {
             enable = true;
             package = null;
             # package = pkgs.ocamlPackages.lsp;
@@ -29,12 +30,10 @@
             installCargo = false;
             installRustc = false;
             settings = {
-              procMacro = {
-                enable = true;
-              };
+              procMacro = { enable = true; };
               check = {
                 command = "clippy";
-                extraArgs = ["--all-targets"];
+                extraArgs = [ "--all-targets" ];
               };
               cargo = {
                 extraEnv = {
@@ -59,12 +58,10 @@
                 crossFileReferences = true;
                 callHierarchy = true;
                 compilationDatabaseDirectory = "build";
-                fallbackFlags = [
-                  "-std=c++17"
-                ];
+                fallbackFlags = [ "-std=c++17" ];
               };
             };
-          }; 
+          };
           # python :D
           pyright = {
             enable = true;
@@ -87,7 +84,7 @@
           diagnostic = {
             "<leader>j" = "goto_next";
             "<leader>k" = "goto_prev";
-            "<leader>e" = "open_float"; 
+            "<leader>e" = "open_float";
           };
           lspBuf = {
             "gd" = "definition";
@@ -96,7 +93,7 @@
             "<leader>rn" = "rename";
             "<leader>ca" = "code_action";
             "<leader>ic" = "incoming_calls";
-          }; 
+          };
         };
       };
       fidget.enable = true;

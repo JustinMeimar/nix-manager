@@ -1,12 +1,6 @@
-{ coinfigs, pkgs, ...}:
+{ coinfigs, pkgs, ... }:
 
 {
-  programs.nixvim = {
-    plugins = {
-      markdown-preview = {
-	enable = true; 
-      };
-    };
-  };
+  programs.nixvim = { plugins = { markdown-preview = { enable = true; }; }; };
 }
 

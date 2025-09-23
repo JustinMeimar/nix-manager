@@ -1,10 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../modules/nixos/base.nix
-  ];
-  
+  imports = [ ../modules/nixos/base.nix ];
+
   # specifics = {
   #   git = {
   #     enable = true;

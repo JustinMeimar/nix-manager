@@ -1,5 +1,4 @@
-{ config, lib, pkgs, modulesPath, ... }:
-{ 
+{ config, lib, pkgs, modulesPath, ... }: {
   # Basic system settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   networking.hostName = "bee";
@@ -50,7 +49,7 @@
   boot.initrd.luks.devices."nixos-enc" = {
     device = "/dev/disk/by-uuid/0ea8a345-3261-40f1-8923-e8ca345f8a0b";
     keyFile = "/etc/secrets/luks-keyfile";
-    fallbackToPassword = true;  # Safety net
+    fallbackToPassword = true; # Safety net
   };
 }
 

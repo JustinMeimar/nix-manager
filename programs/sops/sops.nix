@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   sops = {
     age.keyFile = "/home/justin/.secrets/nix.age";
     defaultSopsFile = ./secrets.yaml.enc;

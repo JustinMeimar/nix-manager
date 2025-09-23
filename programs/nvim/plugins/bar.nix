@@ -17,9 +17,9 @@
           goTo6.key = "<leader>6";
           goTo7.key = "<leader>7";
           goTo8.key = "<leader>8";
-        }; 	
+        };
       };
     };
-  }; 
+  };
 }
 

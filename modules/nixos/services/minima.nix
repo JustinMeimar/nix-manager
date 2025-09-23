@@ -12,8 +12,8 @@ in {
     # systemd service config
     service = {
       description = "Minimal Personal Site";
-      exec = "${pkgs.python3}/bin/python3 -m http.server " + 
-             "${builtins.toString(port)} --directory ${minima}";
+      exec = "${pkgs.python3}/bin/python3 -m http.server "
+        + "${builtins.toString (port)} --directory ${minima}";
     };
 
     # network config for nginx
@@ -21,7 +21,7 @@ in {
       port = port;
       subdomain = "minima";
       public = true;
-    }; 
-  };  
+    };
+  };
 }
 

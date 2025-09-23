@@ -1,16 +1,15 @@
 { config, lib, pkgs, ... }:
 let
-  concatFilesInDir = dirPath: 
+  concatFilesInDir = dirPath:
     let
       files = builtins.attrNames (builtins.readDir dirPath);
-      regularFiles = builtins.filter (name: 
-        (builtins.readDir dirPath).${name} == "regular"
-      ) files;
-      contents = map (file: builtins.readFile "${dirPath}/${file}") regularFiles;
-    in
-      builtins.concatStringsSep "" contents;
-in
-{
+      regularFiles =
+        builtins.filter (name: (builtins.readDir dirPath).${name} == "regular")
+        files;
+      contents =
+        map (file: builtins.readFile "${dirPath}/${file}") regularFiles;
+    in builtins.concatStringsSep "" contents;
+in {
   imports = [
     ./plugins/bar.nix
     ./plugins/cmp.nix
@@ -24,18 +23,13 @@ in
   ];
 
   programs.nixvim = {
+    enable = true;
+    colorschemes.catppuccin.enable = true;
 
-    enable = true; 
-    colorschemes.catppuccin.enable = true; 
-    
     plugins = {
-      lualine = {
-        enable = true;
-      }; 
-      typst-vim = {
-        enable = true;
-      };
-    }; 
+      lualine = { enable = true; };
+      typst-vim = { enable = true; };
+    };
 
     globals = {
       mapleader = " ";
@@ -51,14 +45,12 @@ in
       relativenumber = true;
       scrolloff = 10;
     };
-      
-    autoCmd = [
-      {
-        event = ["FileType"];
-        pattern = ["nix" "yaml" "json" "html" "css" "svelte"];
-        command = "setlocal shiftwidth=2 tabstop=2";
-      }
-    ];
+
+    autoCmd = [{
+      event = [ "FileType" ];
+      pattern = [ "nix" "yaml" "json" "html" "css" "svelte" ];
+      command = "setlocal shiftwidth=2 tabstop=2";
+    }];
 
     extraConfigLua = concatFilesInDir ./lua;
   };

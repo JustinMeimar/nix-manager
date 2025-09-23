@@ -28,6 +28,10 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 ### NPM
 export PATH="/home/justin/.npm-global/bin:$PATH"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 ### ANTLR
 export ANTLR_INS=/home/justin/install/antlr/antlr4-install
 export ANTLR_JAR=/home/justin/install/antlr/antlr4-install/bin/antlr-4.13.0-complete.jar
@@ -49,6 +53,7 @@ export MOZCONFIG=$HOME/dev/mozconfigs/debug
 
 ### OCAML
 eval "$(opam env)"
+
 
 source $HOME/.zshrc.local
 

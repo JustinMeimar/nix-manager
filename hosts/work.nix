@@ -1,9 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../modules/home-manager/base.nix
-  ];
+  imports = [ ../modules/home-manager/base.nix ];
 
   specifics = {
     git = {
@@ -11,6 +9,6 @@
       userName = "j84409084";
       userEmail = "justin.meimar@hpartners.com";
     };
-  };  
+  };
 }
 

@@ -1,5 +1,5 @@
-{ config, lib, pkgs, ... } : {
-  
+{ config, lib, pkgs, ... }: {
+
   imports = [
     ../../home.nix
     ../../programs/git.nix
@@ -11,7 +11,7 @@
     ../../programs/zsh/zsh.nix
     ../../programs/nvim/nvim.nix
   ];
-  
+
   # Anything in a module which changes depending on the host.
   options.specifics = {
     git = {
@@ -25,6 +25,6 @@
         description = "Git email";
       };
     };
-  }; 
+  };
 }
 

@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   # Home info
   home.username = "justin";
   home.homeDirectory = "/home/justin";
@@ -7,7 +6,7 @@
 
   # Pacakges
   home.packages = [
-    
+
     # Low config command line tools
     pkgs.age
     pkgs.bat
@@ -28,27 +27,24 @@
     pkgs.tinymist
     pkgs.wget
     pkgs.zathura
-    
+
     # Todo: find place
     pkgs.ninja
     pkgs.sops
-    
+
     # Todo: categorically different...
-    pkgs.nodejs_23
-    pkgs.boost
+    # pkgs.nodejs_23
+    # pkgs.boost
   ];
-  
-   
+
   # Other dotfiles
   home.file = {
     ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty.toml;
   };
 
   # Environment
-  home.sessionVariables = {
-    EDITOR = "vim";
-  };
-  
+  home.sessionVariables = { EDITOR = "vim"; };
+
   # Let home manager self-manage
   programs.home-manager.enable = true;
 }

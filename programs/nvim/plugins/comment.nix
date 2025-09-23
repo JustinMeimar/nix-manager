@@ -2,11 +2,9 @@
 
 {
   programs.nixvim = {
-    plugins = { 
+    plugins = {
 
-      comment = {
-        enable = true; 
-      };
+      comment = { enable = true; };
     };
   };
 }

@@ -1,5 +1,5 @@
-{ config, lib, pkgs, ... } : {
-  
+{ config, lib, pkgs, ... }: {
+
   config = lib.mkIf config.specifics.git.enable {
     programs.git = {
       enable = true;
@@ -10,5 +10,5 @@
         init.defaultBranch = "main";
       };
     };
-  };  
-}	
+  };
+}

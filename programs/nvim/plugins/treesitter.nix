@@ -1,6 +1,6 @@
 {
   programs.nixvim = {
-    
+
     plugins.treesitter = {
       enable = true;
 
@@ -14,24 +14,22 @@
           "diff"
           "dockerfile"
           "html"
-	        "javascript"
+          "javascript"
           "lua"
           "luadoc"
           "markdown"
           "markdown_inline"
-	        "nix"
+          "nix"
           "query"
           "tablegen"
-	        "typescript"
+          "typescript"
           "typst"
           "vim"
           "vimdoc"
           "yaml"
         ];
 
-        highlight = {
-          enable = true;
-        };
+        highlight = { enable = true; };
       };
     };
   };

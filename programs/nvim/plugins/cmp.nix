@@ -14,9 +14,7 @@
             '';
           };
 
-          completion = {
-            completeopt = "menu,menuone,noinsert";
-          };
+          completion = { completeopt = "menu,menuone,noinsert"; };
 
           mapping = {
             "<C-n>" = "cmp.mapping.select_next_item()";
@@ -27,18 +25,15 @@
             "<C-Space>" = "cmp.mapping.complete {}";
           };
 
-          sources = [
-            { name = "luasnip"; }
-            { name = "nvim_lsp"; }
-            { name = "path"; }
-          ];
+          sources =
+            [ { name = "luasnip"; } { name = "nvim_lsp"; } { name = "path"; } ];
         };
       };
 
       # Required completion source plugins
       cmp-nvim-lsp.enable = true;
       cmp-path.enable = true;
-      
+
       # Snippet support
       luasnip.enable = true;
       cmp_luasnip.enable = true;
