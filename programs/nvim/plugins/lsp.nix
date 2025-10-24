@@ -58,7 +58,7 @@
                 crossFileReferences = true;
                 callHierarchy = true;
                 compilationDatabaseDirectory = "build";
-                fallbackFlags = [ "-std=c++17" ];
+                fallbackFlags = [ "-std=c++23" ];
               };
             };
           };
