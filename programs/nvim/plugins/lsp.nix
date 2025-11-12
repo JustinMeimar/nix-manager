@@ -58,23 +58,22 @@
                 crossFileReferences = true;
                 callHierarchy = true;
                 compilationDatabaseDirectory = "build";
-                fallbackFlags = [ "-std=c++23" ];
+                fallbackFlags = [ "-std=c++20" ];
               };
             };
           };
+
           # python :D
-          pyright = {
+          pylsp = {
             enable = true;
             settings = {
-              python = {
-                analysis = {
-                  autoSearchPaths = true;
-                  diagnosticMode = "workspace";
-                  useLibraryCodeForTypes = true;
+              pylsp = {
+                plugins = {
+                  pycodestyle = { enabled = false; };  # Disable if too slow
+                  mccabe = { enabled = false; };
+                  pyflakes = { enabled = true; };
+                  pylint = { enabled = false; };  # Can be slow
                 };
-                pythonPath = "";
-                venvPath = ".";
-                venv = "venv";
               };
             };
           };
