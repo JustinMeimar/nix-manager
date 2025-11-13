@@ -51,8 +51,10 @@ export EMSDK_NODE=/home/justin/installs/emsdk/node/18.20.3_64bit/bin/node
 ### MOZ
 export MOZCONFIG=$HOME/dev/spidermonkey/mozconfigs/debug-shell-baseline
 
-### OCAML
-eval "$(opam env)"
-
-source $HOME/.zshrc.local
+### Not everything needs to be in nix. We can configure locally too
+### and just source it in.
+if [ ! -f "$HOME/.zshrc.local" ]; then
+    touch "$HOME/.zshrc.local"; 
+fi
+source "$HOME/.zshrc.local"
 
