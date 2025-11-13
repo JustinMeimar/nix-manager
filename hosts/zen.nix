@@ -17,13 +17,19 @@
     pkgs.boost
     pkgs.opam
   ];
-  
+
   specifics = {
     git = {
       enable = true;
       userName = "JustinMeimar";
       userEmail = "meimar@ualberta.ca";
     };
-  };
+    home = {
+      enable = true;
+      username = "justin";
+      homeDirectory = "/home/justin";
+      stateVersion = "24.05"; 
+    };
+  }; 
 }
 

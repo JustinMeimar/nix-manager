@@ -1,35 +1,16 @@
-{ config, pkgs, ... }: {
-  
-  # Home info
-  home.username = "justin";
-  home.homeDirectory = "/home/justin";
-  home.stateVersion = "24.05";
-
-  # Pacakges
-  home.packages = [
-    pkgs.age
-    pkgs.bat
-    pkgs.dust
-    pkgs.github-cli
-    pkgs.htop
-    pkgs.just
-    pkgs.jq
-    pkgs.lazygit
-    pkgs.mutagen
-    pkgs.ripgrep
-    pkgs.rr
-    pkgs.sshfs
-    pkgs.tree 
-    pkgs.wget
-  ];
-
-  # Other dotfiles
-  home.file = {
-    ".config/alacritty/alacritty.toml".source = ./dotfiles/alacritty.toml;
+{ config, lib, ... }:
+  let homeOpts = config.specifics.home; 
+in { 
+  home = lib.mkIf homeOpts.enable {
+    username = homeOpts.username;
+    homeDirectory = homeOpts.homeDirectory;
+    stateVersion = homeOpts.stateVersion;
+    
+    # probably defaults
+    packages = homeOpts.packages;
+    sessionVariables = homeOpts.sessionVariables; 
+    file = homeOpts.file;
   };
-
-  # Environment
-  home.sessionVariables = { EDITOR = "vim"; };
 
   # Let home manager self-manage
   programs.home-manager.enable = true;
