@@ -48,7 +48,7 @@ in {
 
     autoCmd = [{
       event = [ "FileType" ];
-      pattern = [ "nix" "yaml" "json" "html" "css" "svelte" ];
+      pattern = [ "nix" "yaml" "json" "html" "css" "svelte" "js" ];
       command = "setlocal shiftwidth=2 tabstop=2";
     }];
 

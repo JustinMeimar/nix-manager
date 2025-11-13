@@ -48,16 +48,19 @@
           nixvim.homeManagerModules.nixvim
           sops.homeManagerModules.sops
         ];
-
         "justin@work" = mkHome "x86_64-linux" [
           ./hosts/work.nix
           nixvim.homeManagerModules.nixvim
         ];
+        "justy@pi" = mkHome "aarch64-linux" [
+          ./hosts/pi.nix
+          nixvim.homeManagerModules.nixvim
+        ];
       };
-
       nixosConfigurations = {
-        "bee" =
-          mkSystem "x86_64-linux" [ ./hosts/bee.nix sops.nixosModules.sops ];
+        "bee" = mkSystem "x86_64-linux" [
+          ./hosts/bee.nix sops.nixosModules.sops
+        ];
       };
     };
 }

@@ -10,15 +10,8 @@
     ../../programs/tmux/tmux.nix
     ../../programs/zsh/zsh.nix
     ../../programs/nvim/nvim.nix
-
-    ../../packages/llvm.nix
   ];
-  
-
-  options.llvm = {
-    enable = true; 
-  };
-
+     
   # Anything in a module which changes depending on the host.
   options.specifics = {
     git = {
