@@ -57,6 +57,7 @@
           nixvim.homeManagerModules.nixvim
         ];
       };
+
       nixosConfigurations = {
         "bee" = mkSystem "x86_64-linux" [
           ./hosts/bee.nix sops.nixosModules.sops

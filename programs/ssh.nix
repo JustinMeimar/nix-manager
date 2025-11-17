@@ -38,7 +38,7 @@ in {
 
       "bee" = mkKeyConfig {
         user = "justin";
-        hostname = "192.168.1.88";
+        hostname = "192.168.1.74";
         key = "~/.ssh/justin-bee";
       };
 
@@ -61,6 +61,11 @@ in {
       "uofa" = mkPwdConfig {
         user = "meimar";
         hostname = "coronation.cs.ualberta.ca";
+      };
+
+      "pi" = mkPwdConfig {
+        user = "justy";
+        hostname = "192.168.1.81";
       };
 
       "ci415" = {
