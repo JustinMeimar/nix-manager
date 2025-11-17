@@ -3,8 +3,7 @@
     age.keyFile = "/home/justin/.secrets/nix.age";
     defaultSopsFile = ./secrets.yaml.enc;
     secrets = {
-      nix-cloudflare-dydns-token = {
-        path = "/home/justin/.secrets/nix-cloudflare-dydns-token";
+      cloudflare-dydns-token = {
         mode = "0600";
       };
       nix-github-token = {
