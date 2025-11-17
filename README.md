@@ -27,3 +27,4 @@ secrets may be decrypted manually using:
 sops --decrypt --input-type yaml --output-type yaml  <SECRETS_YAML_ENC>
 ```
 
+On NixOS secrets go to `/run/secrets`. With home-manager they go to `~/.config/sops-nix/secrets`
