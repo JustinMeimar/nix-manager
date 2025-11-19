@@ -13,7 +13,7 @@
     pkgs.tinymist
     pkgs.ninja
     pkgs.sops
-    pkgs.nodejs_23
+    # pkgs.nodejs_23
     pkgs.boost
     pkgs.opam
   ];
