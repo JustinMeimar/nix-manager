@@ -21,7 +21,7 @@ let
 in {
   programs.ssh = {
     enable = true;
-
+    enableDefaultConfig = false;
     matchBlocks = {
 
       "innis" = mkKeyConfig {

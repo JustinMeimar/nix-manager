@@ -3,12 +3,14 @@
   config = lib.mkIf config.specifics.git.enable {
     programs.git = {
       enable = true;
-      userName = config.specifics.git.userName;
-      userEmail = config.specifics.git.userEmail;
-      extraConfig = {
+      settings = {
+        user = {
+          name = config.specifics.git.userName;
+          email = config.specifics.git.userEmail;
+        };
         pull.rebase = true;
         init.defaultBranch = "main";
-      };
+      };  
     };
   };
 }

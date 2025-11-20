@@ -16,6 +16,7 @@
     # pkgs.nodejs_23
     pkgs.boost
     pkgs.opam
+    pkgs.ocaml
   ];
 
   specifics = {
