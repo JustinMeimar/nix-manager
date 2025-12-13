@@ -43,6 +43,24 @@ alias grun='java org.antlr.v5.gui.TestRig'
 ### HOMEBREW
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 
+### RUBY
+export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="/home/justin/.rbenv/shims:${PATH}"
+export RBENV_SHELL=zsh
+rbenv() {
+  local command
+  command="${1:-}"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+  case "$command" in
+  rehash|shell)
+    eval "$(rbenv "sh-$command" "$@")";;
+  *)
+    command rbenv "$command" "$@";;
+  esac
+}
+
 ### OTHER
 export MODULAR_HOME=/home/justin/.modualr
 export EMSDK=/home/justin/installs/emsdk

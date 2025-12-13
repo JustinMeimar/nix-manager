@@ -20,6 +20,7 @@ in {
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
     ./plugins/gitsigns.nix
+    ./plugins/extra.nix
   ];
 
   programs.nixvim = {

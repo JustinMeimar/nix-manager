@@ -65,7 +65,7 @@ in {
 
       "pi" = mkPwdConfig {
         user = "justy";
-        hostname = "192.168.1.81";
+        hostname = "192.168.1.150";
       };
 
       "ci415" = {

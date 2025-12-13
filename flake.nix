@@ -45,16 +45,16 @@
       homeConfigurations = {
         "justin@zen" = mkHome "x86_64-linux" [
           ./hosts/zen.nix
-          nixvim.homeManagerModules.nixvim
+          nixvim.homeModules.nixvim
           sops.homeManagerModules.sops
         ];
         "justin@work" = mkHome "x86_64-linux" [
           ./hosts/work.nix
-          nixvim.homeManagerModules.nixvim
+          nixvim.homeModules.nixvim
         ];
         "justy@pi" = mkHome "aarch64-linux" [
           ./hosts/pi.nix
-          nixvim.homeManagerModules.nixvim
+          nixvim.homeModules.nixvim
         ];
       };
 

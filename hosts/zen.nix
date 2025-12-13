@@ -17,6 +17,7 @@
     pkgs.boost
     pkgs.opam
     pkgs.ocaml
+    pkgs.dune_3
   ];
 
   specifics = {

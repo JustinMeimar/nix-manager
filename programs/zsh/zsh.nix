@@ -23,6 +23,7 @@ in {
       gitc = "git commit";
       gits = "git status";
       nv = "nvim .";
+      t = "tmux";
     };
 
     # oh my zsh plugin
@@ -33,7 +34,7 @@ in {
     };
 
     # load scripts
-    initExtra = "${concatFilesInDir ./scripts}";
+    initContent = "${concatFilesInDir ./scripts}";
 
     # env vars!
     envExtra = builtins.readFile ./zsh_env.sh;

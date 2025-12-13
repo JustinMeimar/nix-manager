@@ -43,6 +43,10 @@
               };
             };
           };
+          ruby_lsp = {
+            enable = true;
+            package = null;  # uses rbenv's version
+          };
           clangd = {
             enable = true;
             cmd = [
