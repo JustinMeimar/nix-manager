@@ -2,11 +2,12 @@
 
   imports = [
     ../../home.nix
-    ../../programs/git.nix
-    ../../programs/vim.nix
     ../../programs/fzf.nix
-    ../../programs/zoxide.nix
+    ../../programs/git.nix
     ../../programs/ssh.nix
+    ../../programs/vim.nix
+    ../../programs/zoxide.nix
+    ../../programs/alacritty/alacritty.nix
     ../../programs/tmux/tmux.nix
     ../../programs/zsh/zsh.nix
     ../../programs/nvim/nvim.nix

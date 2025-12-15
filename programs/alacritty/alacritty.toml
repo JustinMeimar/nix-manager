@@ -6,5 +6,9 @@ text = "0x1d1f21"
 background = "0x1d1f21"
 foreground = "0xc5c8c6"
 
-[shell]
-program = "/usr/bin/zsh"
+[window.dimensions]
+columns = 120
+lines = 40
+
+[font]
+size = 16.0
