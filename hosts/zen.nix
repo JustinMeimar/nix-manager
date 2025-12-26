@@ -7,17 +7,20 @@
   ];
   
   home.packages = [
+    pkgs.cloc
     pkgs.docker-compose
     pkgs.zathura
     pkgs.typst
     pkgs.tinymist
     pkgs.ninja
     pkgs.sops
-    # pkgs.nodejs_23
     pkgs.boost
     pkgs.opam
     pkgs.ocaml
     pkgs.dune_3
+    pkgs.radare2
+    pkgs.uv
+    pkgs.ruff
   ];
 
   specifics = {

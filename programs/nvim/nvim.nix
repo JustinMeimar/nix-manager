@@ -16,6 +16,7 @@ in {
     ./plugins/comment.nix
     ./plugins/fmt.nix
     ./plugins/lsp.nix
+    ./plugins/lualine.nix
     ./plugins/md.nix
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
@@ -28,8 +29,7 @@ in {
     colorschemes.catppuccin.enable = true;
 
     plugins = {
-      lualine = { enable = true; };
-      typst-vim = { enable = true; };
+      typst-vim = { enable = true; }; 
     };
 
     globals = {
@@ -44,7 +44,8 @@ in {
       clipboard = "unnamedplus";
       signcolumn = "yes:1"; # prevent diagnostic flicker
       relativenumber = true;
-      scrolloff = 10;
+      scrolloff = 15;
+      pumheight = 10;
     };
 
     autoCmd = [{

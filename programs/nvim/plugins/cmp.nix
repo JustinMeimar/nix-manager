@@ -14,7 +14,20 @@
             '';
           };
 
-          completion = { completeopt = "menu,menuone,noinsert"; };
+          completion = {
+            completeopt = "menu,menuone,noinsert";
+          };
+
+          window = {
+            completion = {
+              max_height = 15;
+              max_width = 80;
+            };
+            documentation = {
+              max_height = 15;
+              max_width = 80;
+            };
+          };
 
           mapping = {
             "<C-n>" = "cmp.mapping.select_next_item()";
