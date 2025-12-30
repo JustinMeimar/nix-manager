@@ -44,23 +44,23 @@
     in {
       homeConfigurations = {
         "justin@zen" = mkHome "x86_64-linux" [
-          ./hosts/zen.nix
+          ./hosts/zen/zen.nix
           nixvim.homeModules.nixvim
           sops.homeManagerModules.sops
         ];
         "justin@work" = mkHome "x86_64-linux" [
-          ./hosts/work.nix
+          ./hosts/work/work.nix
           nixvim.homeModules.nixvim
         ];
         "justy@pi" = mkHome "aarch64-linux" [
-          ./hosts/pi.nix
+          ./hosts/pi/pi.nix
           nixvim.homeModules.nixvim
         ];
       };
 
       nixosConfigurations = {
         "bee" = mkSystem "x86_64-linux" [
-          ./hosts/bee.nix sops.nixosModules.sops
+          ./hosts/bee/bee.nix sops.nixosModules.sops
         ];
       };
     };

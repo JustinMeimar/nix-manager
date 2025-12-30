@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ../modules/home-manager/base.nix
+    ../../modules/programs/default.nix
   ];
   specifics = {
     git = {

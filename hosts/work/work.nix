@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 {
-  imports = [ ../modules/home-manager/base.nix ];
+  imports = [
+    ../../modules/programs/default.nix
+  ];
   specifics = {
     git = {
       enable = true;

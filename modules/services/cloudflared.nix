@@ -1,19 +1,7 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let beeHoleToken = config.sops.secrets.cloudflare-bee-hole-tunnel-token.path;
 in
 {
-  imports = [
-    ../programs/sops/sops.nix
-    ../modules/nixos/base.nix
-    ../modules/nixos/services/beefarm.nix
-    ../modules/nixos/services/minima.nix
-  ];
-  
-  environment.systemPackages = [
-    pkgs.cloudflared
-    pkgs.python3
-  ];
- 
   services.cloudflared = {
     enable = true;
     tunnels = {
@@ -28,10 +16,4 @@ in
       };
     };
   };
-  
-  services.beefarm = {
-    enable = true;
-    domain = "localhost";
-  };
 }
-
