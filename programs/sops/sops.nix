@@ -9,12 +9,8 @@
       cloudflare-dydns-token = {
         mode = "0600";
       };
-      nix-github-token = {
-        path = "/home/justin/.ssh/nix-github-token";
-        mode = "0600";
-      };
-      nix-github-zen = {
-        path = "/home/justin/.ssh/nix-github-zen";
+      github-zen = {
+        path = "/home/justin/.ssh/github-zen";
         mode = "0600";
       };
     };

@@ -6,9 +6,7 @@ in
     ../programs/sops/sops.nix
     ../modules/nixos/base.nix
     ../modules/nixos/services/beefarm.nix
-    
-    # Todo: Debug stale minima commit problem
-    # ../modules/nixos/services/minima.nix
+    ../modules/nixos/services/minima.nix
   ];
   
   environment.systemPackages = [
