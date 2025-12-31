@@ -25,7 +25,7 @@ in
       };
       github-zen = {
         path = "/home/justin/.ssh/github-zen";
-        mode = "0600";
+        mode = "0666";
       };
     };
   };
