@@ -3,15 +3,13 @@
 {
   programs.nixvim = {
     plugins = {
-
       web-devicons.enable = true;
-
       telescope = {
         enable = true;
         extensions.fzf-native = {
           enable = true;
           settings = {
-            case_mode = "smart_case";
+            case_mode = "ignore_case";
             fuzzy = true;
           };
         };
@@ -69,6 +67,7 @@
           "<leader>fd" = "diagnostics";
           "<leader>fi" = "lsp_implementations";
           "<leader>fr" = "lsp_references";
+          "<leader>/" = "current_buffer_fuzzy_find";
         };
       };
     };
