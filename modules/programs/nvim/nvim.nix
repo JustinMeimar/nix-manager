@@ -46,6 +46,7 @@ in {
       relativenumber = true;
       scrolloff = 15;
       pumheight = 10;
+      incsearch = false;
     };
 
     autoCmd = [{

@@ -19,9 +19,13 @@ in {
     # peak lazy
     shellAliases = {
       ll = "ls -la";
-      gita = "git add";
+      
+      gita = "git add .";
       gitc = "git commit";
       gits = "git status";
+      gitd = "git diff";
+      gitds = "git diff --staged";
+
       nv = "nvim .";
       t = "tmux";
     };

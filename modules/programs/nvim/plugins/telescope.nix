@@ -15,6 +15,9 @@
         };
 
         settings.defaults = {
+          cache_picker = {
+            num_pickers = 10;
+          };
           file_ignore_patterns = [
             "^.git/"
             "^node_modules/"
@@ -67,6 +70,7 @@
           "<leader>fd" = "diagnostics";
           "<leader>fi" = "lsp_implementations";
           "<leader>fr" = "lsp_references";
+          "<leader>fl" = "resume";
           "<leader>/" = "current_buffer_fuzzy_find";
         };
       };
