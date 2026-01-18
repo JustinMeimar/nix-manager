@@ -71,10 +71,21 @@
           "<leader>fi" = "lsp_implementations";
           "<leader>fr" = "lsp_references";
           "<leader>fl" = "resume";
-          "<leader>/" = "current_buffer_fuzzy_find";
         };
       };
     };
+
+    # Custom keymap for case-insensitive substring search in current buffer
+    keymaps = [
+      {
+        mode = "n";
+        key = "<leader>/";
+        action = "<cmd>lua telescope_helpers.current_buffer_search()<CR>";
+        options = {
+          desc = "Search current buffer (case-insensitive)";
+        };
+      }
+    ];
   };
 }
 

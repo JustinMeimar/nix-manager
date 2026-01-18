@@ -1,14 +1,7 @@
 { config, lib, pkgs, ... }:
 let
-  concatFilesInDir = dirPath:
-    let
-      files = builtins.attrNames (builtins.readDir dirPath);
-      regularFiles =
-        builtins.filter (name: (builtins.readDir dirPath).${name} == "regular")
-        files;
-      contents =
-        map (file: builtins.readFile "${dirPath}/${file}") regularFiles;
-    in builtins.concatStringsSep "" contents;
+  myLib = import ../../../lib { };
+  inherit (myLib) concatFilesInDir;
 in {
   programs.zsh = {
 
