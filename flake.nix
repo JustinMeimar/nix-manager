@@ -41,6 +41,15 @@
           modules = modules;
         };
 
+      mkDevShell = system: shellFile:
+        let
+          pkgs = import nixpkgs {
+            system = system;
+            config.allowUnfree = true;
+          };
+        in
+        import shellFile { inherit pkgs; };
+
     in {
       homeConfigurations = {
         "justin@zen" = mkHome "x86_64-linux" [
@@ -62,6 +71,15 @@
         "bee" = mkSystem "x86_64-linux" [
           ./hosts/bee/bee.nix sops.nixosModules.sops
         ];
+      };
+
+      devShells = {
+        x86_64-linux = {
+          ocaml = mkDevShell "x86_64-linux" ./shells/ocaml.nix;
+        };
+        aarch64-linux = {
+          ocaml = mkDevShell "aarch64-linux" ./shells/ocaml.nix;
+        };
       };
     };
 }
