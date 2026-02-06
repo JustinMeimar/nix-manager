@@ -46,18 +46,9 @@ local function format_text_file()
     -- Common text files like markdown, typst and text can be formated such that
     -- no line exceedsd a column width. This makes a text file readable in a terminal
     -- pane.
-
-    local ft = vim.bo.filetype
-    local allowed = {md = true, markdown = true, typst = true, text = true}
-
-    if not allowed[ft] then
-        print("Filetype '" .. ft .. "' not supported.")
-        return
-    end
-
     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
     local text = table.concat(lines, '\n')
-    local formatted = format_to_col(text, 80)
+    local formatted = format_to_col(text, 70)
 
     vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(formatted, '\n', {plain = true}))
 end

@@ -7,6 +7,16 @@
         enable = true;
         package = pkgs.vimPlugins.nvim-lspconfig;
         servers = {
+          astro = {
+            enable = true;
+            extraOptions = {
+              initializationOptions = {
+                typescript = {
+                  tsdk = "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib";
+                };
+              };
+            };
+          };
           cmake = { enable = true; };
           denols = { enable = false; };
           gopls = { enable = true; };

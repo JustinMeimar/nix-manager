@@ -4,22 +4,15 @@ pkgs.mkShell {
   name = "ocaml-dev";
 
   buildInputs = with pkgs; [
-    # OCaml toolchain
     ocaml
     dune_3
     opam
-
-    # Language server and tools
     ocamlPackages.ocaml-lsp
     ocamlPackages.ocamlformat
-    ocamlPackages.utop  # Interactive REPL
-
-    # Build utilities
+    ocamlPackages.utop
     pkg-config
-
-    # Optional but useful OCaml packages
     ocamlPackages.findlib
-    ocamlPackages.odoc  # Documentation generator
+    ocamlPackages.odoc
   ];
 
   shellHook = ''
