@@ -1,4 +1,5 @@
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/bin # comma commands
 
 ### CMake
 export PATH="$PATH:/home/justin/install/cmake/bin"

@@ -1,45 +1,126 @@
-local function format_to_col(text, width)
-    local result = {}
-    -- Split into paragraphs (separated by empty lines)
-    local paragraphs = vim.split(text, '\n\n', {plain = true})
+-- Symmetric delimiters that skip formatting when encountered
+local SKIP_DELIMITERS = {
+    ['```'] = true,
+    ['---'] = true,
+}
 
-    for i, para in ipairs(paragraphs) do
-        if para:match('^%s*$') then
-            -- Preserve empty paragraphs
-            table.insert(result, para)
+local function format_paragraph(para_lines, width)
+    if #para_lines == 0 then return {} end
+
+    local first_line = para_lines[1]
+    local initial_indent = first_line:match('^%s*') or ''
+
+    -- Detect if this is a list item (-, *, --, etc. followed by space)
+    local list_marker = first_line:match('^%s*([%-*]+)%s')
+    local continuation_indent
+
+    if list_marker then
+        -- Find first non-space char after marker
+        local marker_pos = #initial_indent + #list_marker + 1
+        continuation_indent = string.rep(' ', marker_pos)
+    else
+        -- For non-list items, align continuation to first non-space char
+        local first_nonspace = first_line:match('^%s*()')
+        if first_nonspace and first_nonspace > 1 then
+            continuation_indent = string.rep(' ', first_nonspace - 1)
         else
-            -- Detect indentation from first line
-            local indent = para:match('^%s*') or ''
-            -- Collapse paragraph into single line of words
-            local words = {}
-            for word in para:gmatch('%S+') do
-                table.insert(words, word)
-            end
-
-            -- Reflow words into lines of max width
-            local lines = {}
-            local current = indent
-
-            for j, word in ipairs(words) do
-                local test = current == indent and (current .. word) or (current .. ' ' .. word)
-                if #test <= width then
-                    current = test
-                else
-                    if current ~= indent then
-                        table.insert(lines, current)
-                    end
-                    current = indent .. word
-                end
-            end
-            if current ~= indent then
-                table.insert(lines, current)
-            end
-
-            table.insert(result, table.concat(lines, '\n'))
+            continuation_indent = initial_indent
         end
     end
 
-    return table.concat(result, '\n\n')
+    -- Collapse paragraph into words
+    local words = {}
+    for _, line in ipairs(para_lines) do
+        for word in line:gmatch('%S+') do
+            table.insert(words, word)
+        end
+    end
+
+    if #words == 0 then return {first_line} end
+
+    -- Reflow words
+    local result = {}
+    local current = initial_indent .. words[1]
+
+    for i = 2, #words do
+        local word = words[i]
+        local test = current .. ' ' .. word
+        if #test <= width then
+            current = test
+        else
+            table.insert(result, current)
+            current = continuation_indent .. word
+        end
+    end
+
+    if #current > #continuation_indent or #result == 0 then
+        table.insert(result, current)
+    end
+
+    return result
+end
+
+local function check_delimiter(line)
+    local after_indent = line:match('^%s*(.*)$')
+    for delim, _ in pairs(SKIP_DELIMITERS) do
+        if after_indent:sub(1, #delim) == delim then
+            return delim
+        end
+    end
+    return nil
+end
+
+local function format_to_col(text, width)
+    local lines = vim.split(text, '\n', {plain = true})
+    local result = {}
+    local skip_stack = {}
+    local i = 1
+
+    while i <= #lines do
+        local line = lines[i]
+        local delimiter = check_delimiter(line)
+
+        if delimiter then
+            -- Toggle skip mode for this delimiter
+            if #skip_stack > 0 and skip_stack[#skip_stack] == delimiter then
+                table.remove(skip_stack)
+            else
+                table.insert(skip_stack, delimiter)
+            end
+            table.insert(result, line)
+            i = i + 1
+        elseif #skip_stack > 0 then
+            -- Inside skip block, preserve exactly
+            table.insert(result, line)
+            i = i + 1
+        elseif line:match('^%s*$') then
+            -- Preserve empty lines
+            table.insert(result, line)
+            i = i + 1
+        else
+            -- Process paragraph until empty line or delimiter
+            local para_lines = {line}
+            local j = i + 1
+            while j <= #lines do
+                local next_line = lines[j]
+                if next_line:match('^%s*$') or check_delimiter(next_line) then
+                    break
+                end
+                table.insert(para_lines, next_line)
+                j = j + 1
+            end
+
+            -- Format this paragraph
+            local formatted = format_paragraph(para_lines, width)
+            for _, fline in ipairs(formatted) do
+                table.insert(result, fline)
+            end
+
+            i = j
+        end
+    end
+
+    return table.concat(result, '\n')
 end
 
 local function format_text_file()
