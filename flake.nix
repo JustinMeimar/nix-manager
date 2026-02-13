@@ -41,14 +41,13 @@
           modules = modules;
         };
 
-      mkDevShell = system: shellFile:
+      mkDevShells = system:
         let
           pkgs = import nixpkgs {
             system = system;
-            config.allowUnfree = true;
           };
         in
-        import shellFile { inherit pkgs; };
+        import ./shells { inherit pkgs; };
 
     in {
       homeConfigurations = {
@@ -74,12 +73,8 @@
       };
 
       devShells = {
-        x86_64-linux = {
-          ocaml = mkDevShell "x86_64-linux" ./shells/ocaml.nix;
-        };
-        aarch64-linux = {
-          ocaml = mkDevShell "aarch64-linux" ./shells/ocaml.nix;
-        };
+        x86_64-linux = mkDevShells "x86_64-linux";
+        aarch64-linux = mkDevShells "aarch64-linux";
       };
     };
 }

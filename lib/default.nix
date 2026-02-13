@@ -1,16 +1,24 @@
 { ... }:
-
-{
-  # Concatenate all files in a directory into a single string
-  concatFilesInDir = dirPath:
+let
+  collectFilesOfType = dirPath: fileType:
+    let files = builtins.readDir dirPath;
+    in
+      builtins.filter
+          (name: (files.${name} == fileType))
+          (builtins.attrNames files);
+  
+  fileListToContentList = dirPath: fileList:
+    builtins.map
+        (file: builtins.readFile "${dirPath}/${file}") 
+        (fileList); 
+in
+{ 
+  # Concat contents of regular files into a NL separated string,
+  # non recursive.
+  concatDirFiles = dirPath:
     let
-      files = builtins.attrNames (builtins.readDir dirPath);
-      regularFiles =
-        builtins.filter (name: (builtins.readDir dirPath).${name} == "regular")
-        files;
-      contents =
-        map (file: builtins.readFile "${dirPath}/${file}") regularFiles;
-    in builtins.concatStringsSep "" contents;
-
-  # Add more utility functions here as needed
+      regularFiles = collectFilesOfType dirPath "regular";     
+      contents = fileListToContentList dirPath regularFiles;
+    in
+      builtins.concatStringsSep "\n" contents;
 }

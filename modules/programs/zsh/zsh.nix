@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   myLib = import ../../../lib { };
-  inherit (myLib) concatFilesInDir;
+  inherit (myLib) concatDirFiles;
 in {
   programs.zsh = {
 
@@ -21,6 +21,7 @@ in {
 
       nv = "nvim .";
       t = "tmux";
+
     };
 
     # oh my zsh plugin
@@ -31,7 +32,7 @@ in {
     };
 
     # load scripts
-    initContent = "${concatFilesInDir ./scripts}";
+    initContent = "${concatDirFiles ./scripts}";
 
     # env vars!
     envExtra = builtins.readFile ./zsh_env.sh;

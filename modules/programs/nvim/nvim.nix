@@ -1,10 +1,11 @@
 { config, lib, pkgs, ... }:
 let
   myLib = import ../../../lib { };
-  inherit (myLib) concatFilesInDir;
+  inherit (myLib) concatDirFiles;
 in {
   imports = [
     ./plugins/bar.nix
+    ./plugins/centering.nix
     ./plugins/cmp.nix
     ./plugins/comment.nix
     ./plugins/fmt.nix
@@ -48,7 +49,7 @@ in {
       command = "setlocal shiftwidth=2 tabstop=2";
     }];
 
-    extraConfigLua = concatFilesInDir ./lua;
+    extraConfigLua = concatDirFiles ./lua;
   };
 }
 
