@@ -49,6 +49,12 @@ in {
       command = "setlocal shiftwidth=2 tabstop=2";
     }];
 
+    filetype = {
+      extension = {
+        mdx = "markdown";
+      };
+    };
+
     extraConfigLua = concatDirFiles ./lua;
   };
 }

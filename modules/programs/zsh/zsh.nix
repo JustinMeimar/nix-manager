@@ -18,10 +18,12 @@ in {
       gits = "git status";
       gitd = "git diff";
       gitds = "git diff --staged";
-
+      
       nv = "nvim .";
       t = "tmux";
-
+      b = "z ..";
+      b2 = "z ../..";
+      b3 = "z ../../../";
     };
 
     # oh my zsh plugin

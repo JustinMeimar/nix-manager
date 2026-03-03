@@ -70,27 +70,43 @@ local function check_delimiter(line)
     return nil
 end
 
-local function format_to_col(text, width)
-    local lines = vim.split(text, '\n', {plain = true})
+-- Pre-scan to find matched delimiter pairs, returns set of line indices to skip
+local function find_skip_ranges(lines)
+    local skip = {}
+    local open_delimiters = {} -- {delimiter, line_index}
+
+    for i, line in ipairs(lines) do
+        local delim = check_delimiter(line)
+        if delim then
+            if #open_delimiters > 0 and open_delimiters[#open_delimiters][1] == delim then
+                -- Closing delimiter found: mark entire range as skip
+                local open_idx = open_delimiters[#open_delimiters][2]
+                table.remove(open_delimiters)
+                for j = open_idx, i do
+                    skip[j] = true
+                end
+            else
+                table.insert(open_delimiters, {delim, i})
+            end
+        end
+    end
+
+    -- Unmatched opening delimiters are NOT marked as skip,
+    -- so lines after them still get formatted (fixes the bug where
+    -- an unclosed ``` block would suppress all formatting below it)
+    return skip
+end
+
+local function format_lines(lines, width)
     local result = {}
-    local skip_stack = {}
+    local skip = find_skip_ranges(lines)
     local i = 1
 
     while i <= #lines do
         local line = lines[i]
-        local delimiter = check_delimiter(line)
 
-        if delimiter then
-            -- Toggle skip mode for this delimiter
-            if #skip_stack > 0 and skip_stack[#skip_stack] == delimiter then
-                table.remove(skip_stack)
-            else
-                table.insert(skip_stack, delimiter)
-            end
-            table.insert(result, line)
-            i = i + 1
-        elseif #skip_stack > 0 then
-            -- Inside skip block, preserve exactly
+        if skip[i] then
+            -- Inside a matched skip block, preserve exactly
             table.insert(result, line)
             i = i + 1
         elseif line:match('^%s*$') then
@@ -98,12 +114,12 @@ local function format_to_col(text, width)
             table.insert(result, line)
             i = i + 1
         else
-            -- Process paragraph until empty line or delimiter
+            -- Process paragraph until empty line or skip block
             local para_lines = {line}
             local j = i + 1
             while j <= #lines do
                 local next_line = lines[j]
-                if next_line:match('^%s*$') or check_delimiter(next_line) then
+                if next_line:match('^%s*$') or skip[j] then
                     break
                 end
                 table.insert(para_lines, next_line)
@@ -120,7 +136,7 @@ local function format_to_col(text, width)
         end
     end
 
-    return table.concat(result, '\n')
+    return result
 end
 
 local function format_text_file()
@@ -128,11 +144,17 @@ local function format_text_file()
     -- no line exceedsd a column width. This makes a text file readable in a terminal
     -- pane.
     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    local text = table.concat(lines, '\n')
-    local formatted = format_to_col(text, 70)
+    local formatted = format_lines(lines, 70)
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, formatted)
+end
 
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(formatted, '\n', {plain = true}))
+local function format_text_visual()
+    local start_line = vim.fn.line("'<")
+    local end_line = vim.fn.line("'>")
+    local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+    local formatted = format_lines(lines, 70)
+    vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, formatted)
 end
 
 vim.keymap.set('n', '<leader>fw', format_text_file, {desc = 'Format text file to width'})
-
+vim.keymap.set('v', '<leader>fw', format_text_visual, {desc = 'Format selected text to width'})

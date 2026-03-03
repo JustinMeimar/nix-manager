@@ -1,6 +1,9 @@
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/bin # comma commands
 
+### MOJO
+export PATH=$PATH:/home/justin/.pixi/bin
+
 ### CMake
 export PATH="$PATH:/home/justin/install/cmake/bin"
 
