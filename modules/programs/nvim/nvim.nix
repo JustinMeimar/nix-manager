@@ -43,11 +43,18 @@ in {
       incsearch = false;
     };
 
-    autoCmd = [{
-      event = [ "FileType" ];
-      pattern = [ "nix" "yaml" "json" "html" "css" "svelte" "js" ];
-      command = "setlocal shiftwidth=2 tabstop=2";
-    }];
+    autoCmd = [
+      {
+        event = [ "FileType" ];
+        pattern = [ "nix" "yaml" "json" "html" "css" "svelte" "js" ];
+        command = "setlocal shiftwidth=2 tabstop=2";
+      }
+      {
+        event = [ "FileType" ];
+        pattern = [ "xml" ];
+        command = "setlocal indentexpr= indentkeys=";
+      }
+    ];
 
     filetype = {
       extension = {

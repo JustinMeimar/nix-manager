@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ nixfmt-classic ];
+  home.packages = with pkgs; [ nixfmt-classic libxml2 ];
   programs.nixvim = {
     plugins.conform-nvim = {
       enable = true;
@@ -16,10 +16,12 @@
           yaml = [ "prettier" ];
           markdown = [ "prettier" ];
           nix = [ "nixfmt" ];
+          xml = [ "xmllint" ];
         };
         formatters = {
           black = { prepend_args = [ "--line-length" "88" ]; };
           prettier = { prepend_args = [ "--tab-width" "2" ]; };
+          xmllint = { prepend_args = [ "--format" ]; };
         };
       };
     };
