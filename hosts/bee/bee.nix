@@ -13,6 +13,11 @@ in
     pkgs.python3
     pkgs.git
     pkgs.dolphin-emu
+    pkgs.firefox
+    pkgs.bluez
+    pkgs.bluez-tools
+    pkgs.xcb-util-cursor
+   
   ]; 
   
   sops = { 
@@ -36,4 +41,3 @@ in
     domain = "localhost";
   };
 }
-

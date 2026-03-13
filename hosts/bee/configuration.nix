@@ -39,13 +39,22 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
   };
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
+  
+  hardware = {
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
   };
+  services.blueman.enable = true; # for gui help
+  
 
   # Firewall
   networking.firewall = {
@@ -54,7 +63,12 @@
   };
 
   # Essential packages
-  environment.systemPackages = with pkgs; [ vim git neovim ];
+  environment.systemPackages = with pkgs; [
+    
+    vim
+    git
+    neovim
+  ];
 
   # Boot configuration
   boot.loader.systemd-boot.enable = true;
