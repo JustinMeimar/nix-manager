@@ -12,6 +12,7 @@ in
     pkgs.cloudflared
     pkgs.python3
     pkgs.git
+    pkgs.dolphin-emu
   ];
   
   sops = { 
