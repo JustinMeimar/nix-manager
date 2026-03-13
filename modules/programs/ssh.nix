@@ -38,7 +38,7 @@ in {
 
       "bee" = mkKeyConfig {
         user = "justin";
-        hostname = "192.168.1.74";
+        hostname = "192.168.1.88";
         key = "~/.ssh/justin-bee";
       };
 

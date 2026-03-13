@@ -12,8 +12,7 @@ in
     pkgs.cloudflared
     pkgs.python3
     pkgs.git
-    pkgs.dolphin-emu
-  ]; 
+  ];
   
   sops = { 
     age.keyFile = "/home/justin/.secrets/nix.age";
