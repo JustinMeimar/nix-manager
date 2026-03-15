@@ -24,6 +24,7 @@ in {
       b = "z ..";
       b2 = "z ../..";
       b3 = "z ../../../";
+      dog = "bat --style=plain --paging=never";
     };
 
     # oh my zsh plugin

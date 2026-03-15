@@ -10,6 +10,10 @@ map("n", "<leader>ep", ":Explore<CR>", { desc = "Open Netrw" })
 map("n", "<leader>sa", ":wall<CR>", { desc = "Open Netrw" })
 map("v", "<leader>d", '"_d', { desc = "Delete selection without copying" })
 
+-- Spell Check
+
+map("n", "<leader>sc", "<cmd>setlocal spell!<CR>", { desc = "Toggle spellcheck" })
+
 -- Diagnositcs
 
 map("n", "<leader>tt", function()

@@ -22,9 +22,7 @@ in {
     enable = true;
     colorschemes.catppuccin.enable = true;
 
-    plugins = {
-      typst-vim = { enable = true; }; 
-    };
+    plugins.typst-vim.enable = true;
 
     globals = {
       mapleader = " ";

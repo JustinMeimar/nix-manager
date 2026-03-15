@@ -13,8 +13,9 @@ Applying a configuration referenced in `./hosts`
 Some hosts configure `sops` which is used to manage secrets, for which some additional work post switch needs to be done.
 
 ```bash
-sops --encrypt --age <AGE_PUBLIC_KEY> <SECRETS_YAML> <SECRETS_YAML_ENC>
+sops --encrypt -a $(cat {AGE_PUBLIC_KEY}) {SECRETS_YAML} > {SECRETS_YAML_ENC}
 ```
+
 Where: 
 * `AGE_PUBLIC_KEY`: path to AGE public key (hidden locally)
 * `SECRETS_YAML`: path to `.yaml` containing secrets (hidden locally)
