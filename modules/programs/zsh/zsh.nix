@@ -4,21 +4,18 @@ let
   inherit (myLib) concatDirFiles;
 in {
   programs.zsh = {
-
     enable = true;
+    enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    # peak lazy
     shellAliases = {
       ll = "ls -la";
-      
       gita = "git add .";
       gitc = "git commit";
       gits = "git status";
       gitd = "git diff";
       gitds = "git diff --staged";
-      
       nv = "nvim .";
       t = "tmux";
       b = "z ..";
@@ -27,17 +24,13 @@ in {
       dog = "bat --style=plain --paging=never";
     };
 
-    # oh my zsh plugin
     oh-my-zsh = {
       enable = true;
-      plugins = [ ];
+      plugins = [ "git" "z" "history" ];
       theme = "robbyrussell";
     };
 
-    # load scripts
     initContent = "${concatDirFiles ./scripts}";
-
-    # env vars!
     envExtra = builtins.readFile ./zsh_env.sh;
   };
 }

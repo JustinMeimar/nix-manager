@@ -1,48 +1,47 @@
 { config, lib, pkgs, modulesPath, ... }: {
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "zen";
-  time.timeZone = "America/Denver";
-  system.stateVersion = "25.05";
+  time.timeZone = "America/Edmonton";
+  i18n.defaultLocale = "en_CA.UTF-8";
+  system.stateVersion = "25.11";
 
-  # Boot — UEFI with systemd-boot
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Kernel — latest for best AMD support
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # AMD GPU
   hardware.graphics.enable = true;
   hardware.amdgpu.initrd.enable = true;
-
-  # Networking
-  networking.networkmanager.enable = true;
-
-  # Bluetooth
   hardware.bluetooth.enable = true;
 
-  # Sound — pipewire
+  networking.networkmanager.enable = true;
+
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
   };
 
-  # GNOME desktop
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Touchpad
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.xserver.xkb.layout = "us";
   services.libinput.enable = true;
-
-  # Power management — Framework laptop
+  services.printing.enable = true;
   services.power-profiles-daemon.enable = true;
   services.fwupd.enable = true;
 
-  # Users
+  environment.sessionVariables = {
+    TERMINAL = "alacritty";
+    EDITOR = "vim";
+  };
+
+
   users.users.justin = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "docker" ];
@@ -50,37 +49,40 @@
   };
 
   programs.zsh.enable = true;
-
-  # Docker
   virtualisation.docker.enable = true;
 
-  # SSH
+
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = false;
   };
 
-  # Firewall
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 ];
   };
 
-  # System packages
   environment.systemPackages = with pkgs; [
     vim
     git
     neovim
     wget
+    curl
     firefox
     alacritty
+    claude-code
+    google-chrome
+    obsidian
+    zotero
+    bitwarden-desktop
+    brave
   ];
 
-  # Fonts
+
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
     noto-fonts
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
 }

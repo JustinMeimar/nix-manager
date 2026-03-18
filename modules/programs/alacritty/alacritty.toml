@@ -1,3 +1,6 @@
+[terminal.shell]
+program = "/run/current-system/sw/bin/zsh"
+
 [colors.cursor]
 cursor = "0xc5c8c6"
 text = "0x1d1f21"

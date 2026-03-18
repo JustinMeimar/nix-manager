@@ -39,7 +39,7 @@
   home = {
     username = "justin";
     homeDirectory = "/home/justin";
-    stateVersion = "24.05"; 
+    stateVersion = "24.05";
   };
   
   programs.git = {
@@ -49,7 +49,8 @@
         name = "justinmeimar";
         email = "meimar@ualberta.ca";
       };
-    }; 
+      core.editor = "vim";
+    };
   }; 
   
   # allow home-manager to manage itself
