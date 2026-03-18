@@ -70,6 +70,16 @@
         "bee" = mkSystem "x86_64-linux" [
           ./hosts/bee/bee.nix sops.nixosModules.sops
         ];
+        "zen" = mkSystem "x86_64-linux" [
+          ./hosts/zen/zen-system.nix
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.justin = import ./hosts/zen/zen.nix;
+            home-manager.extraSpecialArgs = { inherit nixvim; };
+            home-manager.sharedModules = [ nixvim.homeModules.nixvim ];
+          }
+        ];
       };
 
       devShells = {
