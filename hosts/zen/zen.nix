@@ -20,7 +20,8 @@
     pkgs.just
     pkgs.lazygit
     pkgs.mutagen
-    pkgs.neovim
+
+    pkgs.fastfetch
     pkgs.ninja
     pkgs.ocaml
     pkgs.opam
@@ -37,6 +38,7 @@
     pkgs.typst
     pkgs.usbutils
     pkgs.uv
+    pkgs.wl-clipboard
     pkgs.wget
     pkgs.zathura
     pkgs.boost

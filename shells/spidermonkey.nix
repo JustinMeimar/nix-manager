@@ -27,10 +27,12 @@ pkgs.mkShell {
     which
     perl
     git
+    rust-cbindgen
+    bear
   ];
 
   shellHook = ''
-    echo "🕷️  SpiderMonkey development environment loaded"
+    echo "SpiderMonkey development environment loaded"
     echo "  - python:          $(python3 --version)"
     echo "  - rustc:           $(rustc --version)"
     echo "  - cargo:           $(cargo --version)"
