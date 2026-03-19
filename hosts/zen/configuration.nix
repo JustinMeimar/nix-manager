@@ -17,6 +17,7 @@
   hardware.bluetooth.enable = true;
 
   networking.networkmanager.enable = true;
+  networking.nameservers = [ "1.1.1.3" "1.0.0.3" ];
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -33,6 +34,7 @@
   services.xserver.xkb.layout = "us";
   services.libinput.enable = true;
   services.printing.enable = true;
+  services.printing.drivers = [ pkgs.brlaser ];
   services.power-profiles-daemon.enable = true;
   services.fwupd.enable = true;
 
@@ -44,7 +46,7 @@
 
   users.users.justin = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "docker" "lp" ];
     shell = pkgs.zsh;
   };
 
@@ -76,6 +78,10 @@
     zotero
     bitwarden-desktop
     brave
+    discord
+    htop
+    psmisc
+    usbutils
   ];
 
 
