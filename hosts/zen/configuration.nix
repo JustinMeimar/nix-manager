@@ -3,7 +3,6 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "zen";
   time.timeZone = "America/Edmonton";
   i18n.defaultLocale = "en_CA.UTF-8";
   system.stateVersion = "25.11";
@@ -15,9 +14,6 @@
   hardware.graphics.enable = true;
   hardware.amdgpu.initrd.enable = true;
   hardware.bluetooth.enable = true;
-
-  networking.networkmanager.enable = true;
-  networking.nameservers = [ "1.1.1.3" "1.0.0.3" ];
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -43,7 +39,6 @@
     EDITOR = "vim";
   };
 
-
   users.users.justin = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "video" "docker" "lp" ];
@@ -53,37 +48,26 @@
   programs.zsh.enable = true;
   virtualisation.docker.enable = true;
 
-
-  services.openssh = {
-    enable = true;
-    settings.PasswordAuthentication = false;
-  };
-
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 22 ];
-  };
+  programs.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
     git
-    neovim
-    wget
-    curl
-    firefox
     alacritty
-    claude-code
     google-chrome
     obsidian
     zotero
     bitwarden-desktop
     brave
     discord
-    htop
-    psmisc
-    usbutils
+    spotify
+    feh
+    libsForQt5.qtstyleplugin-kvantum
+    kdePackages.qtstyleplugin-kvantum
+    orchis-theme
+    colloid-gtk-theme
+    colloid-icon-theme
   ];
-
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
