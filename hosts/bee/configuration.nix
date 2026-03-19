@@ -1,4 +1,38 @@
 { config, lib, pkgs, modulesPath, ... }: {
+  
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/services/default.nix
+    # ../../modules/programs/default.nix
+    # ../../modules/packages/default.nix
+  ];
+ 
+  sops = {
+    age.keyFile = "/home/justin/.secrets/nix.age";
+    defaultSopsFile = ./secrets.yaml.enc;
+    secrets = {
+      cloudflare-bee-hole-tunnel-token = {
+        mode = "0600";
+      };
+      cloudflare-dydns-token = {
+        mode = "0600";
+      };
+      github-zen = {
+        path = "/home/justin/.ssh/github-zen";
+        mode = "0666";
+      };
+      signal-number = {
+        mode = "0600";
+      };
+      openrouter-api-key = {
+        mode = "0600";
+      };
+    };
+  };
+
+  services.cloudflared-bee.enable = true;
+  services.ironclaw.enable = true;
+
   # Basic system settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   networking.hostName = "bee";
@@ -7,6 +41,19 @@
 
   networking.networkmanager.enable = true;
 
+  # Essential packages
+  environment.systemPackages = with pkgs; [
+    vim
+    git
+    cloudflared
+    python3
+    git
+    neofetch
+    signal-cli
+  ];
+
+  programs.nix-ld.enable = true;
+  
   # Users
   users.users.admin = {
     isNormalUser = true;
@@ -16,7 +63,11 @@
 
   users.users.justin = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+    ];
     shell = pkgs.zsh;
   };
 
@@ -29,15 +80,25 @@
     settings.PermitRootLogin = "yes";
   };
 
+  services.beefarm = {
+    enable = true;
+    domain = "localhost";
+  };
+  
+  virtualisation.docker.enable = true;
+
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_16;
+    extensions = ps: [ ps.pgvector ];
+    settings.listen_addresses = "localhost";
+  };
+
   # Firewall
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 ];
   };
-
-  # Essential packages
-  environment.systemPackages = with pkgs; [ vim git neovim ];
-
   # Boot configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

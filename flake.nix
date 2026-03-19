@@ -32,7 +32,9 @@
             system = system;
             config.allowUnfree = true;
           };
-          inherit modules;
+          modules = modules ++ [
+            nixvim.homeModules.nixvim
+          ];
         };
 
       mkSystem = system: modules:
@@ -53,22 +55,23 @@
       homeConfigurations = {
         "justin@zen" = mkHome "x86_64-linux" [
           ./hosts/zen/zen.nix
-          nixvim.homeModules.nixvim
           sops.homeManagerModules.sops
         ];
         "justin@work" = mkHome "x86_64-linux" [
           ./hosts/work/work.nix
-          nixvim.homeModules.nixvim
         ];
         "justy@pi" = mkHome "aarch64-linux" [
           ./hosts/pi/pi.nix
-          nixvim.homeModules.nixvim
+        ];
+        "justin@bee" = mkHome "x86_64-linux" [
+          ./hosts/bee/bee.nix
         ];
       };
 
       nixosConfigurations = {
         "bee" = mkSystem "x86_64-linux" [
-          ./hosts/bee/bee.nix sops.nixosModules.sops
+          ./hosts/bee/configuration.nix
+          sops.nixosModules.sops
         ];
         "zen" = mkSystem "x86_64-linux" [
           ./hosts/zen/zen-system.nix

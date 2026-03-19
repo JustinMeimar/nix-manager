@@ -1,19 +1,26 @@
 { config, lib, pkgs, ... }:
-let beeHoleToken = config.sops.secrets.cloudflare-bee-hole-tunnel-token.path;
+let
+  cfg = config.services.cloudflared-bee;
+  beeHoleToken = config.sops.secrets.cloudflare-bee-hole-tunnel-token.path;
 in
 {
-  services.cloudflared = {
-    enable = true;
-    tunnels = {
-      "bee-hole" = {
-        credentialsFile = beeHoleToken;
-        ingress = {
-          "justinmeimar.com" = "http://localhost:8001";
-          "gazbolt.justinmeimar.com" = "http://localhost:8002";
-          "thymos.justinmeimar.com" = "http://localhost:8002";
+  options.services.cloudflared-bee = {
+    enable = lib.mkEnableOption "cloudflared tunnel for bee";
+  };
+
+  config = lib.mkIf cfg.enable {
+    services.cloudflared = {
+      enable = true;
+      tunnels = {
+        "bee-hole" = {
+          credentialsFile = beeHoleToken;
+          ingress = {
+            "bee.justinmeimar.com" = "http://localhost:3000";
+          };
+          default = "http_status:404"; 
         };
-        default = "http_status:404"; 
       };
     };
   };
 }
+

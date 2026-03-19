@@ -1,38 +1,40 @@
-{ config, pkgs, ... }:
-let beeHoleToken = config.sops.secrets.cloudflare-bee-hole-tunnel-token.path;
-in
+{ config, pkgs, lib, ... }:
+
 {
   imports = [
-    ./configuration.nix
-    ./hardware-configuration.nix
-    ../../modules/services/default.nix
+    ../../modules/programs/default.nix
+    ../../modules/packages/default.nix
+  ];
+     
+  home = {
+    username = "justin";
+    homeDirectory = "/home/justin";
+    stateVersion = "24.05"; 
+  };
+  
+  home.packages = [
+    pkgs.claude-code 
+    pkgs.signal-cli
+    pkgs.qrencode
+    pkgs.ripgrep
   ];
 
-  environment.systemPackages = [
-    pkgs.cloudflared
-    pkgs.python3
-    pkgs.git
-  ];
-  
-  sops = { 
-    age.keyFile = "/home/justin/.secrets/nix.age";
-    defaultSopsFile = ./secrets.yaml.enc;
-    secrets = {
-      cloudflare-bee-hole-tunnel-token = {
-        mode = "0600";
-      };
-      cloudflare-dydns-token = {
-        mode = "0600";
-      };
-      github-zen = {
-        path = "/home/justin/.ssh/github-zen";
-        mode = "0666";
-      };
-    };
-  };
-  services.beefarm = {
+  programs.git = {
     enable = true;
-    domain = "localhost";
-  };
+    settings = {
+      user = {
+        name = "justinmeimar";
+        email = "meimar@ualberta.ca";
+      };
+    }; 
+  }; 
+
+  programs.zsh.initExtra = lib.mkAfter ''
+    [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+  '';
+  rust.enable = true;
+  
+  # allow home-manager to manage itself
+  programs.home-manager.enable = true;
 }
 
