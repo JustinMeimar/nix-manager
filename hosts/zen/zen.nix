@@ -25,6 +25,7 @@
     pkgs.ninja
     pkgs.ocaml
     pkgs.opam
+    pkgs.python3
     pkgs.psmisc
     pkgs.radare2
     pkgs.ripgrep
@@ -42,6 +43,24 @@
     pkgs.wget
     pkgs.zathura
     pkgs.boost
+    pkgs.openssl
+
+    pkgs.eza
+    pkgs.fd
+    pkgs.yq
+    pkgs.hexyl
+    pkgs.hyperfine
+    pkgs.delta
+    pkgs.difftastic
+    pkgs.gdb
+    pkgs.valgrind
+    pkgs.strace
+    pkgs.btop
+    pkgs.bandwhich
+    pkgs.duf
+    pkgs.tldr
+    pkgs.nix-tree
+    pkgs.direnv
   ];
   
   home = {

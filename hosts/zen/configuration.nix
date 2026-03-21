@@ -10,6 +10,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
 
   hardware.graphics.enable = true;
   hardware.amdgpu.initrd.enable = true;
@@ -61,12 +62,15 @@
     brave
     discord
     spotify
+    vscode
     feh
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
     orchis-theme
     colloid-gtk-theme
     colloid-icon-theme
+    prismlauncher
+    zip
   ];
 
   fonts.packages = with pkgs; [

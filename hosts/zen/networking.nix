@@ -10,6 +10,7 @@
     allowedTCPPorts = [ 22 ];
   };
 
+    
   environment.etc."resolv.conf".text = ''
     nameserver 1.1.1.3
     nameserver 1.0.0.3
@@ -30,6 +31,8 @@
       DnsOverHttpsMode = "off";
     };
   };
+
+  services.mullvad-vpn.enable = true;
 
   services.openssh = {
     enable = true;
