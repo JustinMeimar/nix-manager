@@ -4,9 +4,11 @@ let
   androidComposition = pkgs.androidenv.composeAndroidPackages {
     platformVersions = [ "34" "35" ];
     buildToolsVersions = [ "34.0.0" "35.0.0" ];
-    includeEmulator = false;
+    includeEmulator = true;
     includeSources = false;
-    includeSystemImages = false;
+    includeSystemImages = true;
+    systemImageTypes = [ "google_apis" ];
+    abiVersions = [ "x86_64" ];
     includeNDK = false;
   };
   androidSdk = androidComposition.androidsdk;
