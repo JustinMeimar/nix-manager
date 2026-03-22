@@ -10,6 +10,7 @@
     pkgs.bat
     pkgs.claude-code
     pkgs.cloc
+    pkgs.cargo
     pkgs.curl
     pkgs.docker-compose
     pkgs.dune_3
