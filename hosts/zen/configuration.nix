@@ -54,6 +54,7 @@
   environment.systemPackages = with pkgs; [
     vim
     git
+    android-tools
     alacritty
     google-chrome
     obsidian

@@ -4,4 +4,5 @@
   spidermonkey = import ./spidermonkey.nix { inherit pkgs; };
   friction-box = import ./friction-box.nix { inherit pkgs; };
   rust = import ./rust.nix { inherit pkgs; };
+  blog = import ./blog.nix { inherit pkgs; };
 }

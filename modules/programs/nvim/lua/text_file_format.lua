@@ -156,5 +156,32 @@ local function format_text_visual()
     vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, formatted)
 end
 
+local function format_text_paragraph()
+    local cur = vim.fn.line('.')
+    local total = vim.api.nvim_buf_line_count(0)
+
+    local function is_blank(lnum)
+        local line = vim.fn.getline(lnum)
+        return line:match('^%s*$') ~= nil
+    end
+
+    if is_blank(cur) then return end
+
+    local start_line = cur
+    while start_line > 1 and not is_blank(start_line - 1) do
+        start_line = start_line - 1
+    end
+
+    local end_line = cur
+    while end_line < total and not is_blank(end_line + 1) do
+        end_line = end_line + 1
+    end
+
+    local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+    local formatted = format_lines(lines, 70)
+    vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, formatted)
+end
+
 vim.keymap.set('n', '<leader>fw', format_text_file, {desc = 'Format text file to width'})
 vim.keymap.set('v', '<leader>fw', format_text_visual, {desc = 'Format selected text to width'})
+vim.keymap.set('n', '<leader>wp', format_text_paragraph, {desc = 'Format current paragraph to width'})

@@ -62,6 +62,7 @@
     pkgs.tldr
     pkgs.nix-tree
     pkgs.direnv
+    pkgs.poppler-utils
   ];
   
   home = {

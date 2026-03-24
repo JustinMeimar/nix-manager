@@ -81,6 +81,12 @@ in {
         identityFile = "~/.ssh/github-zen";
         identitiesOnly = true;
       };
+
+      "github-vidual" = {
+        hostname = "github.com";
+        identityFile = "~/.ssh/github-vidual";
+        identitiesOnly = true;
+      };
     };
   };
 }
