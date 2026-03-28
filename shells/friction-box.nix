@@ -20,6 +20,7 @@ pkgs.mkShell {
     bun
     nodejs
     just
+    lefthook
     jdk21
     gradle
     androidSdk
@@ -39,6 +40,7 @@ pkgs.mkShell {
   GH_CONFIG_DIR = "$HOME/.config/gh-vidual";
 
   shellHook = ''
+    lefthook install 2>/dev/null
     echo "friction-box development environment loaded"
     echo "  git:     $GIT_AUTHOR_NAME <$GIT_AUTHOR_EMAIL>"
     echo "  bun:     $(bun --version)"

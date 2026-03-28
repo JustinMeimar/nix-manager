@@ -4,7 +4,7 @@ pkgs.mkShell {
   name = "blog";
 
   buildInputs = with pkgs; [
+    bun
     nodejs_22
-    nodePackages.npm
   ];
 }

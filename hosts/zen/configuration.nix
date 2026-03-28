@@ -10,7 +10,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
+  boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" "amdgpu.abmlevel=0" ];
 
   hardware.graphics.enable = true;
   hardware.amdgpu.initrd.enable = true;
@@ -71,7 +71,6 @@
     colloid-gtk-theme
     colloid-icon-theme
     prismlauncher
-    zip
   ];
 
   fonts.packages = with pkgs; [

@@ -63,6 +63,8 @@
     pkgs.nix-tree
     pkgs.direnv
     pkgs.poppler-utils
+    pkgs.zip
+    pkgs.unzip
   ];
   
   home = {
@@ -73,12 +75,18 @@
   
   programs.git = {
     enable = true;
+    delta.enable = false;
     settings = {
       user = {
         name = "justinmeimar";
         email = "meimar@ualberta.ca";
       };
       core.editor = "vim";
+      delta = {
+        navigate = true;
+        side-by-side = true;
+      };
+      merge.conflictstyle = "zdiff3";
     };
   }; 
   
