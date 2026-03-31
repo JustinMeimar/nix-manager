@@ -62,19 +62,11 @@
             cmd = [
               "clangd"
               "--background-index"
-              "--background-index=false"
-              "--limit-results=100"
-              "--j=1"
-              "--malloc-trim" # memory opt?
+              "--j=2"
+              "--limit-results=0"
+              "--malloc-trim"
+              "--header-insertion=never"
             ];
-            extraOptions = {
-              initializationOptions = {
-                crossFileReferences = true;
-                callHierarchy = true;
-                compilationDatabaseDirectory = "build";
-                fallbackFlags = [ "-std=c++20" ];
-              };
-            };
           };
 
           # python :D
