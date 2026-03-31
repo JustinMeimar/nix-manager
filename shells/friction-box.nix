@@ -2,8 +2,8 @@
 
 let
   androidComposition = pkgs.androidenv.composeAndroidPackages {
-    platformVersions = [ "34" "35" ];
-    buildToolsVersions = [ "34.0.0" "35.0.0" ];
+    platformVersions = [ "34" "35" "36" ];
+    buildToolsVersions = [ "34.0.0" "35.0.0" "36.0.0" ];
     includeEmulator = true;
     includeSources = false;
     includeSystemImages = true;
@@ -40,7 +40,6 @@ pkgs.mkShell {
   GH_CONFIG_DIR = "$HOME/.config/gh-vidual";
 
   shellHook = ''
-    lefthook install 2>/dev/null
     echo "friction-box development environment loaded"
     echo "  git:     $GIT_AUTHOR_NAME <$GIT_AUTHOR_EMAIL>"
     echo "  bun:     $(bun --version)"
