@@ -1,4 +1,5 @@
--- Symmetric delimiters that skip formatting when encountered
+local DEFAULT_WIDTH = 70
+
 local SKIP_DELIMITERS = {
     ['```'] = true,
     ['---'] = true,
@@ -10,16 +11,13 @@ local function format_paragraph(para_lines, width)
     local first_line = para_lines[1]
     local initial_indent = first_line:match('^%s*') or ''
 
-    -- Detect if this is a list item (-, *, --, etc. followed by space)
     local list_marker = first_line:match('^%s*([%-*]+)%s')
     local continuation_indent
 
     if list_marker then
-        -- Find first non-space char after marker
         local marker_pos = #initial_indent + #list_marker + 1
         continuation_indent = string.rep(' ', marker_pos)
     else
-        -- For non-list items, align continuation to first non-space char
         local first_nonspace = first_line:match('^%s*()')
         if first_nonspace and first_nonspace > 1 then
             continuation_indent = string.rep(' ', first_nonspace - 1)
@@ -28,7 +26,6 @@ local function format_paragraph(para_lines, width)
         end
     end
 
-    -- Collapse paragraph into words
     local words = {}
     for _, line in ipairs(para_lines) do
         for word in line:gmatch('%S+') do
@@ -38,7 +35,6 @@ local function format_paragraph(para_lines, width)
 
     if #words == 0 then return {first_line} end
 
-    -- Reflow words
     local result = {}
     local current = initial_indent .. words[1]
 
@@ -70,16 +66,14 @@ local function check_delimiter(line)
     return nil
 end
 
--- Pre-scan to find matched delimiter pairs, returns set of line indices to skip
 local function find_skip_ranges(lines)
     local skip = {}
-    local open_delimiters = {} -- {delimiter, line_index}
+    local open_delimiters = {}
 
     for i, line in ipairs(lines) do
         local delim = check_delimiter(line)
         if delim then
             if #open_delimiters > 0 and open_delimiters[#open_delimiters][1] == delim then
-                -- Closing delimiter found: mark entire range as skip
                 local open_idx = open_delimiters[#open_delimiters][2]
                 table.remove(open_delimiters)
                 for j = open_idx, i do
@@ -91,9 +85,6 @@ local function find_skip_ranges(lines)
         end
     end
 
-    -- Unmatched opening delimiters are NOT marked as skip,
-    -- so lines after them still get formatted (fixes the bug where
-    -- an unclosed ``` block would suppress all formatting below it)
     return skip
 end
 
@@ -106,15 +97,12 @@ local function format_lines(lines, width)
         local line = lines[i]
 
         if skip[i] then
-            -- Inside a matched skip block, preserve exactly
             table.insert(result, line)
             i = i + 1
         elseif line:match('^%s*$') then
-            -- Preserve empty lines
             table.insert(result, line)
             i = i + 1
         else
-            -- Process paragraph until empty line or skip block
             local para_lines = {line}
             local j = i + 1
             while j <= #lines do
@@ -126,7 +114,6 @@ local function format_lines(lines, width)
                 j = j + 1
             end
 
-            -- Format this paragraph
             local formatted = format_paragraph(para_lines, width)
             for _, fline in ipairs(formatted) do
                 table.insert(result, fline)
@@ -140,11 +127,8 @@ local function format_lines(lines, width)
 end
 
 local function format_text_file()
-    -- Common text files like markdown, typst and text can be formated such that
-    -- no line exceedsd a column width. This makes a text file readable in a terminal
-    -- pane.
     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    local formatted = format_lines(lines, 70)
+    local formatted = format_lines(lines, DEFAULT_WIDTH)
     vim.api.nvim_buf_set_lines(0, 0, -1, false, formatted)
 end
 
@@ -152,7 +136,7 @@ local function format_text_visual()
     local start_line = vim.fn.line("'<")
     local end_line = vim.fn.line("'>")
     local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-    local formatted = format_lines(lines, 70)
+    local formatted = format_lines(lines, DEFAULT_WIDTH)
     vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, formatted)
 end
 
@@ -178,10 +162,20 @@ local function format_text_paragraph()
     end
 
     local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-    local formatted = format_lines(lines, 70)
+    local formatted = format_lines(lines, DEFAULT_WIDTH)
     vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, formatted)
+end
+
+local function format_text_file_prompted()
+    local input = vim.fn.input('Column width: ', tostring(DEFAULT_WIDTH))
+    local width = tonumber(input)
+    if not width or width < 1 then return end
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    local formatted = format_lines(lines, width)
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, formatted)
 end
 
 vim.keymap.set('n', '<leader>fw', format_text_file, {desc = 'Format text file to width'})
 vim.keymap.set('v', '<leader>fw', format_text_visual, {desc = 'Format selected text to width'})
 vim.keymap.set('n', '<leader>wp', format_text_paragraph, {desc = 'Format current paragraph to width'})
+vim.keymap.set('n', '<leader>fW', format_text_file_prompted, {desc = 'Format text file to prompted width'})

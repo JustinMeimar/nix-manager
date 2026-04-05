@@ -34,6 +34,7 @@
     pkgs.ruff
     pkgs.sops
     pkgs.sox
+    pkgs.ffmpeg
     pkgs.sshfs
     pkgs.tinymist
     pkgs.tree
