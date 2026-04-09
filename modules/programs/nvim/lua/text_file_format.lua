@@ -1,4 +1,4 @@
-local DEFAULT_WIDTH = 70
+local DEFAULT_WIDTH = 55
 
 local SKIP_DELIMITERS = {
     ['```'] = true,
