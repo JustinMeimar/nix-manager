@@ -10,6 +10,7 @@ in {
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+      lsdir = "ls -d */";
       ll = "ls -la";
       gita = "git add .";
       gitc = "git commit";
