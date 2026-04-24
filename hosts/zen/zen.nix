@@ -21,7 +21,6 @@
     pkgs.just
     pkgs.lazygit
     pkgs.mutagen
-
     pkgs.fastfetch
     pkgs.ninja
     pkgs.ocaml
@@ -35,6 +34,7 @@
     pkgs.sops
     pkgs.sox
     pkgs.ffmpeg
+    pkgs.gnupg
     pkgs.sshfs
     pkgs.tinymist
     pkgs.tree
@@ -46,7 +46,6 @@
     pkgs.zathura
     pkgs.boost
     pkgs.openssl
-
     pkgs.eza
     pkgs.fd
     pkgs.yq
