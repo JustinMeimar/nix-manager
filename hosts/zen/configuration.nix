@@ -33,6 +33,7 @@
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.brlaser ];
   services.power-profiles-daemon.enable = true;
+  services.logind.lidSwitchExternalPower = "ignore"; # build w/ lid closed
   services.fwupd.enable = true;
 
   environment.sessionVariables = {
