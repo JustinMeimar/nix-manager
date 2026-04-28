@@ -1,0 +1,28 @@
+{ pkgs, ... }: {
+  home.packages = with pkgs; [
+    bat
+    btop
+    cloc
+    curl
+    duf
+    dust
+    eza
+    fastfetch
+    fd
+    hexyl
+    htop
+    hyperfine
+    jq
+    poppler-utils
+    psmisc
+    ripgrep
+    tldr
+    tree
+    usbutils
+    wget
+    wl-clipboard
+    yq
+    zip
+    unzip
+  ];
+}

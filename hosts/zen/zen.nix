@@ -3,68 +3,7 @@
 {
   imports = [
     ../../modules/programs/default.nix
-  ];
-  
-  home.packages = [
-    pkgs.age
-    pkgs.bat
-    pkgs.claude-code
-    pkgs.cloc
-    pkgs.cargo
-    pkgs.curl
-    pkgs.docker-compose
-    pkgs.dune_3
-    pkgs.dust
-    pkgs.github-cli
-    pkgs.htop
-    pkgs.jq
-    pkgs.just
-    pkgs.lazygit
-    pkgs.mutagen
-    pkgs.fastfetch
-    pkgs.ninja
-    pkgs.ocaml
-    pkgs.opam
-    pkgs.python3
-    pkgs.psmisc
-    pkgs.radare2
-    pkgs.ripgrep
-    pkgs.rr
-    pkgs.ruff
-    pkgs.sops
-    pkgs.sox
-    pkgs.ffmpeg
-    pkgs.gnupg
-    pkgs.sshfs
-    pkgs.tinymist
-    pkgs.tree
-    pkgs.typst
-    pkgs.usbutils
-    pkgs.uv
-    pkgs.wl-clipboard
-    pkgs.wget
-    pkgs.zathura
-    pkgs.boost
-    pkgs.openssl
-    pkgs.eza
-    pkgs.fd
-    pkgs.yq
-    pkgs.hexyl
-    pkgs.hyperfine
-    pkgs.delta
-    pkgs.difftastic
-    pkgs.gdb
-    pkgs.valgrind
-    pkgs.strace
-    pkgs.btop
-    pkgs.bandwhich
-    pkgs.duf
-    pkgs.tldr
-    pkgs.nix-tree
-    pkgs.direnv
-    pkgs.poppler-utils
-    pkgs.zip
-    pkgs.unzip
+    ../../modules/packages/default.nix
   ];
   
   home = {

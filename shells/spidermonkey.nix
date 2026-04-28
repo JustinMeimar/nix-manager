@@ -64,6 +64,7 @@ pkgs.mkShell {
     dconf
     libcanberra-gtk3
     libclang.lib
+    udev
   ];
 
   LIBCLANG_PATH = "${pkgs.libclang.lib}/lib";

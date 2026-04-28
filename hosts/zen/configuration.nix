@@ -6,35 +6,48 @@
   time.timeZone = "America/Edmonton";
   i18n.defaultLocale = "en_CA.UTF-8";
   system.stateVersion = "25.11";
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" "amdgpu.abmlevel=0" ];
-
-  hardware.graphics.enable = true;
-  hardware.amdgpu.initrd.enable = true;
-  hardware.bluetooth.enable = true;
-
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = [ "amdgpu.dcdebugmask=0x10" "amdgpu.abmlevel=0" ];
+  };
+  
+  hardware = {
+    graphics.enable = true;
+    amdgpu.initrd.enable = true;
+    bluetooth.enable = true;
+  };
+ 
+  services = {
+    pulseaudio.enable = false;
+    xserver.enable = true;
+    xserver.xkb.layout = "us";
+    displayManager.sddm.enable = true;
+    desktopManager.plasma6.enable = true;
+    libinput.enable = true;
+    power-profiles-daemon.enable = true;
+    fwupd.enable = true;
+  };
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+   
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.brlaser ];
+  };
 
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  services.xserver.xkb.layout = "us";
-  services.libinput.enable = true;
-  services.printing.enable = true;
-  services.printing.drivers = [ pkgs.brlaser ];
-  services.power-profiles-daemon.enable = true;
-  services.logind.lidSwitchExternalPower = "ignore"; # build w/ lid closed
-  services.fwupd.enable = true;
+  services.logind = {
+    lidSwitch = "ignore"; # work w/ lid closed & !power
+    lidSwitchExternalPower = "ignore"; # work w/ lid closed & pwr
+  };
 
   environment.sessionVariables = {
     TERMINAL = "alacritty";
