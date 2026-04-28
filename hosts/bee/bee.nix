@@ -32,9 +32,7 @@
   programs.zsh.initExtra = lib.mkAfter ''
     [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
   '';
-  rust.enable = true;
-  
-  # allow home-manager to manage itself
+
   programs.home-manager.enable = true;
 }
 
