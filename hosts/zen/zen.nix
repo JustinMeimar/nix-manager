@@ -14,20 +14,18 @@
   
   programs.git = {
     enable = true;
-    delta.enable = false;
+    signing.format = null;
     settings = {
       user = {
         name = "justinmeimar";
         email = "meimar@ualberta.ca";
       };
       core.editor = "vim";
-      delta = {
-        navigate = true;
-        side-by-side = true;
-      };
       merge.conflictstyle = "zdiff3";
     };
-  }; 
+  };
+
+  programs.delta.enable = false; 
   
   # allow home-manager to manage itself
   programs.home-manager.enable = true;

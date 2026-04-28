@@ -44,9 +44,9 @@
     drivers = [ pkgs.brlaser ];
   };
 
-  services.logind = {
-    lidSwitch = "ignore"; # work w/ lid closed & !power
-    lidSwitchExternalPower = "ignore"; # work w/ lid closed & pwr
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
   };
 
   environment.sessionVariables = {
