@@ -51,7 +51,7 @@
 
   environment.sessionVariables = {
     TERMINAL = "alacritty";
-    EDITOR = "vim";
+    EDITOR = "nvim";
   };
 
   users.users.justin = {
@@ -66,6 +66,7 @@
   programs.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [
+    calibre
     vim
     git
     android-tools

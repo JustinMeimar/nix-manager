@@ -14,6 +14,7 @@
     lazygit
     mutagen
     nix-tree
+    python3
     radare2
     rr
     sops
