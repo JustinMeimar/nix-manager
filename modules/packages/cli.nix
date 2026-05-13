@@ -16,6 +16,7 @@
     poppler-utils
     psmisc
     ripgrep
+    sqlite
     tldr
     tree
     usbutils

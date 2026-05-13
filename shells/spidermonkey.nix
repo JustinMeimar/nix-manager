@@ -28,6 +28,7 @@ pkgs.mkShell {
     git
     rust-cbindgen
     bear
+    uv
 
     alsa-lib
     libpulseaudio

@@ -17,12 +17,14 @@ in {
       gits = "git status";
       gitd = "git diff";
       gitds = "git diff --staged";
+      gitl = "git log | bat";
       nv = "nvim .";
       t = "tmux";
       b = "z ..";
       b2 = "z ../..";
       b3 = "z ../../../";
       dog = "bat --style=plain --paging=never";
+      cwd = "pwd | wl-copy";
     };
 
     oh-my-zsh = {
