@@ -9,6 +9,7 @@
     eza
     fastfetch
     fd
+    gcc
     hexyl
     htop
     hyperfine

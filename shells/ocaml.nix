@@ -14,7 +14,9 @@ pkgs.mkShell {
     ocamlPackages.findlib
     ocamlPackages.odoc
   ];
-
+  
+  # yes I am ok with this emoji in my source code. I think
+  # the camel is kind of cute.
   shellHook = ''
     echo "🐫 OCaml development environment loaded"
     echo "  - ocaml:           $(ocaml --version | head -n1)"

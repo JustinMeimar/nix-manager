@@ -8,7 +8,7 @@
     enable = true;
     allowedTCPPorts = [ 22 ];
   };
- 
+
   services.mullvad-vpn.enable = true;
   services.openssh = {
     enable = true;
@@ -22,7 +22,7 @@
       nameserver 1.0.0.3
     '';
   };
-  
+
   programs.firefox = {
     enable = true;
     policies = {
@@ -38,5 +38,5 @@
       DnsOverHttpsMode = "off";
     };
   };
- 
+
 }

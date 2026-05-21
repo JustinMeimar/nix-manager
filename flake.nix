@@ -22,9 +22,15 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, sops, ... }:
+  outputs = { nixpkgs, home-manager, nixvim, sops, plasma-manager, ... }:
     let
       mkHome = system: modules:
         home-manager.lib.homeManagerConfiguration {
@@ -82,7 +88,7 @@
             home-manager.useUserPackages = true;
             home-manager.users.justin = import ./hosts/zen/zen.nix;
             home-manager.extraSpecialArgs = { inherit nixvim; };
-            home-manager.sharedModules = [ nixvim.homeModules.nixvim ];
+            home-manager.sharedModules = [ nixvim.homeModules.nixvim plasma-manager.homeManagerModules.plasma-manager ];
           }
         ];
       };

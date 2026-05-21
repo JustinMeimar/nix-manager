@@ -25,9 +25,38 @@
     };
   };
 
-  programs.delta.enable = false; 
-  
-  # allow home-manager to manage itself
+  programs.delta.enable = false;
+
+  programs.plasma = {
+    enable = true;
+    overrideConfig = false;
+    panels = [
+      {
+        location = "bottom";
+        widgets = [
+          "org.kde.plasma.kickoff"
+          "org.kde.plasma.pager"
+          {
+            iconTasks = {
+              launchers = [
+                "applications:bitwarden.desktop"
+                "applications:obsidian.desktop"
+                "applications:firefox.desktop"
+                "applications:zotero.desktop"
+                "applications:systemsettings.desktop"
+                "applications:discord.desktop"
+              ];
+            };
+          }
+          "org.kde.plasma.marginsseparator"
+          "org.kde.plasma.systemtray"
+          "org.kde.plasma.digitalclock"
+          "org.kde.plasma.showdesktop"
+        ];
+      }
+    ];
+  };
+
   programs.home-manager.enable = true;
 }
 

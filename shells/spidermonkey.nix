@@ -66,6 +66,7 @@ pkgs.mkShell {
     libcanberra-gtk3
     libclang.lib
     udev
+    mitmproxy
   ];
 
   LIBCLANG_PATH = "${pkgs.libclang.lib}/lib";

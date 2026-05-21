@@ -12,7 +12,7 @@ in {
     shellAliases = {
       lsdir = "ls -d */";
       ll = "ls -la";
-      gita = "git add .";
+      gita = "git add";
       gitc = "git commit";
       gits = "git status";
       gitd = "git diff";
