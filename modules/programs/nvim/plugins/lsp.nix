@@ -45,12 +45,6 @@
                 command = "clippy";
                 extraArgs = [ "--all-targets" ];
               };
-              cargo = {
-                extraEnv = {
-                  CARGO_PATH = "~/.cargo/bin/cargo";
-                  RUSTC_PATH = "~/.cargo/bin/rustc";
-                };
-              };
             };
           };
           ruby_lsp = {
