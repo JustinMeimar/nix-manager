@@ -1,5 +1,18 @@
 { pkgs ? import <nixpkgs> {} }:
 
+let
+  rr-master = pkgs.rr.overrideAttrs (old: {
+    version = "unstable-2026-05-13";
+    src = pkgs.fetchFromGitHub {
+      owner = "rr-debugger";
+      repo = "rr";
+      rev = "b835bbdee5bed59094f76e1f29437e6043254f8e";
+      sha256 = "1fchzakpb1yrb36fpr3afgvhn2ba6949np2wnkbq7fik8j0apada";
+    };
+    patches = [];
+  });
+in
+
 pkgs.mkShell {
   name = "spidermonkey-dev";
   buildInputs = with pkgs; [
@@ -67,6 +80,7 @@ pkgs.mkShell {
     libclang.lib
     udev
     mitmproxy
+    rr-master
   ];
 
   LIBCLANG_PATH = "${pkgs.libclang.lib}/lib";

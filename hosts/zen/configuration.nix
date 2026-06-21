@@ -1,7 +1,6 @@
 { config, lib, pkgs, modulesPath, ... }: {
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;
 
   time.timeZone = "America/Edmonton";
   i18n.defaultLocale = "en_CA.UTF-8";

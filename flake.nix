@@ -46,7 +46,9 @@
       mkSystem = system: modules:
         nixpkgs.lib.nixosSystem {
           system = system;
-          modules = modules;
+          modules = [
+            { nixpkgs.pkgs = import nixpkgs { inherit system; config.allowUnfree = true; }; }
+          ] ++ modules;
         };
 
       mkDevShells = system:
