@@ -87,6 +87,42 @@ pkgs.mkShell {
   hardeningDisable = [ "all" ];
 
   shellHook = ''
+    export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath (with pkgs; [
+      stdenv.cc.cc.lib
+      zlib
+      gtk3
+      glib
+      pango
+      cairo
+      gdk-pixbuf
+      atk
+      at-spi2-atk
+      at-spi2-core
+      dbus
+      dbus-glib
+      fontconfig
+      freetype
+      libpulseaudio
+      alsa-lib
+      pipewire
+      libx11
+      libxcb
+      libxcomposite
+      libxdamage
+      libxext
+      libxfixes
+      libxrandr
+      libxrender
+      libxtst
+      libxt
+      libxkbcommon
+      libice
+      libsm
+      libdrm
+      mesa
+      libcanberra-gtk3
+      udev
+    ])}:$LD_LIBRARY_PATH"
     export XDG_DATA_DIRS="${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}:${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}:${pkgs.adwaita-icon-theme}/share:$XDG_DATA_DIRS"
     export GIO_EXTRA_MODULES="${pkgs.dconf.lib}/lib/gio/modules"
     export GTK_PATH="${pkgs.libcanberra-gtk3}/lib/gtk-3.0"

@@ -72,7 +72,9 @@ export EMSDK=/home/justin/installs/emsdk
 export EMSDK_NODE=/home/justin/installs/emsdk/node/18.20.3_64bit/bin/node
 
 ### MOZ
-export MOZCONFIG=$HOME/dev/spidermonkey/mozconfigs/debug-shell-baseline
+# drive.py sets MOZCONFIG per build target; leaving it unset lets `./mach`
+# commands fall back to whichever mozconfig is passed explicitly.
+unset MOZCONFIG
 
 ### Not everything needs to be in nix. We can configure locally too
 ### and just source it in.

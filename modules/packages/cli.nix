@@ -4,8 +4,11 @@
     btop
     cloc
     curl
+    dosfstools
     duf
     dust
+    e2fsprogs
+    exfatprogs
     eza
     fastfetch
     fd
@@ -14,6 +17,7 @@
     htop
     hyperfine
     jq
+    parted
     poppler-utils
     psmisc
     ripgrep

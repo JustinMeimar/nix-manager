@@ -58,7 +58,7 @@
     extraGroups = [ "wheel" "networkmanager" "video" "docker" "lp" ];
     shell = pkgs.zsh;
   };
-
+programs.steam.enable = true;
   programs.zsh.enable = true;
   virtualisation.docker.enable = true;
 
@@ -77,6 +77,7 @@
     brave
     discord
     spotify
+    thunderbird
     vscode
     feh
     libsForQt5.qtstyleplugin-kvantum
