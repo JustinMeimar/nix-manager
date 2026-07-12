@@ -1,6 +1,6 @@
 wipe_usb() {
   local dev="${1:-}"
-  local fs="${2:-exfat}"
+  local fs="${2:-vfat}"
   local label="${3:-USB}"
 
   if [ -z "$dev" ]; then
@@ -42,6 +42,18 @@ wipe_usb() {
     return 1
   fi
 
+  local max
+  case "$fs" in
+    exfat)      max=11 ;;
+    ext4)       max=16 ;;
+    vfat|fat32) max=11; label="${(U)label}" ;;
+    *) echo "Unknown fs: $fs (use exfat|ext4|vfat)"; return 1 ;;
+  esac
+  if [ ${#label} -gt $max ]; then
+    echo "Label '$label' is ${#label} chars, max $max for $fs. Truncating."
+    label="${label:0:$max}"
+  fi
+
   sudo umount "${dev}"* 2>/dev/null
   sudo wipefs -a "$dev" || return 1
   printf 'g\nn\n\n\n\nw\n' | sudo fdisk "$dev" >/dev/null || return 1
@@ -51,11 +63,12 @@ wipe_usb() {
   local part="${dev}1"
   [ -b "$part" ] || part="${dev}p1"
 
+  sudo wipefs -a "$part" || return 1
+
   case "$fs" in
-    exfat)      sudo mkfs.exfat -L "$label" "$part" ;;
-    ext4)       sudo mkfs.ext4 -L "$label" "$part" ;;
-    vfat|fat32) sudo mkfs.vfat -F32 -n "$label" "$part" ;;
-    *) echo "Unknown fs: $fs (use exfat|ext4|vfat)"; return 1 ;;
+    exfat)      sudo mkfs.exfat -L "$label" "$part" || { echo "mkfs.exfat failed"; return 1; } ;;
+    ext4)       sudo mkfs.ext4 -F -L "$label" "$part" || { echo "mkfs.ext4 failed"; return 1; } ;;
+    vfat|fat32) sudo mkfs.vfat -F32 -n "$label" "$part" || { echo "mkfs.vfat failed"; return 1; } ;;
   esac
 
   echo

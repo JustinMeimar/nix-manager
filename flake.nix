@@ -90,7 +90,7 @@
             home-manager.useUserPackages = true;
             home-manager.users.justin = import ./hosts/zen/zen.nix;
             home-manager.extraSpecialArgs = { inherit nixvim; };
-            home-manager.sharedModules = [ nixvim.homeModules.nixvim plasma-manager.homeManagerModules.plasma-manager ];
+            home-manager.sharedModules = [ nixvim.homeModules.nixvim plasma-manager.homeModules.plasma-manager ];
           }
         ];
       };
