@@ -30,13 +30,45 @@
         Enabled = false;
         Locked = true;
       };
+      WebsiteFilter = {
+        Block = [
+          "*://*.youtube.com/*"
+          "*://youtube.com/*"
+          "*://*.youtu.be/*"
+          "*://youtu.be/*"
+        ];
+      };
     };
   };
   programs.chromium = {
     enable = true;
     extraOpts = {
       DnsOverHttpsMode = "off";
+      URLBlocklist = [
+        "youtube.com"
+        "*.youtube.com"
+        "youtu.be"
+        "*.youtu.be"
+      ];
     };
+  };
+
+  environment.etc."opt/chrome/policies/managed/policies.json".text = builtins.toJSON {
+    URLBlocklist = [
+      "youtube.com"
+      "*.youtube.com"
+      "youtu.be"
+      "*.youtu.be"
+    ];
+  };
+
+  environment.etc."brave/policies/managed/policies.json".text = builtins.toJSON {
+    URLBlocklist = [
+      "youtube.com"
+      "*.youtube.com"
+      "youtu.be"
+      "*.youtu.be"
+    ];
   };
 
 }
