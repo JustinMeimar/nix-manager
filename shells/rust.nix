@@ -10,6 +10,7 @@ pkgs.mkShell {
     clippy
     rust-analyzer
     gcc
+    clang
     pkg-config
     openssl
   ];

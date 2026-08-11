@@ -23,23 +23,9 @@
     '';
   };
 
-  programs.firefox = {
-    enable = true;
-    policies = {
-      DNSOverHTTPS = {
-        Enabled = false;
-        Locked = true;
-      };
-      WebsiteFilter = {
-        Block = [
-          "*://*.youtube.com/*"
-          "*://youtube.com/*"
-          "*://*.youtu.be/*"
-          "*://youtu.be/*"
-        ];
-      };
-    };
-  };
+  programs.firefox.enable = true;
+
+  environment.etc."firefox/policies/policies.json".enable = lib.mkForce false;
   programs.chromium = {
     enable = true;
     extraOpts = {

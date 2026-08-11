@@ -17,6 +17,7 @@
     htop
     hyperfine
     jq
+    jujutsu
     parted
     poppler-utils
     psmisc

@@ -33,6 +33,7 @@ pkgs.mkShell {
     gnumake
     ninja
     gdb
+    perf
     just
     zlib
     libffi
@@ -135,6 +136,7 @@ pkgs.mkShell {
     echo "  - clang:           $(clang --version | head -n1)"
     echo "  - node:            $(node --version)"
     echo "  - just:            $(just --version)"
+    echo "  - perf:            $(perf --version)"
     echo "  - sccache:         $(sccache --version)"
     echo ""
   '';

@@ -66,6 +66,7 @@
         "justin@zen" = mkHome "x86_64-linux" [
           ./hosts/zen/zen.nix
           sops.homeManagerModules.sops
+          plasma-manager.homeModules.plasma-manager
         ];
         "justin@work" = mkHome "x86_64-linux" [
           ./hosts/work/work.nix

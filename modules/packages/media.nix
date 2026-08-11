@@ -4,6 +4,12 @@
     sox
     tinymist
     typst
-    zathura
   ];
+
+  programs.zathura = {
+    enable = true;
+    options = {
+      selection-clipboard = "clipboard";
+    };
+  };
 }

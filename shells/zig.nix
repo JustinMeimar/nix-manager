@@ -3,7 +3,8 @@
 pkgs.mkShell {
   name = "zig";
 
-  buildInputs = with pkgs; [
+  packages = with pkgs; [
     zig
+    zls
   ];
 }
