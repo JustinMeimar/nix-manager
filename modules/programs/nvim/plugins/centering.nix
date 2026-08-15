@@ -4,14 +4,9 @@
       enable = true;
       settings = {
         # max width before centering.
-        width = 140;
+        width = 90;
         autocmds = {
           enableOnVimEnter = false;
-        };
-        buffers = {
-          right = {
-            enabled = false; # Only show left side buffer for symmetry
-          };
         };
       };
     };

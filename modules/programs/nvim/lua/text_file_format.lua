@@ -1,4 +1,4 @@
-local DEFAULT_WIDTH = 70
+local DEFAULT_WIDTH = 76
 
 local SKIP_DELIMITERS = {
     ['```'] = true,
@@ -11,7 +11,8 @@ local function format_paragraph(para_lines, width)
     local first_line = para_lines[1]
     local initial_indent = first_line:match('^%s*') or ''
 
-    local list_marker = first_line:match('^%s*([%-*]+)%s')
+    local list_marker = first_line:match('^%s*([%-*>]+)%s')
+        or first_line:match('^%s*(%d+[%.%)])%s')
     local continuation_indent
 
     if list_marker then
