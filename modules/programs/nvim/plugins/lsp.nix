@@ -43,7 +43,6 @@
               procMacro = { enable = true; };
               check = {
                 command = "clippy";
-                extraArgs = [ "--all-targets" ];
               };
             };
           };

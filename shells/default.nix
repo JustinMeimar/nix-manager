@@ -10,4 +10,5 @@
   zig = import ./zig.nix { inherit pkgs; };
   luamura = import ./luamura.nix { inherit pkgs; };
   svelte = import ./svelte.nix { inherit pkgs; };
+  latex = import ./latex.nix { inherit pkgs; };
 }
