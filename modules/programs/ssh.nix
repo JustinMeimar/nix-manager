@@ -23,11 +23,22 @@ in {
     enable = true;
     enableDefaultConfig = false;
     matchBlocks = {
+      
+      "am-build-rig" = mkKeyConfig {
+        user = "justin";
+        hostname = "100.73.6.114";
+        key = "~/.ssh/am-build-rig";
+      };
+      
+      "am-build-rig-pwd" = mkPwdConfig {
+        user = "justin";
+        hostname = "100.73.6.114";
+      };
 
       "innis" = mkKeyConfig {
         user = "meimar";
         hostname = "innisfree.cs.ualberta.ca";
-        key = "~/.ssh/cdol.pub";
+        key = "~/.ssh/cdol";
       };
 
       "coronation" = mkKeyConfig {
@@ -35,7 +46,7 @@ in {
         hostname = "coronation.cs.ualberta.ca";
         key = "~/.ssh/cmput415";
       };
-
+      
       "bee" = mkKeyConfig {
         user = "justin";
         hostname = "192.168.1.88";

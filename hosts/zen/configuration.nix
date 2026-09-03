@@ -22,6 +22,7 @@
  
   services = {
     pulseaudio.enable = false;
+    tailscale.enable = true;
     xserver.enable = true;
     xserver.xkb.layout = "us";
     displayManager.sddm.enable = true;
