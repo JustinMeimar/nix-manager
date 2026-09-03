@@ -141,7 +141,7 @@ local function format_text_visual()
     vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, formatted)
 end
 
-local function format_text_paragraph()
+local function current_paragraph_range()
     local cur = vim.fn.line('.')
     local total = vim.api.nvim_buf_line_count(0)
 
@@ -150,7 +150,7 @@ local function format_text_paragraph()
         return line:match('^%s*$') ~= nil
     end
 
-    if is_blank(cur) then return end
+    if is_blank(cur) then return nil end
 
     local start_line = cur
     while start_line > 1 and not is_blank(start_line - 1) do
@@ -162,9 +162,35 @@ local function format_text_paragraph()
         end_line = end_line + 1
     end
 
+    return start_line, end_line
+end
+
+local function format_text_paragraph()
+    local start_line, end_line = current_paragraph_range()
+    if not start_line then return end
+
     local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
     local formatted = format_lines(lines, DEFAULT_WIDTH)
     vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, formatted)
+end
+
+local function unwrap_text_paragraph()
+    local start_line, end_line = current_paragraph_range()
+    if not start_line then return end
+
+    local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+    local initial_indent = lines[1]:match('^%s*') or ''
+    local words = {}
+
+    for _, line in ipairs(lines) do
+        for word in line:gmatch('%S+') do
+            table.insert(words, word)
+        end
+    end
+
+    if #words == 0 then return end
+    local unwrapped = initial_indent .. table.concat(words, ' ')
+    vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, {unwrapped})
 end
 
 local function format_text_file_prompted()
@@ -179,4 +205,5 @@ end
 vim.keymap.set('n', '<leader>fw', format_text_file, {desc = 'Format text file to width'})
 vim.keymap.set('v', '<leader>fw', format_text_visual, {desc = 'Format selected text to width'})
 vim.keymap.set('n', '<leader>wp', format_text_paragraph, {desc = 'Format current paragraph to width'})
+vim.keymap.set('n', '<leader>up', unwrap_text_paragraph, {desc = 'Unwrap current paragraph'})
 vim.keymap.set('n', '<leader>fW', format_text_file_prompted, {desc = 'Format text file to prompted width'})
