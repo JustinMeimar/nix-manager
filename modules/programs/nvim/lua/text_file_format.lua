@@ -5,27 +5,40 @@ local SKIP_DELIMITERS = {
     ['---'] = true,
 }
 
+local function list_content_start(line)
+    local pos = #(line:match('^%s*') or '') + 1
+    local found_prefix = false
+
+    while true do
+        local rest = line:sub(pos)
+        local next_pos = rest:match('^>%s+()')
+            or rest:match('^[-+*]%s+()')
+            or rest:match('^%d+[%.%)]%s+()')
+
+        if not next_pos and found_prefix then
+            next_pos = rest:match('^%[[ xX]%]%s+()')
+        end
+        if not next_pos then break end
+
+        found_prefix = true
+        pos = pos + next_pos - 1
+    end
+
+    if found_prefix and line:sub(pos):match('%S') then
+        return pos
+    end
+    return nil
+end
+
 local function format_paragraph(para_lines, width)
     if #para_lines == 0 then return {} end
 
     local first_line = para_lines[1]
     local initial_indent = first_line:match('^%s*') or ''
-
-    local list_marker = first_line:match('^%s*([%-*>]+)%s')
-        or first_line:match('^%s*(%d+[%.%)])%s')
-    local continuation_indent
-
-    if list_marker then
-        local marker_pos = #initial_indent + #list_marker + 1
-        continuation_indent = string.rep(' ', marker_pos)
-    else
-        local first_nonspace = first_line:match('^%s*()')
-        if first_nonspace and first_nonspace > 1 then
-            continuation_indent = string.rep(' ', first_nonspace - 1)
-        else
-            continuation_indent = initial_indent
-        end
-    end
+    local content_start = list_content_start(first_line)
+    local continuation_indent = content_start
+        and string.rep(' ', content_start - 1)
+        or initial_indent
 
     local words = {}
     for _, line in ipairs(para_lines) do
@@ -108,7 +121,7 @@ local function format_lines(lines, width)
             local j = i + 1
             while j <= #lines do
                 local next_line = lines[j]
-                if next_line:match('^%s*$') or skip[j] then
+                if next_line:match('^%s*$') or skip[j] or list_content_start(next_line) then
                     break
                 end
                 table.insert(para_lines, next_line)
@@ -154,11 +167,14 @@ local function current_paragraph_range()
 
     local start_line = cur
     while start_line > 1 and not is_blank(start_line - 1) do
+        if list_content_start(vim.fn.getline(start_line)) then break end
         start_line = start_line - 1
     end
 
     local end_line = cur
-    while end_line < total and not is_blank(end_line + 1) do
+    while end_line < total
+        and not is_blank(end_line + 1)
+        and not list_content_start(vim.fn.getline(end_line + 1)) do
         end_line = end_line + 1
     end
 
