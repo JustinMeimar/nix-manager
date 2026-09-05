@@ -220,6 +220,6 @@ end
 
 vim.keymap.set('n', '<leader>fw', format_text_file, {desc = 'Format text file to width'})
 vim.keymap.set('v', '<leader>fw', format_text_visual, {desc = 'Format selected text to width'})
-vim.keymap.set('n', '<leader>wp', format_text_paragraph, {desc = 'Format current paragraph to width'})
-vim.keymap.set('n', '<leader>up', unwrap_text_paragraph, {desc = 'Unwrap current paragraph'})
+vim.keymap.set('n', '<leader>tr', format_text_paragraph, {desc = 'Reflow current paragraph to width'})
+vim.keymap.set('n', '<leader>tu', unwrap_text_paragraph, {desc = 'Unwrap current paragraph'})
 vim.keymap.set('n', '<leader>fW', format_text_file_prompted, {desc = 'Format text file to prompted width'})
