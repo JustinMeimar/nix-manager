@@ -34,7 +34,8 @@ On NixOS secrets go to `/run/secrets`. With home-manager they go to `~/.config/s
 
 `hosts/bee/web-services/` holds one module per site. Each enabled
 `services.beefarm.sites` entry creates a route on the existing `bee-hole`
-Cloudflare tunnel: `<site>.justinmeimar.com` goes to `127.0.0.1:<port>`.
+Cloudflare tunnel: `<site>.justinmeimar.com` goes to its loopback service,
+through Anubis when enabled.
 `bee.justinmeimar.com` lists the other enabled sites.
 
 Cloudflare DNS needs a proxied wildcard CNAME for `*.justinmeimar.com` pointing
@@ -46,14 +47,24 @@ To add a service already managed by NixOS, declare its loopback port:
 ```nix
 services.beefarm.sites.example = {
   port = 8010;
+  anubis.enable = true;
 };
 ```
+
+Anubis listens on `127.0.0.1:<port + 10000>` (or an explicit
+`anubis.port`) and forwards to the site's original loopback port. Beefarm
+automatically points the tunnel route at Anubis and restricts challenge
+redirects to that site's hostname. Set `anubis.enable = false` to expose a
+service directly, for example if an API client cannot complete browser
+challenges. A protected site requires JavaScript and cookies for challenged
+visitors.
 
 For a simple command, also set `service.description` and `service.exec` to have
 bee-farm create its systemd unit. The command must listen on `127.0.0.1` at the
 declared port. Set `subdomain` if it should differ from the site attribute name.
-Ports and hostnames must be unique. Set `enable = false` to keep a declaration
-without publishing or starting its bee-farm unit.
+Ports (including Anubis ports) and hostnames must be unique. Set
+`enable = false` to keep a declaration without publishing or starting its
+bee-farm unit.
 
 `dashboard.justinmeimar.com` lists the files in
 `hosts/bee/web-services/dashboard/public/`. This directory is Git-ignored data.

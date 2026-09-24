@@ -5,7 +5,10 @@ let
   index = pkgs.writeTextDir "index.html" (builtins.readFile ./index.html);
 in
 {
-  services.beefarm.sites.dashboard.port = 8002;
+  services.beefarm.sites.dashboard = {
+    port = 8002;
+    anubis.enable = true;
+  };
 
   systemd.services.nginx.serviceConfig.BindReadOnlyPaths = [ "${source}:${root}" ];
 

@@ -18,6 +18,7 @@ in
 {
   services.beefarm.sites.bee = {
     port = 8000;
+    anubis.enable = true;
   };
 
   services.nginx.virtualHosts."bee.justinmeimar.com" = {

@@ -6,9 +6,11 @@ let
   managedSites = filterAttrs (_: site: site.service != null) enabledSites;
   names = builtins.attrNames enabledSites;
   ports = map (name: enabledSites.${name}.port) names;
+  protectedSites = filterAttrs (_: site: site.anubis.enable) enabledSites;
+  anubisPorts = map (name: protectedSites.${name}.anubis.port) (builtins.attrNames protectedSites);
   hostnames = map (name: "${enabledSites.${name}.subdomain}.${cfg.domain}") names;
 
-  siteType = types.submodule ({ name, ... }: {
+  siteType = types.submodule ({ name, config, ... }: {
     options = {
       enable = mkOption {
         type = types.bool;
@@ -23,6 +25,14 @@ let
       port = mkOption {
         type = types.port;
         description = "Port where the service listens on 127.0.0.1";
+      };
+      anubis = {
+        enable = mkEnableOption "Anubis protection for this site";
+        port = mkOption {
+          type = types.port;
+          default = 10000 + config.port;
+          description = "Loopback port where Anubis accepts tunnel traffic";
+        };
       };
       service = mkOption {
         type = types.nullOr (types.submodule {
@@ -66,6 +76,11 @@ in
         message = "bee-farm sites must use distinct loopback ports";
       }
       {
+        assertion = builtins.length (ports ++ anubisPorts)
+          == builtins.length (lib.unique (ports ++ anubisPorts));
+        message = "bee-farm site and Anubis ports must be distinct";
+      }
+      {
         assertion = builtins.length hostnames == builtins.length (lib.unique hostnames);
         message = "bee-farm sites must use distinct hostnames";
       }
@@ -80,7 +95,16 @@ in
 
     services.cloudflared.tunnels."bee-hole".ingress = mapAttrs' (_: site:
       nameValuePair "${site.subdomain}.${cfg.domain}"
-        "http://127.0.0.1:${toString site.port}") enabledSites;
+        "http://127.0.0.1:${toString (if site.anubis.enable then site.anubis.port else site.port)}") enabledSites;
+
+    services.anubis.instances = lib.mapAttrs (name: site: {
+      settings = {
+        BIND = "127.0.0.1:${toString site.anubis.port}";
+        BIND_NETWORK = "tcp";
+        TARGET = "http://127.0.0.1:${toString site.port}";
+        REDIRECT_DOMAINS = "${site.subdomain}.${cfg.domain}";
+      };
+    }) protectedSites;
 
     systemd.services = mapAttrs' (name: site:
       nameValuePair "beefarm-${name}" {

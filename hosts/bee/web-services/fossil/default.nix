@@ -11,6 +11,7 @@ in
 {
   services.beefarm.sites.fossil = {
     port = 8001;
+    anubis.enable = true;
   };
 
   services.nginx.virtualHosts."fossil.justinmeimar.com" = {
