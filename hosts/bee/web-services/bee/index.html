@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eaf8f5">
+  <title>Bee farm</title>
+  <style>
+    :root { color-scheme: light; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #183d42; background: #eaf8f5; }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; min-height: 100svh; margin: 0; display: grid; place-items: center; padding: 2.5rem 1.25rem; background: radial-gradient(circle at 50% 38%, #f9fffd 0, #eaf8f5 48%, #d9f0eb 100%); }
+    main { width: min(100%, 28rem); text-align: center; }
+    .bee { display: block; width: min(72vw, 14rem); height: auto; margin: 0 auto .65rem; filter: drop-shadow(0 18px 16px rgb(25 83 78 / 13%)); animation: flight 4s ease-in-out infinite; }
+    @keyframes flight { 0%, 100% { transform: translate(0, 2px) rotate(-2deg); } 25% { transform: translate(5px, -5px) rotate(0deg); } 50% { transform: translate(0, -12px) rotate(2deg); } 75% { transform: translate(-5px, -5px) rotate(0deg); } }
+    h1 { margin: .2rem 0 .35rem; font-size: clamp(2rem, 5vw, 2.7rem); letter-spacing: -.055em; line-height: 1.1; }
+    p { margin: 0 0 1.8rem; color: #52767a; font-size: .98rem; }
+    ul { display: grid; gap: .65rem; margin: 0; padding: 0; list-style: none; }
+    a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .95rem 1.15rem; border: 1px solid #c8e4df; border-radius: 1rem; background: rgb(255 255 255 / 78%); box-shadow: 0 5px 20px rgb(31 103 97 / 5%); color: #22575c; font-weight: 600; text-decoration: none; transition: border-color .2s, background .2s, transform .2s; }
+    a:hover, a:focus-visible { border-color: #79c2b7; background: #fff; transform: translateY(-2px); }
+    a:focus-visible { outline: 3px solid #65b5aa; outline-offset: 3px; }
+    a span { color: #6aa99e; font-size: 1.1rem; }
+    @media (prefers-reduced-motion: reduce) { .bee { animation: none; } a { transition: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <img class="bee" src="/my-goph-bee.png" width="240" height="240" alt="A mint green bee with big eyes">
+    <h1>Bee farm</h1>
+    <p>A collection of web-services exposed over my home-server tunnel, running on a <em>BeeLink-U59</em>.</p>
+    <nav aria-label="Services"><ul>
+      @SERVICE_LINKS@
+    </ul></nav>
+  </main>
+</body>
+</html>

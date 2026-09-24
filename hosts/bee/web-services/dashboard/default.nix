@@ -1,7 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 let
   source = "/home/justin/nix-manager/hosts/bee/web-services/dashboard/public";
   root = "/srv/beefarm/dashboard/public";
+  index = pkgs.writeTextDir "index.html" (builtins.readFile ./index.html);
 in
 {
   services.beefarm.sites.dashboard.port = 8002;
@@ -28,8 +29,15 @@ in
         add_header X-Content-Type-Options nosniff always;
       '';
       locations."= /".extraConfig = ''
+        root ${index};
+        try_files /index.html =404;
+        default_type text/html;
+      '';
+      locations."= /__listing__/".extraConfig = ''
+        alias ${root}/;
         index __beefarm_directory_listing__.html;
         autoindex on;
+        autoindex_format json;
       '';
       locations."~ (^|/)\\." = {
         return = "404";
