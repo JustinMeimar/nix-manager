@@ -31,7 +31,7 @@
   };
 
   services.cloudflared-bee.enable = true;
-  services.ironclaw.enable = true;
+  services.ironclaw.enable = false;
 
   # Basic system settings
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -48,7 +48,7 @@
     cloudflared
     python3
     git
-    neofetch
+    fastfetch
     signal-cli
   ];
 
@@ -81,7 +81,7 @@
   };
 
   services.beefarm = {
-    enable = true;
+    enable = false;
     domain = "localhost";
   };
   
@@ -110,7 +110,5 @@
   boot.initrd.luks.devices."nixos-enc" = {
     device = "/dev/disk/by-uuid/0ea8a345-3261-40f1-8923-e8ca345f8a0b";
     keyFile = "/etc/secrets/luks-keyfile";
-    fallbackToPassword = true; # Safety net
   };
 }
-
