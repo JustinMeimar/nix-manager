@@ -1,5 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, ... }@args:
 let
+  staticSite = import ../static-site.nix args;
   page = pkgs.writeTextDir "index.html" ''
     <!doctype html>
     <html lang="en">
@@ -9,18 +10,10 @@ let
   '';
 in
 {
+  imports = [ (staticSite "fossil" { root = page; }) ];
+
   services.beefarm.sites.fossil = {
     port = 8001;
     anubis.enable = true;
-  };
-
-  services.nginx.virtualHosts."fossil.justinmeimar.com" = {
-    listen = [ { addr = "127.0.0.1"; port = 8001; } ];
-    root = page;
-    extraConfig = ''
-      if_modified_since off;
-      etag off;
-      add_header Cache-Control "no-store" always;
-    '';
   };
 }

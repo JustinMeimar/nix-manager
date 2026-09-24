@@ -3,7 +3,6 @@ let
   inherit (lib) filterAttrs mapAttrs' mkEnableOption mkIf mkOption nameValuePair types;
   cfg = config.services.beefarm;
   enabledSites = filterAttrs (_: site: site.enable) cfg.sites;
-  managedSites = filterAttrs (_: site: site.service != null) enabledSites;
   names = builtins.attrNames enabledSites;
   ports = map (name: enabledSites.${name}.port) names;
   protectedSites = filterAttrs (_: site: site.anubis.enable) enabledSites;
@@ -33,20 +32,6 @@ let
           default = 10000 + config.port;
           description = "Loopback port where Anubis accepts tunnel traffic";
         };
-      };
-      service = mkOption {
-        type = types.nullOr (types.submodule {
-          options = {
-            description = mkOption { type = types.str; };
-            exec = mkOption { type = types.str; };
-            user = mkOption {
-              type = types.str;
-              default = "justin";
-            };
-          };
-        });
-        default = null;
-        description = "Optional systemd service; leave null to route an existing service";
       };
     };
   });
@@ -105,17 +90,5 @@ in
         REDIRECT_DOMAINS = "${site.subdomain}.${cfg.domain}";
       };
     }) protectedSites;
-
-    systemd.services = mapAttrs' (name: site:
-      nameValuePair "beefarm-${name}" {
-        description = site.service.description;
-        wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
-        serviceConfig = {
-          ExecStart = site.service.exec;
-          Restart = "always";
-          User = site.service.user;
-        };
-      }) managedSites;
   };
 }

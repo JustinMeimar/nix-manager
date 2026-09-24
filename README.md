@@ -38,6 +38,12 @@ Cloudflare tunnel: `<site>.justinmeimar.com` goes to its loopback service,
 through Anubis when enabled.
 `bee.justinmeimar.com` lists the other enabled sites.
 
+Static sites use `hosts/bee/web-services/static-site.nix` to enable nginx and
+derive the hostname and loopback listener from their Beefarm entry. The helper
+also applies the shared cache policy. Each site supplies its document root and
+any additional nginx locations. Bee's `page.nix` assembles its landing page and
+generates links from the enabled sites.
+
 Cloudflare DNS needs a proxied wildcard CNAME for `*.justinmeimar.com` pointing
 to the existing tunnel's `<tunnel-id>.cfargotunnel.com` address. DNS is managed
 outside this repository. Unconfigured hostnames receive a tunnel 404.
@@ -59,19 +65,28 @@ service directly, for example if an API client cannot complete browser
 challenges. A protected site requires JavaScript and cookies for challenged
 visitors.
 
-For a simple command, also set `service.description` and `service.exec` to have
-bee-farm create its systemd unit. The command must listen on `127.0.0.1` at the
-declared port. Set `subdomain` if it should differ from the site attribute name.
-Ports (including Anubis ports) and hostnames must be unique. Set
-`enable = false` to keep a declaration without publishing or starting its
-bee-farm unit.
+Beefarm manages publication. Configure the application using its NixOS service
+module, or declare a dedicated `systemd.services` unit in the site's module.
+Custom units should use a dedicated service account or `DynamicUser = true`,
+`NoNewPrivileges = true`, `ProtectHome = true`, and `ProtectSystem = "strict"`,
+with writable state explicitly provided through options such as `StateDirectory`.
+Do not run public applications as a personal login user. Review permissions for
+each application's needs; publication does not add process isolation.
 
-`dashboard.justinmeimar.com` lists the files in
-`hosts/bee/web-services/dashboard/public/`. This directory is Git-ignored data.
+The application must listen on `127.0.0.1` at the declared port. Set `subdomain`
+if it should differ from the site attribute name. Ports (including Anubis ports)
+and hostnames must be unique. Set `enable = false` to stop publishing a site;
+the application's lifecycle is controlled by its own module.
+
+`html.justinmeimar.com` serves
+`/srv/beefarm/dashboard/`. NixOS creates this directory with `justin` as its
+owner, so uploads do not require root access.
+An uploaded `index.html` provides the HTML dashboard links; update it when adding
+reports. Without that file, nginx lists files and directories.
 Upload a dashboard with, for example,
-`scp report.html justin@bee:~/nix-manager/hosts/bee/web-services/dashboard/public/`.
-It is immediately available at `https://dashboard.justinmeimar.com/report.html`,
-without another NixOS rebuild. Nginx sees only this directory through a read-only
-bind mount; it refuses requests for hidden paths and symlinks. The directory
+`scp report.html justin@bee:/srv/beefarm/dashboard/`.
+It is immediately available at `https://html.justinmeimar.com/report.html`,
+without another NixOS rebuild. Nginx serves the directory directly with read-only
+access under its systemd sandbox; it refuses requests for hidden paths and symlinks. The directory
 listing shows filenames, and every uploaded file is public; keep secrets and
 private files out of this directory.
