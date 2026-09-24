@@ -1,0 +1,8 @@
+{ ... }:
+{
+  imports = [
+    ./bee
+    ./dashboard
+    ./fossil
+  ];
+}

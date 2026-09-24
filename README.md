@@ -32,10 +32,10 @@ On NixOS secrets go to `/run/secrets`. With home-manager they go to `~/.config/s
 
 ## Bee web services
 
-`hosts/bee/configuration.nix` declares the sites in `services.beefarm.sites`. Each
-enabled entry creates a route on the existing `bee-hole` Cloudflare tunnel:
-`<site>.justinmeimar.com` goes to `127.0.0.1:<port>`. The current `bee`,
-`fossil`, and `dashboards` entries serve placeholder HTML pages.
+`hosts/bee/web-services/` holds one module per site. Each enabled
+`services.beefarm.sites` entry creates a route on the existing `bee-hole`
+Cloudflare tunnel: `<site>.justinmeimar.com` goes to `127.0.0.1:<port>`.
+`bee.justinmeimar.com` lists the other enabled sites.
 
 Cloudflare DNS needs a proxied wildcard CNAME for `*.justinmeimar.com` pointing
 to the existing tunnel's `<tunnel-id>.cfargotunnel.com` address. DNS is managed
@@ -54,3 +54,13 @@ bee-farm create its systemd unit. The command must listen on `127.0.0.1` at the
 declared port. Set `subdomain` if it should differ from the site attribute name.
 Ports and hostnames must be unique. Set `enable = false` to keep a declaration
 without publishing or starting its bee-farm unit.
+
+`dashboard.justinmeimar.com` lists the files in
+`hosts/bee/web-services/dashboard/public/`. This directory is Git-ignored data.
+Upload a dashboard with, for example,
+`scp report.html justin@bee:~/nix-manager/hosts/bee/web-services/dashboard/public/`.
+It is immediately available at `https://dashboard.justinmeimar.com/report.html`,
+without another NixOS rebuild. Nginx sees only this directory through a read-only
+bind mount; it refuses requests for hidden paths and symlinks. The directory
+listing shows filenames, and every uploaded file is public; keep secrets and
+private files out of this directory.
