@@ -81,8 +81,29 @@
   };
 
   services.beefarm = {
-    enable = false;
-    domain = "localhost";
+    enable = true;
+    domain = "justinmeimar.com";
+
+    sites = let
+      placeholder = name: port: {
+        inherit port;
+        service = {
+          description = "Placeholder page for ${name}.justinmeimar.com";
+          exec = "${pkgs.python3}/bin/python3 -m http.server ${toString port} "
+            + "--bind 127.0.0.1 --directory ${pkgs.writeTextDir "index.html" ''
+              <!doctype html>
+              <html lang="en">
+                <head><meta charset="utf-8"><title>${name}</title></head>
+                <body><h1>You've reached ${name}</h1></body>
+              </html>
+            ''}";
+        };
+      };
+    in {
+      bee = placeholder "bee" 8000;
+      fossil = placeholder "fossil" 8001;
+      dashboards = placeholder "dashboards" 8002;
+    };
   };
   
   virtualisation.docker.enable = true;

@@ -14,13 +14,9 @@ in
       tunnels = {
         "bee-hole" = {
           credentialsFile = beeHoleToken;
-          ingress = {
-            "bee.justinmeimar.com" = "http://localhost:3000";
-          };
-          default = "http_status:404"; 
+          default = "http_status:404";
         };
       };
     };
   };
 }
-
