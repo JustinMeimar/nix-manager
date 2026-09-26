@@ -54,6 +54,7 @@
         nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
+            ./modules/nix-maintenance.nix
             { nixpkgs.pkgs = import nixpkgs { inherit system; config.allowUnfree = true; }; }
           ] ++ modules;
         };
@@ -86,6 +87,7 @@
       nixosConfigurations = {
         "pi" = nixos-raspberrypi.lib.nixosSystem {
           modules = [
+            ./modules/nix-maintenance.nix
             nixos-raspberrypi.nixosModules.raspberry-pi-5.base
             nixos-raspberrypi.nixosModules.raspberry-pi-5.page-size-16k
             nixos-raspberrypi.nixosModules.raspberry-pi-5.display-vc4
