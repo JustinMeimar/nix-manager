@@ -5,6 +5,8 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
+
     # add home manager
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -30,7 +32,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, sops, plasma-manager, ... }:
+  outputs = { nixpkgs, nixos-raspberrypi, home-manager, nixvim, sops, plasma-manager, ... }:
     let
       mkHome = system: modules:
         home-manager.lib.homeManagerConfiguration {
@@ -80,6 +82,14 @@
       };
 
       nixosConfigurations = {
+        "pi" = nixos-raspberrypi.lib.nixosSystem {
+          modules = [
+            nixos-raspberrypi.nixosModules.raspberry-pi-5.base
+            nixos-raspberrypi.nixosModules.raspberry-pi-5.page-size-16k
+            nixos-raspberrypi.nixosModules.raspberry-pi-5.display-vc4
+            ./hosts/pi/configuration.nix
+          ];
+        };
         "bee" = mkSystem "x86_64-linux" [
           ./hosts/bee/configuration.nix
           sops.nixosModules.sops
@@ -102,4 +112,3 @@
       };
     };
 }
-
