@@ -11,9 +11,6 @@
     homeDirectory = "/home/justin";
     stateVersion = "24.05";
   };
-
-  home.file.".local/bin/proompt".source =
-    config.lib.file.mkOutOfStoreSymlink "/home/justin/tools/proompt/target/release/proompt";
   
   programs.git = {
     enable = true;
@@ -62,4 +59,3 @@
 
   programs.home-manager.enable = true;
 }
-

@@ -23,9 +23,6 @@
       signal-number = {
         mode = "0600";
       };
-      openrouter-api-key = {
-        mode = "0600";
-      };
     };
   };
 
