@@ -21,9 +21,14 @@
   users.users.justin = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.zsh;
   };
 
-  services.openssh.enable = true;
+  programs.zsh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = true;
+  };
   environment.systemPackages = with pkgs; [ git vim ];
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

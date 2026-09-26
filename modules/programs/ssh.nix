@@ -74,9 +74,10 @@ in {
         hostname = "coronation.cs.ualberta.ca";
       };
 
-      "pi" = mkPwdConfig {
-        user = "justy";
-        hostname = "192.168.1.150";
+      "pi" = mkKeyConfig {
+        user = "justin";
+        hostname = "192.168.1.115";
+        key = "~/.ssh/justin-pi";
       };
 
       "ci415" = {
@@ -101,4 +102,3 @@ in {
     };
   };
 }
-

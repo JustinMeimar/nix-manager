@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  myLib = import ../../../lib { };
-  inherit (myLib) concatDirFiles;
+  myLib = import ../../../lib {};
 in {
   programs.zsh = {
     enable = true;
@@ -24,7 +23,6 @@ in {
       b2 = "z ../..";
       b3 = "z ../../../";
       dog = "bat --style=plain --paging=never";
-      cwd = "pwd | wl-copy";
     };
 
     oh-my-zsh = {
@@ -33,8 +31,7 @@ in {
       theme = "robbyrussell";
     };
 
-    initContent = "${concatDirFiles ./scripts}";
+    initContent = myLib.concatDirFiles ./scripts;
     envExtra = builtins.readFile ./zsh_env.sh;
   };
 }
-

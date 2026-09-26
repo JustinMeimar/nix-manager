@@ -7,6 +7,11 @@
 
     nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi/main";
 
+    home-manager-pi = {
+      url = "github:nix-community/home-manager/release-26.05";
+      inputs.nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
+    };
+
     # add home manager
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -32,7 +37,7 @@
     };
   };
 
-  outputs = { nixpkgs, nixos-raspberrypi, home-manager, nixvim, sops, plasma-manager, ... }:
+  outputs = { nixpkgs, nixos-raspberrypi, home-manager, home-manager-pi, nixvim, sops, plasma-manager, ... }:
     let
       mkHome = system: modules:
         home-manager.lib.homeManagerConfiguration {
@@ -70,9 +75,6 @@
           sops.homeManagerModules.sops
           plasma-manager.homeModules.plasma-manager
         ];
-        "justin@work" = mkHome "x86_64-linux" [
-          ./hosts/work/work.nix
-        ];
         "justin@pi" = mkHome "aarch64-linux" [
           ./hosts/pi/pi.nix
         ];
@@ -88,6 +90,12 @@
             nixos-raspberrypi.nixosModules.raspberry-pi-5.page-size-16k
             nixos-raspberrypi.nixosModules.raspberry-pi-5.display-vc4
             ./hosts/pi/configuration.nix
+            home-manager-pi.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.justin = import ./hosts/pi/pi.nix;
+            }
           ];
         };
         "bee" = mkSystem "x86_64-linux" [

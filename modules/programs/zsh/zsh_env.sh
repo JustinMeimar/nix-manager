@@ -1,7 +1,3 @@
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.cargo/bin
-export PATH=$PATH:$HOME/bin # comma commands
-
 ### MOJO
 export PATH=$PATH:/home/justin/.pixi/bin
 
@@ -76,10 +72,7 @@ export EMSDK_NODE=/home/justin/installs/emsdk/node/18.20.3_64bit/bin/node
 # commands fall back to whichever mozconfig is passed explicitly.
 unset MOZCONFIG
 
-### Not everything needs to be in nix. We can configure locally too
-### and just source it in.
-if [ ! -f "$HOME/.zshrc.local" ]; then
-    touch "$HOME/.zshrc.local"; 
-fi
-source "$HOME/.zshrc.local"
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
+export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/bin"
 
