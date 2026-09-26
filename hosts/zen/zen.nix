@@ -58,4 +58,8 @@
   };
 
   programs.home-manager.enable = true;
+  programs.tmux.extraConfig = ''
+    set -g @host-color brightblue
+    set -g @host-label zen
+  '';
 }

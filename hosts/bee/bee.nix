@@ -30,4 +30,8 @@
   }; 
   
   programs.home-manager.enable = true;
+  programs.tmux.extraConfig = ''
+    set -g @host-color brightgreen
+    set -g @host-label bee
+  '';
 }
