@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -29,11 +29,5 @@
     }; 
   }; 
   
-  # note: this is hacky. why do we need it?
-  programs.zsh.initExtra = lib.mkAfter ''
-    [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
-  '';
-
   programs.home-manager.enable = true;
 }
-

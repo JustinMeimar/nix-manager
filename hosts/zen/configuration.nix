@@ -59,10 +59,10 @@
     extraGroups = [ "wheel" "networkmanager" "video" "docker" "lp" ];
     shell = pkgs.zsh;
   };
-programs.steam.enable = true;
+  
+  programs.steam.enable = true;
   programs.zsh.enable = true;
   virtualisation.docker.enable = true;
-
   programs.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [

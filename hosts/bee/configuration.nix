@@ -18,7 +18,8 @@
       };
       github-zen = {
         path = "/home/justin/.ssh/github-zen";
-        mode = "0666";
+        owner = "justin";
+        mode = "0600";
       };
       signal-number = {
         mode = "0600";
@@ -83,18 +84,12 @@
   
   virtualisation.docker.enable = true;
 
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_16;
-    extensions = ps: [ ps.pgvector ];
-    settings.listen_addresses = "localhost";
-  };
-
   # Firewall
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 22 ];
   };
+
   # Boot configuration
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

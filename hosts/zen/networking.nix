@@ -1,4 +1,14 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }:
+let
+  youtubePolicy = {
+    URLBlocklist = [
+      "youtube.com"
+      "*.youtube.com"
+      "youtu.be"
+      "*.youtu.be"
+    ];
+  };
+in {
 
   networking.hostName = "zen";
   networking.networkmanager.enable = true;
@@ -24,37 +34,14 @@
   };
 
   programs.firefox.enable = true;
-
-  environment.etc."firefox/policies/policies.json".enable = lib.mkForce false;
   programs.chromium = {
     enable = true;
-    extraOpts = {
+    extraOpts = youtubePolicy // {
       DnsOverHttpsMode = "off";
-      URLBlocklist = [
-        "youtube.com"
-        "*.youtube.com"
-        "youtu.be"
-        "*.youtu.be"
-      ];
     };
   };
-
-  environment.etc."opt/chrome/policies/managed/policies.json".text = builtins.toJSON {
-    URLBlocklist = [
-      "youtube.com"
-      "*.youtube.com"
-      "youtu.be"
-      "*.youtu.be"
-    ];
-  };
-
-  environment.etc."brave/policies/managed/policies.json".text = builtins.toJSON {
-    URLBlocklist = [
-      "youtube.com"
-      "*.youtube.com"
-      "youtu.be"
-      "*.youtu.be"
-    ];
-  };
+  environment.etc."firefox/policies/policies.json".enable = lib.mkForce false;
+  environment.etc."opt/chrome/policies/managed/policies.json".text = builtins.toJSON youtubePolicy;
+  environment.etc."brave/policies/managed/policies.json".text = builtins.toJSON youtubePolicy;
 
 }
