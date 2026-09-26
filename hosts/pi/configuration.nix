@@ -18,7 +18,7 @@
   networking.networkmanager.enable = true;
   time.timeZone = "America/Edmonton";
 
-  users.users.justy = {
+  users.users.justin = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
   };

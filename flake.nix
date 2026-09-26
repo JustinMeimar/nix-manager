@@ -73,7 +73,7 @@
         "justin@work" = mkHome "x86_64-linux" [
           ./hosts/work/work.nix
         ];
-        "justy@pi" = mkHome "aarch64-linux" [
+        "justin@pi" = mkHome "aarch64-linux" [
           ./hosts/pi/pi.nix
         ];
         "justin@bee" = mkHome "x86_64-linux" [

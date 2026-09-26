@@ -11,8 +11,8 @@
     };
     home = {
       enable = true;
-      username = "justy";
-      homeDirectory = "/home/justy";
+      username = "justin";
+      homeDirectory = "/home/justin";
       stateVersion = "24.05"; 
     };
   };
