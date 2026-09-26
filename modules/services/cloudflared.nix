@@ -9,6 +9,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    sops.secrets.cloudflare-bee-hole-tunnel-token.restartUnits = [
+      "cloudflared-tunnel-bee-hole.service"
+    ];
+
     services.cloudflared = {
       enable = true;
       tunnels = {

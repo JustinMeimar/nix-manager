@@ -1,11 +1,5 @@
-### MOJO
-export PATH=$PATH:/home/justin/.pixi/bin
-
-### CMake
-export PATH="$PATH:/home/justin/install/cmake/bin"
-
-### 415
-export PATH=$PATH:$HOME/CDOL/Tester/bin
+# Interactive setup only; loaded from .zshrc through programs.zsh.initContent.
+# Ordinary PATH entries are managed by home.sessionPath.
 
 ### Python
 alias python='python3'
@@ -13,25 +7,13 @@ alias python3.8='/usr/bin/python3.8'
 
 ### Zig
 export ZIG_PATH=/home/justin/install/zig
-export PATH=$PATH:$ZIG_PATH
-
-### GO
-export PATH=$PATH:/usr/local/go/bin  
-export PATH=$PATH:/home/justin/go/bin  
-
-### DENO
-export PATH=$PATH:/home/justin/.deno/bin
 
 ### BUN
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 ### NPM
-export PATH="/home/justin/.npm-global/bin:$PATH"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ### ANTLR
 export ANTLR_INS=/home/justin/install/antlr/antlr4-install
@@ -41,12 +23,7 @@ export CLASSPATH="$ANTLR_JAR:$CLASSPATH"
 alias antlr4="java -Xmx500M org.antlr.v4.Tool"
 alias grun='java org.antlr.v5.gui.TestRig'
 
-### HOMEBREW
-export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
-
 ### RUBY
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="/home/justin/.rbenv/shims:${PATH}"
 export RBENV_SHELL=zsh
 rbenv() {
   local command
@@ -67,12 +44,5 @@ export MODULAR_HOME=/home/justin/.modualr
 export EMSDK=/home/justin/installs/emsdk
 export EMSDK_NODE=/home/justin/installs/emsdk/node/18.20.3_64bit/bin/node
 
-### MOZ
-# drive.py sets MOZCONFIG per build target; leaving it unset lets `./mach`
-# commands fall back to whichever mozconfig is passed explicitly.
-unset MOZCONFIG
-
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
-export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:$HOME/bin"
-

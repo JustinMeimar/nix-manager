@@ -71,14 +71,6 @@
 
     in {
       homeConfigurations = {
-        "justin@zen" = mkHome "x86_64-linux" [
-          ./hosts/zen/zen.nix
-          sops.homeManagerModules.sops
-          plasma-manager.homeModules.plasma-manager
-        ];
-        "justin@pi" = mkHome "aarch64-linux" [
-          ./hosts/pi/pi.nix
-        ];
         "justin@bee" = mkHome "x86_64-linux" [
           ./hosts/bee/bee.nix
         ];

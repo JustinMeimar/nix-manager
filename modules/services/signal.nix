@@ -21,6 +21,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    sops.secrets.signal-number.restartUnits = [ "signal-cli.service" ];
+
     systemd.services.signal-cli = {
       description = "signal-cli daemon";
       after = [ "network.target" ];
@@ -40,4 +42,3 @@ in
     };
   };
 }
-

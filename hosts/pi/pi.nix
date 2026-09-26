@@ -7,7 +7,7 @@
     username = "justin";
     homeDirectory = "/home/justin";
     stateVersion = "24.05";
-    packages = with pkgs; [ ripgrep fd bat jq htop rsync ];
+    packages = with pkgs; [ ripgrep fd bat jq htop rsync just ];
   };
 
   programs.git = {

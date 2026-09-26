@@ -1,7 +1,26 @@
 { config, lib, pkgs, ... }:
 let
   myLib = import ../../../lib {};
+  homePath = path: if lib.hasPrefix "/" path then path else "$HOME/${path}";
 in {
+  home.sessionPath = map homePath [
+    ".rbenv/shims"
+    ".rbenv/bin"
+    ".npm-global/bin"
+    ".bun/bin"
+    ".pixi/bin"
+    "install/cmake/bin"
+    "CDOL/Tester/bin"
+    "install/zig"
+    "/usr/local/go/bin"
+    "go/bin"
+    ".deno/bin"
+    "/home/linuxbrew/.linuxbrew/bin"
+    ".local/bin"
+    ".cargo/bin"
+    "bin"
+  ];
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -31,7 +50,7 @@ in {
       theme = "robbyrussell";
     };
 
-    initContent = myLib.concatDirFiles ./scripts;
-    envExtra = builtins.readFile ./zsh_env.sh;
+    initContent = builtins.readFile ./zsh_env.sh + "\n"
+      + myLib.concatDirFiles ./scripts;
   };
 }
