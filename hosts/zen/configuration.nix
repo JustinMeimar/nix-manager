@@ -1,5 +1,7 @@
 { config, lib, pkgs, modulesPath, ... }: {
 
+  imports = [ ../../modules/services/ollama.nix ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   time.timeZone = "America/Edmonton";
