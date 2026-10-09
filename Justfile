@@ -1,6 +1,6 @@
 
 switch-zen:
-    sudo nixos-rebuild switch --flake .#zen
+    sudo nixos-rebuild switch --flake path:.#zen
 
 switch-pi:
     sudo nixos-rebuild switch --flake .#pi

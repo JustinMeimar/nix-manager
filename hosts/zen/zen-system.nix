@@ -5,5 +5,6 @@
     ./configuration.nix
     ./hardware-configuration.nix
     ./networking.nix
-  ] ++ (if builtins.pathExists ./local.nix then [ ./local.nix ] else []);
+    ./site-blocking.nix
+  ];
 }
