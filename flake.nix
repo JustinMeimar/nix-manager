@@ -77,6 +77,16 @@
       };
 
       nixosConfigurations = {
+        "ubik" = mkSystem "x86_64-linux" [
+          ./hosts/ubik/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.justin = import ./hosts/ubik/ubik.nix;
+            home-manager.sharedModules = [ nixvim.homeModules.nixvim ];
+          }
+        ];
         "pi" = nixos-raspberrypi.lib.nixosSystem {
           modules = [
             ./modules/nix-maintenance.nix

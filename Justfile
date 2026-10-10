@@ -1,4 +1,7 @@
 
+switch-ubik:
+    sudo nixos-rebuild switch --flake path:.#ubik
+
 switch-zen:
     sudo nixos-rebuild switch --flake path:.#zen
 
