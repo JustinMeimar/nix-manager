@@ -9,7 +9,11 @@
     username = "justin";
     homeDirectory = "/home/justin";
     stateVersion = "26.05";
-    packages = [ pkgs.alacritty pkgs.dolphin-emu ];
+    packages = with pkgs; [
+      alacritty
+      bitwarden-desktop
+      dolphin-emu
+    ];
   };
 
   programs.git = {
@@ -20,8 +24,18 @@
     };
   };
   programs.home-manager.enable = true;
+  programs.plasma = {
+    enable = true;
+    overrideConfig = false;
+    workspace.colorScheme = "BreezeDark";
+    shortcuts."Alacritty.desktop"."_launch" = "Ctrl+Alt+T";
+    configFile."kdeglobals"."General" = {
+      TerminalApplication = "alacritty";
+      TerminalService = "Alacritty.desktop";
+    };
+  };
   programs.tmux.extraConfig = ''
-    set -g @host-color brightmagenta
+    set -g @host-color '#ff8800'
     set -g @host-label ubik
   '';
 }

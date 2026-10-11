@@ -67,7 +67,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.justin = import ./hosts/ubik/ubik.nix;
-            home-manager.sharedModules = [ nixvim.homeModules.nixvim ];
+            home-manager.sharedModules = [ nixvim.homeModules.nixvim plasma-manager.homeModules.plasma-manager ];
           }
         ];
         "pi" = nixos-raspberrypi.lib.nixosSystem {

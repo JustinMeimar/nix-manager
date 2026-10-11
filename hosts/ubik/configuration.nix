@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../zen/site-blocking.nix
+  ];
 
   networking.hostName = "ubik";
   networking.networkmanager.enable = true;
