@@ -1,40 +1,24 @@
-## NixOS and Home Manager
+# nix-manager
 
-This flake configures the Zen, Pi, and Bee hosts and their user environments.
+Personal NixOS and Home Manager configurations.
 
-### Hosts
+## Hosts
 
-Run these commands on the corresponding host, from this checkout:
+Run the appropriate command from this checkout on the target host:
 
-* Zen: `just switch-zen` rebuilds NixOS and activates Home Manager together.
-* Pi: `just switch-pi` rebuilds NixOS and activates Home Manager together.
-* Bee: `just rebuild-bee` rebuilds NixOS; `just switch-bee` activates its standalone Home Manager configuration.
+| Host | Command |
+| --- | --- |
+| Ubik | `just switch-ubik` |
+| Zen | `just switch-zen` |
+| Pi | `just switch-pi` |
+| Bee | `just rebuild-bee` |
 
-Zen and Pi intentionally have no standalone Home Manager outputs. Their homes
-are managed only by `nixos-rebuild switch --flake .#zen` or `.#pi`, respectively.
-If either host previously used standalone Home Manager, after a successful
-NixOS switch check `nix-env -q` for `home-manager-path`. If present, remove that
-old user-profile package with `nix-env -e home-manager-path` to avoid stale
-packages shadowing `/etc/profiles/per-user/justin/bin`. Log out and back in to
-refresh the session environment.
+Ubik, Zen, and Pi include Home Manager in their NixOS configurations. Bee's
+Home Manager configuration is standalone and can be applied with
+`just switch-bee`.
 
-### Secrets
-Some hosts configure `sops` which is used to manage secrets, for which some additional work post switch needs to be done.
+## Secrets
 
-```bash
-sops --encrypt -a $(cat {AGE_PUBLIC_KEY}) {SECRETS_YAML} > {SECRETS_YAML_ENC}
-```
-
-Where: 
-* `AGE_PUBLIC_KEY`: path to AGE public key (hidden locally)
-* `SECRETS_YAML`: path to `.yaml` containing secrets (hidden locally)
-* `SECRETS_YAML_ENC`: encrypted version of secrets (can be stored publicly)
-
-While `sops-nix` should automatically handle decryption based on the parameters in `sops.nix`,
-secrets may be decrypted manually using:
-
-```bash
-sops --decrypt --input-type yaml --output-type yaml  <SECRETS_YAML_ENC>
-```
-
-On NixOS secrets go to `/run/secrets`. With home-manager they go to `~/.config/sops-nix/secrets`
+Secrets are managed with [sops-nix](https://github.com/Mic92/sops-nix).
+Encrypted secret files belong in the repository; private keys and plaintext do
+not. NixOS services read decrypted secrets from `/run/secrets`.
