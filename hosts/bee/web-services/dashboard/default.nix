@@ -23,6 +23,7 @@ in
   };
 
   systemd.tmpfiles.rules = [
-    "d ${root} 0755 justin users -"
+    "d /srv/beefarm 0750 justin nginx -"
+    "d ${root} 0750 justin nginx -"
   ];
 }

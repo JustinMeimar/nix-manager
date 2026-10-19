@@ -9,6 +9,26 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    systemd.services.cloudflared-tunnel-bee-hole.serviceConfig = {
+      ProtectSystem = "strict";
+      ProtectHome = true;
+      PrivateTmp = true;
+      PrivateDevices = true;
+      NoNewPrivileges = true;
+      CapabilityBoundingSet = "";
+      ProtectKernelTunables = true;
+      ProtectKernelModules = true;
+      ProtectKernelLogs = true;
+      ProtectControlGroups = true;
+      RestrictSUIDSGID = true;
+      RestrictNamespaces = true;
+      RestrictRealtime = true;
+      LockPersonality = true;
+      RestrictAddressFamilies = [ "AF_UNIX" "AF_INET" "AF_INET6" ];
+      InaccessiblePaths = [ "/srv" "-/mnt" "-/media" "/var/lib" ];
+      UMask = "0077";
+    };
+
     sops.secrets.cloudflare-bee-hole-tunnel-token.restartUnits = [
       "cloudflared-tunnel-bee-hole.service"
     ];

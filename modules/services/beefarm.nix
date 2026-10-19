@@ -90,5 +90,14 @@ in
         REDIRECT_DOMAINS = "${site.subdomain}.${cfg.domain}";
       };
     }) protectedSites;
+
+    # The challenge proxies need sockets, not access to published or private files.
+    systemd.services = mapAttrs' (name: _:
+      nameValuePair "anubis-${name}" {
+        serviceConfig = {
+          InaccessiblePaths = [ "/srv" "-/mnt" "-/media" "/var/lib" ];
+          UMask = "0077";
+        };
+      }) protectedSites;
   };
 }
