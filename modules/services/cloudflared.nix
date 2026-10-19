@@ -27,6 +27,10 @@ in
       RestrictAddressFamilies = [ "AF_UNIX" "AF_INET" "AF_INET6" ];
       InaccessiblePaths = [ "/srv" "-/mnt" "-/media" "/var/lib" ];
       UMask = "0077";
+      # Tunnel error messages can contain request URLs and other visitor data.
+      StandardOutput = "null";
+      StandardError = "null";
+      LimitCORE = 0;
     };
 
     sops.secrets.cloudflare-bee-hole-tunnel-token.restartUnits = [

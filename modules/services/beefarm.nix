@@ -97,6 +97,11 @@ in
         serviceConfig = {
           InaccessiblePaths = [ "/srv" "-/mnt" "-/media" "/var/lib" ];
           UMask = "0077";
+          # Anubis logs request metadata, including on error. Keep it out of
+          # the journal; service exit status remains available to systemd.
+          StandardOutput = "null";
+          StandardError = "null";
+          LimitCORE = 0;
         };
       }) protectedSites;
   };

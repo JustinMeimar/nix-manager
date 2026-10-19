@@ -10,9 +10,7 @@ in
       extraConfig = ''
         autoindex on;
         disable_symlinks on;
-        add_header X-Content-Type-Options nosniff always;
       '';
-      locations."~ (^|/)\\.".extraConfig = "deny all;";
     })
   ];
 
