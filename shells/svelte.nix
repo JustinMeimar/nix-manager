@@ -4,6 +4,7 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     bun
     nodejs
+    wrangler
   ];
   shellHook = ''
     echo "Svelte + bun is ready :D"
