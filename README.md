@@ -8,10 +8,10 @@ Run the appropriate command from this checkout on the target host:
 
 | Host | Command |
 | --- | --- |
-| Ubik | `just switch-ubik` |
-| Zen | `just switch-zen` |
-| Pi | `just switch-pi` |
-| Bee | `just switch-bee` (or `just rebuild-bee`) |
+| Ubik | `sudo nixos-rebuild switch --flake .#ubik` |
+| Zen | `sudo nixos-rebuild switch --flake .#zen` |
+| Pi | `sudo nixos-rebuild switch --flake .#pi` |
+| Bee | `sudo nixos-rebuild switch --flake .#bee` |
 
 Ubik, Zen, and Pi include Home Manager in their NixOS configurations. Bee uses
 NixOS alone, including Justin's packages, shell, Git/SSH configuration, tmux,

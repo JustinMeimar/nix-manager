@@ -44,7 +44,7 @@
           system = system;
           modules = [
             ./modules/nix-maintenance.nix
-            { nixpkgs.pkgs = import nixpkgs { inherit system; config.allowUnfree = true; }; }
+            { nixpkgs.config.allowUnfree = true; }
           ] ++ modules;
         };
 

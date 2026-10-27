@@ -12,18 +12,11 @@ let
     lib.mapAttrsToList (
       name: host:
       let
-        options =
-          lib.filterAttrs (_: value: value != null) {
-            User = host.user or null;
-            HostName = host.hostname or null;
-            IdentityFile = host.identityFile or null;
-            IdentitiesOnly = if host.identitiesOnly or false then "yes" else null;
-            ProxyJump = host.proxyJump or null;
-          }
-          // (host.extraOptions or { });
+        options = lib.filterAttrs (_: value: value != null) host;
+        render = value: if builtins.isBool value then (if value then "yes" else "no") else toString value;
       in
       "Host ${name}\n"
-      + lib.concatStringsSep "\n" (lib.mapAttrsToList (key: value: "  ${key} ${value}") options)
+      + lib.concatStringsSep "\n" (lib.mapAttrsToList (key: value: "  ${key} ${render value}") options)
       + "\n"
     ) sshHosts
   );

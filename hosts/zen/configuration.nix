@@ -4,6 +4,10 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "firefox-esr-140-bin-unwrapped-140.17.0esr"
+  ];
+
   time.timeZone = "America/Edmonton";
   i18n.defaultLocale = "en_CA.UTF-8";
   system.stateVersion = "25.11";

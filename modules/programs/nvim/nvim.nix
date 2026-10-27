@@ -20,6 +20,7 @@ in {
 
   programs.nixvim = {
     enable = true;
+    nixpkgs.source = pkgs.path;
     colorschemes.catppuccin.enable = true;
 
     plugins.typst-vim.enable = true;
