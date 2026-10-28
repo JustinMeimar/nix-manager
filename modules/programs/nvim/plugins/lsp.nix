@@ -3,6 +3,10 @@
 { configs, pkgs, ... }: {
   programs.nixvim = {
     plugins = {
+      lean = {
+        enable = true;
+        settings.mappings = true;
+      };
       lsp = {
         enable = true;
         package = pkgs.vimPlugins.nvim-lspconfig;
