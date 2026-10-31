@@ -75,6 +75,7 @@
     calibre
     vim
     git
+    dig
     android-tools
     alacritty
     google-chrome

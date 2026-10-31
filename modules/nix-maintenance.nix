@@ -4,9 +4,10 @@
     automatic = true;
     dates = "daily";
     persistent = true;
-    options = "--delete-older-than 7d";
+    # Keep the current generation and one previous generation per profile.
+    options = "--delete-older-than +2";
   };
-  # dedup identical store files after every build.
+  # Deduplicate identical store files weekly.
   nix.optimise = {
     automatic = true;
     dates = [ "weekly" ];

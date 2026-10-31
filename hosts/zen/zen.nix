@@ -11,7 +11,12 @@
     homeDirectory = "/home/justin";
     stateVersion = "24.05";
   };
-  
+ 
+  programs.ghostty = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.git = {
     enable = true;
     signing.format = null;

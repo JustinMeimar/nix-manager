@@ -16,8 +16,8 @@ in
 pkgs.mkShell {
   name = "spidermonkey-dev";
   buildInputs = with pkgs; [
-    python3
-    python3Packages.pip
+    python313
+    python313Packages.pip
     rustc
     cargo
     rust-analyzer
@@ -88,6 +88,7 @@ pkgs.mkShell {
   hardeningDisable = [ "all" ];
 
   shellHook = ''
+    unset PYTHONPATH _PYTHON_SYSCONFIGDATA_NAME _PYTHON_HOST_PLATFORM
     export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath (with pkgs; [
       stdenv.cc.cc.lib
       zlib
