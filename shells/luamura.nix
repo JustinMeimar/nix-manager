@@ -7,9 +7,13 @@ pkgs.mkShell {
     cmake
     gnumake
     gcc
+    llvmPackages_21.clang
+    bear
 
     llvmPackages.llvm
     llvmPackages.libllvm
     llvmPackages.libllvm.dev
+
+    lua5_5
   ];
 }

@@ -10,6 +10,7 @@
     username = "justin";
     homeDirectory = "/home/justin";
     stateVersion = "24.05";
+    packages = [ pkgs.libnotify ];
   };
  
   programs.ghostty = {
