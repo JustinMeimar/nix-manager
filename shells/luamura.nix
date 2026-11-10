@@ -15,5 +15,6 @@ pkgs.mkShell {
     llvmPackages.libllvm.dev
 
     lua5_5
+    graphviz
   ];
 }
