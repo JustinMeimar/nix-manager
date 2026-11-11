@@ -3,5 +3,6 @@
     ./cli.nix
     ./dev.nix
     ./media.nix
+    ./network-utils.nix
   ];
 }

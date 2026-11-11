@@ -3,7 +3,7 @@
 -- no-neck-pain's width includes the gutter (sign/number cols), so add it.
 vim.api.nvim_create_user_command("CenterBuffer", function(o)
   local win = vim.fn.getwininfo(vim.fn.win_getid())[1]
-  local w = (tonumber(o.args) or 76) + win.textoff
+  local w = (tonumber(o.args) or 80) + win.textoff
   local on = NoNeckPain.state and NoNeckPain.state.enabled
   if on and o.args ~= "" then
     return require("no-neck-pain").resize(w)

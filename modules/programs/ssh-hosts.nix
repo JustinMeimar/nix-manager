@@ -47,6 +47,12 @@ in {
         key = "~/.ssh/justin-bee";
       };
 
+      "lgtv" = mkKeyConfig {
+        user = "root";
+        hostname = "192.168.1.86";
+        key = "~/.ssh/lg-tv-root";
+      };
+
       "gazbolt" = mkKeyConfig {
         user = "justin";
         hostname = "159.223.200.125";
