@@ -1,5 +1,4 @@
 # Interactive setup only; loaded from .zshrc through programs.zsh.initContent.
-# Ordinary PATH entries are managed by home.sessionPath.
 
 ### Python
 alias python='python3'

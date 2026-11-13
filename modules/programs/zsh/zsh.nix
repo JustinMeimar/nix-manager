@@ -1,17 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 let
   settings = import ./settings.nix;
-  myLib = import ../../../lib { };
-  homePath = path: if lib.hasPrefix "/" path then path else "$HOME/${path}";
-in
-{
-  home.sessionPath = map homePath settings.paths;
-
+  myLib = import ../../../lib {};
+in {
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -22,14 +13,11 @@ in
 
     oh-my-zsh = {
       enable = true;
-      plugins = [
-        "git"
-        "z"
-        "history"
-      ];
+      plugins = [ "git" "z" "history" ];
       theme = "robbyrussell";
     };
 
-    initContent = builtins.readFile ./zsh_env.sh + "\n" + myLib.concatDirFiles ./scripts;
+    initContent = builtins.readFile ./zsh_env.sh + "\n"
+      + myLib.concatDirFiles ./scripts;
   };
 }
