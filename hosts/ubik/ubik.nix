@@ -12,6 +12,7 @@
     packages = with pkgs; [
       alacritty
       bitwarden-desktop
+      discord
       dolphin-emu
     ];
   };

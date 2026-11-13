@@ -19,6 +19,10 @@
   boot.loader.efi.efiSysMountPoint = "/boot";
 
   hardware.cpu.intel.updateMicrocode = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
 
   hardware.amdgpu.initrd.enable = true;
   hardware.graphics = {
