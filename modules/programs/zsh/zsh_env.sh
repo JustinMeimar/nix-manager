@@ -1,5 +1,7 @@
 # Interactive setup only; loaded from .zshrc through programs.zsh.initContent.
 
+export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
+
 ### Python
 alias python='python3'
 alias python3.8='/usr/bin/python3.8'
