@@ -46,9 +46,10 @@
 
   users.users.justin = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" ];
+    extraGroups = [ "wheel" "networkmanager" "video" "docker" ];
     shell = pkgs.zsh;
   };
+  virtualisation.docker.enable = true;
   programs.zsh.enable = true;
   programs.steam.enable = true;
   programs.firefox.enable = true;
