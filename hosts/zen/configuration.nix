@@ -18,8 +18,23 @@
     loader.efi.canTouchEfiVariables = true;
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [ "amdgpu.dcdebugmask=0x10" "amdgpu.abmlevel=0" ];
+    # zram swap is cheap, so prefer it over evicting file cache
+    kernel.sysctl."vm.swappiness" = 180;
   };
-  
+
+  # no disk swap: without this, memory exhaustion livelocks instead of OOM-killing
+  zramSwap = {
+    enable = true;
+    memoryPercent = 50;
+  };
+
+  services.earlyoom = {
+    enable = true;
+    freeMemThreshold = 5;
+    freeSwapThreshold = 10;
+    enableNotifications = true;
+  };
+
   hardware = {
     graphics.enable = true;
     amdgpu.initrd.enable = true;
