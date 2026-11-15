@@ -1,6 +1,6 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [ nixfmt libxml2 ];
   programs.nixvim = {
+    extraPackages = with pkgs; [ nixfmt libxml2 ];
     plugins.conform-nvim = {
       enable = true;
       settings = {

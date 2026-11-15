@@ -1,10 +1,6 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
-    ffmpeg
-    sox
-    tinymist
-    typst
-  ];
+{ pkgs, ... }:
+{
+  home.packages = import ./media-packages.nix { inherit pkgs; };
 
   programs.zathura = {
     enable = true;

@@ -1,0 +1,35 @@
+{ pkgs }:
+with pkgs;
+[
+  bat
+  btop
+  cloc
+  curl
+  dosfstools
+  duf
+  dust
+  e2fsprogs
+  exfatprogs
+  eza
+  fastfetch
+  fd
+  gcc
+  hexyl
+  htop
+  hyperfine
+  jq
+  jujutsu
+  parted
+  poppler-utils
+  psmisc
+  ripgrep
+  sqlite
+  tldr
+  tree
+  usbutils
+  wget
+  wl-clipboard
+  yq
+  zip
+  unzip
+]

@@ -9,7 +9,6 @@ switch-pi:
     sudo nixos-rebuild switch --flake .#pi
 
 switch-bee:
-    home-manager switch --flake .#justin@bee
+    sudo nixos-rebuild switch --flake path:.#bee
 
-rebuild-bee:
-    sudo nixos-rebuild switch --flake .#bee
+alias rebuild-bee := switch-bee

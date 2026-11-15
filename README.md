@@ -11,11 +11,17 @@ Run the appropriate command from this checkout on the target host:
 | Ubik | `just switch-ubik` |
 | Zen | `just switch-zen` |
 | Pi | `just switch-pi` |
-| Bee | `just rebuild-bee` |
+| Bee | `just switch-bee` (or `just rebuild-bee`) |
 
-Ubik, Zen, and Pi include Home Manager in their NixOS configurations. Bee's
-Home Manager configuration is standalone and can be applied with
-`just switch-bee`.
+Ubik, Zen, and Pi include Home Manager in their NixOS configurations. Bee uses
+NixOS alone, including Justin's packages, shell, Git/SSH configuration, tmux,
+Vim, and Nixvim. Home Manager inputs remain for the other hosts.
+
+Bee's user configuration lives in `hosts/bee/user-environment.nix`. NixOS
+activation links the managed files from `/etc/nix-manager/justin`, archiving
+existing Home Manager links in `~/.local/state/bee-nixos`. Handwritten files
+are preserved and reported as conflicts. Put local shell additions in
+`~/.zshrc.local`.
 
 ## Secrets
 

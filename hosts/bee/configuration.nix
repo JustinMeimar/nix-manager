@@ -2,6 +2,7 @@
   
   imports = [
     ./hardware-configuration.nix
+    ./user-environment.nix
     ../../modules/services/default.nix
     ./web-services
   ];
@@ -33,7 +34,6 @@
       /srv/recovery 192.168.1.0/24(rw,sync,no_subtree_check)
     '';
   };
-  networking.firewall.allowedTCPPorts = [ 2049 ];
 
   services.cloudflared-bee.enable = true;
   services.ironclaw.enable = false;
@@ -95,7 +95,7 @@
   # Firewall
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 ];
+    allowedTCPPorts = [ 22 2049 ];
   };
 
   # Boot configuration

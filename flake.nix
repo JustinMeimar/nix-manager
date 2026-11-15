@@ -39,17 +39,6 @@
 
   outputs = { nixpkgs, nixos-raspberrypi, home-manager, home-manager-pi, nixvim, sops, plasma-manager, ... }:
     let
-      mkHome = system: modules:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            system = system;
-            config.allowUnfree = true;
-          };
-          modules = modules ++ [
-            nixvim.homeModules.nixvim
-          ];
-        };
-
       mkSystem = system: modules:
         nixpkgs.lib.nixosSystem {
           system = system;
@@ -70,12 +59,6 @@
         import ./shells { inherit pkgs; };
 
     in {
-      homeConfigurations = {
-        "justin@bee" = mkHome "x86_64-linux" [
-          ./hosts/bee/bee.nix
-        ];
-      };
-
       nixosConfigurations = {
         "ubik" = mkSystem "x86_64-linux" [
           ./hosts/ubik/configuration.nix
@@ -104,6 +87,7 @@
         };
         "bee" = mkSystem "x86_64-linux" [
           ./hosts/bee/configuration.nix
+          nixvim.nixosModules.nixvim
           sops.nixosModules.sops
         ];
         "zen" = mkSystem "x86_64-linux" [

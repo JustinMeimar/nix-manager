@@ -3,6 +3,6 @@
   imports = [
     ./terminal.nix
     ./alacritty/alacritty.nix
-    ./nvim/nvim.nix
+    ./nvim/home-manager.nix
   ];   
 }
