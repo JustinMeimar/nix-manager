@@ -18,7 +18,6 @@
     pkgs.qrencode
     pkgs.ripgrep
   ];
-
   programs.git = {
     enable = true;
     settings = {

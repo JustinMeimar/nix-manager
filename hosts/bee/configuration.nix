@@ -26,6 +26,14 @@
       };
     };
   };
+  
+  services.nfs.server = {
+    enable = true;
+    exports = ''
+      /srv/recovery 192.168.1.0/24(rw,sync,no_subtree_check)
+    '';
+  };
+  networking.firewall.allowedTCPPorts = [ 2049 ];
 
   services.cloudflared-bee.enable = true;
   services.ironclaw.enable = false;
