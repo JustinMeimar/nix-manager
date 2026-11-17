@@ -15,3 +15,7 @@ lines = 40
 
 [font]
 size = 16.0
+
+[window]
+decorations = "None"
+padding = { x = 4, y = 4 }

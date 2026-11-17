@@ -29,7 +29,6 @@
     enable = true;
     overrideConfig = false;
     workspace.colorScheme = "BreezeDark";
-    shortcuts."Alacritty.desktop"."_launch" = "Ctrl+Alt+T";
     configFile."kdeglobals"."General" = {
       TerminalApplication = "alacritty";
       TerminalService = "Alacritty.desktop";
