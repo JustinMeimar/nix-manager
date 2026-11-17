@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Copy the concatenated contents of files matching a regex to the clipboard.
+if [[ -z "$1" ]]; then
+  echo "Usage: slurp <regex_pattern>" >&2
+  exit 1
+fi
+find . -type f -regextype posix-extended -regex ".*($1)" -print0 |
+  xargs -0 -r cat | copy

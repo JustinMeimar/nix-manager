@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   settings = import ./settings.nix;
-  myLib = import ../../../lib {};
 in {
   programs.zsh = {
     enable = true;
@@ -17,7 +16,6 @@ in {
       theme = "robbyrussell";
     };
 
-    initContent = builtins.readFile ./zsh_env.sh + "\n"
-      + myLib.concatDirFiles ./scripts;
+    initContent = builtins.readFile ./zsh_env.sh;
   };
 }

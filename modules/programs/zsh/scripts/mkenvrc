@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# Pick a dev shell from this repo's shells/ and write a .envrc using it.
+#
+# Usage: mkenvrc [dir]   (defaults to the current directory)
+set -euo pipefail
+
+dir="${1:-.}"
+if [[ $# -gt 1 || ! -d "$dir" ]]; then
+  echo "Usage: mkenvrc [dir]" >&2
+  exit 1
+fi
+
+# This script lives in <repo>/modules/programs/zsh/scripts.
+repo="$(cd "$(dirname "$(readlink -f "$0")")/../../../.." && pwd)"
+flake_ref="${repo/#$HOME/\~}"
+
+# Shell names are the attributes declared in shells/default.nix.
+mapfile -t shells < <(
+  sed -nE 's/^[[:space:]]*([A-Za-z0-9_-]+)[[:space:]]*=[[:space:]]*import.*/\1/p' \
+    "$repo/shells/default.nix"
+)
+if [[ ${#shells[@]} -eq 0 ]]; then
+  echo "mkenvrc: no shells found in $repo/shells/default.nix" >&2
+  exit 1
+fi
+
+if command -v fzf >/dev/null; then
+  choice="$(printf '%s\n' "${shells[@]}" | fzf --prompt 'shell> ' || true)"
+else
+  PS3="Select a shell (q to quit): "
+  select choice in "${shells[@]}"; do
+    [[ -n "$choice" || "$REPLY" == q ]] && break
+  done
+fi
+
+if [[ -z "${choice:-}" ]]; then
+  echo "Aborted."
+  exit 1
+fi
+
+envrc="$dir/.envrc"
+if [[ -e "$envrc" ]]; then
+  echo "$envrc already exists:"
+  sed 's/^/  /' "$envrc"
+  read -rp "Overwrite? [y/N] " answer
+  [[ "$answer" == [yY]* ]] || { echo "Aborted."; exit 1; }
+fi
+
+echo "use flake $flake_ref#$choice" > "$envrc"
+echo "Wrote $envrc: use flake $flake_ref#$choice"
+
+if command -v direnv >/dev/null; then
+  direnv allow "$dir"
+fi

@@ -1,6 +1,6 @@
 # Interactive setup only; loaded from .zshrc through programs.zsh.initContent.
 
-export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
+export PATH="$HOME/nix-manager/modules/programs/zsh/scripts:$PATH:$HOME/.local/bin:$HOME/.cargo/bin"
 
 ### Python
 alias python='python3'
@@ -23,6 +23,23 @@ export CLASSPATH="$ANTLR_JAR:$CLASSPATH"
 
 alias antlr4="java -Xmx500M org.antlr.v4.Tool"
 alias grun='java org.antlr.v5.gui.TestRig'
+
+### SHELL HELPERS
+# Standalone commands live in ./scripts, which is on PATH. Only things that
+# must run inside the shell itself belong here.
+alias -g both='&>'
+alias -g both+='&>>'
+alias cwd='pwd | copy'
+
+mkcd() {
+    if [ -z "$1" ]; then
+        echo "Usage: mkcd <dir>"
+        return 1;
+    else
+        mkdir "$1" && cd "$1"
+        return 0;
+    fi;
+}
 
 ### RUBY
 export RBENV_SHELL=zsh
@@ -47,3 +64,7 @@ export EMSDK_NODE=/home/justin/installs/emsdk/node/18.20.3_64bit/bin/node
 
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
+
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [ -z "$TMUX" ]; then
+  tmux new-session -s "main-$$"
+fi

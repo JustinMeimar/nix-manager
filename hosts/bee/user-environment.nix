@@ -6,7 +6,6 @@
 }:
 let
   shell = import ../../modules/programs/zsh/settings.nix;
-  scripts = (import ../../lib { }).concatDirFiles ../../modules/programs/zsh/scripts;
   sshHosts = import ../../modules/programs/ssh-hosts.nix { inherit lib; };
   sshConfig = lib.concatStringsSep "\n" (
     lib.mapAttrsToList (
@@ -115,7 +114,6 @@ in
           export FZF_DEFAULT_OPTS='--height 40% --layout reverse --border --tmux bottom,40%'
           export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap --color header:italic"
           ${builtins.readFile ../../modules/programs/zsh/zsh_env.sh}
-          ${scripts}
         fi
       '';
     };
