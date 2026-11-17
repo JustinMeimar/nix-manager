@@ -36,6 +36,11 @@
   programs.plasma = {
     enable = true;
     overrideConfig = false;
+    shortcuts."Alacritty.desktop"."_launch" = "Ctrl+Alt+T";
+    configFile."kdeglobals"."General" = {
+      TerminalApplication = "alacritty";
+      TerminalService = "Alacritty.desktop";
+    };
     panels = [
       {
         location = "bottom";
